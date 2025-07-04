@@ -1,0 +1,187 @@
+---
+description: Architecture principles and Architecture documentation standards
+globs:
+alwaysApply: true
+---
+# Architecture Guidelines
+
+## Core Principles
+
+### Architecture Decision Records (ADR) Philosophy
+
+- **Always audit the Decision Log folder**: Review existing ADRs (`docs/adr/*`) before making architectural changes. Only consider approved decisions.
+- **Context preservation**: Understand historical decisions and their rationale before proposing changes
+- **Consistency over novelty**: Prefer established patterns unless there's clear justification for deviation
+- **Documentation-driven development**: Architectural decisions guide implementation, not the reverse
+- **ADR's must contain the link to the website or GitHub repository**: All architectural decisions must include direct links to component documentation and source code for transparency and verification
+
+### New Component Selection Criteria
+- **Must be compatible with existing components**: New components must integrate seamlessly with current architecture and not break existing functionality
+- **Must be actively maintained**: Components must have recent updates, active development, and community support
+
+## Decision Documentation Guidelines
+
+### Architectural Decisions vs Implementation Details
+
+#### Decisions That Require ADR Documentation
+
+**Architectural decisions** are strategic choices that affect the overall system design, have long-term implications, or establish patterns that guide future development. These **MUST** be documented as ADRs:
+
+- **Technology Stack Choices**: Framework selection, programming language decisions, database choices
+- **Architectural Patterns**: Design patterns, system organization, data flow approaches
+- **Integration Strategies**: How systems communicate, API design decisions, external service integration
+- **Performance Strategies**: Caching approaches, optimization methodologies, scalability decisions
+- **Security Approaches**: Authentication methods, data protection strategies, privacy compliance
+- **Development Process Changes**: CI/CD strategies, testing methodologies, deployment approaches
+- **Breaking Changes**: Modifications that affect existing functionality or APIs
+- **Component Selection**: Library and tool choices that become part of the core architecture
+
+#### Implementation Details (No ADR Required)
+
+**Implementation details** are tactical choices that follow established architectural patterns and don't establish new architectural direction. These are documented in implementation plans and technical specifications, **NOT** as ADRs:
+
+- **Configuration Settings**: Specific component versions, build settings, environment variables
+- **File Organization**: Directory structure, file naming conventions, asset organization
+- **Code Implementation**: Specific function implementations, class structures, method names
+- **UI/UX Details**: Specific styling choices, layout implementations, interaction patterns
+- **Testing Implementation**: Specific test cases, testing frameworks setup, test data
+- **Deployment Configuration**: Hosting setup, SSL configuration, domain management
+- **Performance Optimization**: Specific caching rules, image optimization settings, minification
+
+#### Decision Classification Framework
+
+Use these questions to determine if a decision requires an ADR:
+
+1. **Does this establish a new architectural pattern or approach?**
+   - **Yes** → ADR required
+   - **No** → Implementation detail
+
+2. **Will this decision guide future development choices?**
+   - **Yes** → ADR required
+   - **No** → Implementation detail
+
+3. **Does this choice have long-term maintenance implications?**
+   - **Yes** → ADR required
+   - **No** → Implementation detail
+
+4. **Is this a strategic choice between multiple viable alternatives?**
+   - **Yes** → ADR required
+   - **No** → Implementation detail
+
+5. **Does this decision affect the overall system architecture?**
+   - **Yes** → ADR required
+   - **No** → Implementation detail
+
+## Process
+
+### Documenting a Decision Log
+
+#### ADR Creation Process
+1. **Identify the decision**: Clearly state what architectural choice needs to be made
+2. **Research existing ADRs**: Check `docs/Decision Log/` for related decisions
+3. **Analyze alternatives**: Consider multiple approaches with pros/cons
+4. **Document the decision**: Use the ADR template with full context and rationale
+5. **Update status**: Mark as approved, pending, or deprecated as appropriate
+6. **Communicate changes**: Ensure team awareness of new architectural decisions
+
+#### ADR Review Process
+- **Context validation**: Verify the decision aligns with project constraints and goals
+- **Impact assessment**: Evaluate effects on existing systems and future flexibility
+- **Implementation verification**: Cross-reference ADR decisions with actual code
+- **Status updates**: Maintain current status of all ADRs as systems evolve
+
+### Decision Auditing Workflow
+1. **Pre-change audit**: Review relevant ADRs before implementing changes
+2. **Dependency mapping**: Identify how decisions relate to and impact each other
+3. **Consistency validation**: Ensure new changes align with established patterns
+4. **Documentation updates**: Update ADRs when decisions become deprecated or superseded
+
+## Templates
+
+### Architecture Decision Record
+
+```markdown
+---
+status: approved
+type: technical
+---
+
+# [Decision Title]
+
+## 1. Context / Background
+
+### 1.1 Current State
+[Describe the current system state and constraints]
+
+### 1.2 Requirements
+[List the requirements driving this decision]
+
+## 2. Decision
+
+**Selected Solution:** [Brief description of chosen approach]
+
+### 2.1 Rationale
+[Explain why this solution was chosen over alternatives]
+
+## 3. Solutions Considered
+
+### 3.1 Option A: [Description]
+- **Pros:**
+  - [Benefit 1]
+  - [Benefit 2]
+- **Cons:**
+  - [Drawback 1]
+  - [Drawback 2]
+
+### 3.2 Option B: [Description]
+- **Pros:**
+  - [Benefit 1]
+  - [Benefit 2]
+- **Cons:**
+  - [Drawback 1]
+  - [Drawback 2]
+
+## 4. Consequences
+
+### 4.1 Positive
+- [Positive outcome 1]
+- [Positive outcome 2]
+
+### 4.2 Negative
+- [Negative outcome 1]
+- [Negative outcome 2]
+
+### 4.3 Risks
+- [Risk 1 with mitigation strategy]
+- [Risk 2 with mitigation strategy]
+
+## 5. Component Information
+
+### 5.1 Repository Links
+- **GitHub Repository**: [Link to GitHub repository]
+- **Documentation**: [Link to official documentation]
+- **Release Notes**: [Link to latest release notes]
+
+### 5.2 Maintenance Status
+- **Last Updated**: [Date of last commit/release]
+- **Active Development**: [Yes/No with evidence]
+- **Community Support**: [Description of community activity]
+- **Version Compatibility**: [Compatible versions with current stack]
+
+### 5.3 Integration Verification
+- **Compatibility Tested**: [Yes/No with test results]
+- **Existing Component Impact**: [Analysis of impact on current components]
+- **Migration Path**: [Steps required for integration]
+```
+
+### ADR Status Types
+- **approved**: Decision is active and implemented
+- **pending**: Decision is under consideration
+- **deprecated**: Decision has been superseded or is no longer relevant
+
+### ADR Categories
+- **technical**: Technology, architecture, or implementation decisions
+- **content**: Content strategy, organization, or presentation decisions
+- **process**: Development workflow, deployment, or operational decisions
+
+---

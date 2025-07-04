@@ -1,0 +1,281 @@
+---
+description: Implementing or building a release, Changing existing functionality, Fixing defects or bugs
+globs: 
+alwaysApply: false
+---
+# Development Process Rules for Pomodux
+
+## Core Development Process Principles
+
+### Process-Driven Development Philosophy
+
+- **Always work within a structured process**: All work (releases, features, bug fixes) must follow the defined process
+- **Approval gates are mandatory**: No work can proceed without passing through the required approval gates
+- **TDD is non-negotiable**: All code changes must follow Test-Driven Development process
+- **Documentation-driven progress**: All progress must be tracked and documented
+- **Quality gates are required**: Every change must meet quality standards before proceeding
+
+## Approval Gates Process
+
+### Work Type Classification
+
+**Determine the appropriate process based on work type**:
+
+- **Releases**: Full 4-gate process (Plan → Develop → Test → Release)
+- **Features**: 3-gate process (Plan → Develop → Test)
+- **Bug Fixes**: 2-gate process (Plan → Fix)
+- **Enhancements**: 2-gate process (Plan → Implement)
+- **Technical Debt**: 2-gate process (Plan → Refactor)
+
+### Gate 1: Work Plan Approval
+
+**Before starting any development work**:
+
+- [ ] **Work scope is defined**: Clear understanding of what needs to be done
+- [ ] **Technical approach is planned**: Implementation strategy is documented
+- [ ] **TDD approach is planned**: Test strategy is defined for the work
+- [ ] **Success criteria are measurable**: Clear acceptance criteria defined
+- [ ] **Timeline is realistic**: Development time accounts for TDD and testing
+
+**Required Documentation**:
+- Work plan in appropriate tracking document
+- Technical specifications and approach
+- TDD strategy for the work
+- Timeline and milestone definitions
+
+### Gate 2: Development Completion
+
+**Before testing/validation**:
+
+- [ ] **Work is implemented**: All planned work is functional
+- [ ] **TDD process followed**: All code written following Red-Green-Refactor cycle
+- [ ] **Test coverage meets requirements**: 80%+ overall, 95%+ critical paths
+- [ ] **Code quality standards met**: Linting passes, documentation updated
+- [ ] **Integration tests passing**: All components work together (if applicable)
+
+**Required Deliverables**:
+- Working implementation of the work
+- Test results and coverage reports
+- Updated documentation
+- Code review completion
+
+### Gate 3: Testing/Validation
+
+**Before final approval**:
+
+- [ ] **Testing completed**: Work tested according to type (unit, integration, user)
+- [ ] **Issues addressed**: Any problems found are resolved
+- [ ] **Acceptance criteria met**: Work meets defined success criteria
+
+**Required Activities**:
+- Appropriate testing for work type (unit tests, integration tests, user testing)
+- Bug fixes and improvements as needed
+- Validation that work meets requirements
+
+### Gate 4: Final Approval (Releases Only)
+
+**Before public release** (applies only to releases):
+
+- [ ] **Final testing completed**: All tests pass in release environment
+- [ ] **Release notes prepared**: Complete release documentation
+- [ ] **Installation procedures documented**: Clear installation instructions
+- [ ] **Release artifacts ready**: Binaries and packages prepared
+
+**Required Deliverables**:
+- Release notes and documentation
+- Installation and upgrade procedures
+- Release artifacts for all platforms
+- Final approval from stakeholders
+
+## TDD Integration Requirements
+
+### Test-Driven Development Process
+
+**For every code change**:
+
+1. **Write failing test first (Red)**:
+   - Write a test that defines the desired behavior
+   - Test should fail initially (Red phase)
+   - Test should be specific and focused
+
+2. **Write minimal code to pass (Green)**:
+   - Write the minimal code needed to make the test pass
+   - Don't add extra functionality yet
+   - Focus on making the test green
+
+3. **Refactor while keeping tests passing**:
+   - Clean up the code while keeping tests passing
+   - Improve design, readability, and performance
+   - Ensure all tests still pass
+
+### Test Coverage Requirements
+
+- **Overall Coverage**: Minimum 80% for all code
+- **Critical Paths**: Minimum 95% for core functionality
+- **Public APIs**: 100% coverage for all public interfaces
+- **Integration Tests**: Test component interactions and workflows
+
+### Test Organization
+
+- **Unit Tests**: Test individual functions and methods
+- **Integration Tests**: Test component interactions
+- **Performance Tests**: Benchmark critical paths
+- **Test Helpers**: Use common test utilities and helpers
+
+## Work Development Workflow
+
+### Before Starting Development
+
+1. **Check current work status**:
+   - Review appropriate tracking document for current work
+   - Ensure work is part of approved plan
+   - Verify Gate 1 approval is complete
+
+2. **Plan TDD approach**:
+   - Define test cases for the work
+   - Plan implementation approach
+   - Estimate development time
+
+3. **Update progress tracking**:
+   - Update work status in appropriate tracking document
+   - Set target completion dates
+   - Document any dependencies
+
+### During Development
+
+1. **Follow TDD strictly**:
+   - Write tests before implementation
+   - Implement minimal code to pass tests
+   - Refactor continuously
+
+2. **Update documentation**:
+   - Update technical documentation
+   - Update user documentation (if applicable)
+   - Update API documentation (if applicable)
+
+3. **Track progress**:
+   - Update work status regularly
+   - Document any issues or blockers
+   - Update test coverage metrics
+
+### Before Gate Reviews
+
+1. **Prepare gate deliverables**:
+   - Complete all required deliverables for the gate
+   - Prepare demonstration of work
+   - Gather test results and metrics
+
+2. **Update tracking documentation**:
+   - Update appropriate tracking document with progress
+   - Prepare gate review materials
+   - Document any issues or concerns
+
+3. **Request gate review**:
+   - Schedule gate review meeting (if applicable)
+   - Present deliverables to stakeholders
+   - Address feedback and concerns
+
+### Work Status Tracking
+
+**For each work item, track**:
+
+- **Status**: Not Started / In Progress / Complete / Blocked
+- **Developer**: Assigned developer
+- **TDD Progress**: Test completion status
+- **Test Coverage**: Current coverage metrics
+- **Notes**: Implementation notes and issues
+
+## Quality Assurance Standards
+
+### Code Quality Requirements
+
+- **Linting**: All code must pass project linting rules
+- **Formatting**: All code must follow project formatting standards
+- **Documentation**: All public functions must be documented
+- **Error Handling**: Proper error handling and validation
+
+### Testing Requirements
+
+- **Unit Tests**: Comprehensive unit test coverage
+- **Integration Tests**: Test component interactions
+- **Performance Tests**: Benchmark critical paths
+- **User Acceptance Tests**: Validate user workflows
+
+### Documentation Requirements
+
+- **Technical Documentation**: Keep architecture docs current
+- **User Documentation**: Update user guides and examples
+- **API Documentation**: Document all public APIs
+- **Release Notes**: Prepare comprehensive release notes
+
+## Risk Management
+
+### Risk Assessment
+
+**For each work item, assess**:
+
+- **Technical Risks**: Implementation challenges and solutions
+- **Quality Risks**: Quality assurance risks and controls
+- **User Acceptance Risks**: User experience risks and validation (if applicable)
+
+### Risk Mitigation
+
+- **Early identification**: Identify risks early in release planning
+- **Contingency planning**: Develop backup plans for high-risk items
+- **Regular monitoring**: Monitor risks throughout development
+- **Stakeholder communication**: Keep stakeholders informed of risks
+
+## Work Type-Specific Guidelines
+
+### Release Work (Major Versions)
+- **Process**: Full 4-gate process
+- **Tracking**: Use `docs/current-release.md`
+- **Testing**: Comprehensive testing including user acceptance
+- **Documentation**: Full release notes and documentation
+- **Approval**: Stakeholder approval required at each gate
+
+### Feature Work (New Functionality)
+- **Process**: 3-gate process (Plan → Develop → Test)
+- **Tracking**: Use appropriate feature tracking document
+- **Testing**: Unit, integration, and feature testing
+- **Documentation**: Technical and user documentation updates
+- **Approval**: Technical lead approval for gates 1-2, user testing for gate 3
+
+### Bug Fix Work (Defect Resolution)
+- **Process**: 2-gate process (Plan → Fix)
+- **Tracking**: Use bug tracking system or issue tracker
+- **Testing**: Unit tests and regression testing
+- **Documentation**: Update relevant documentation
+- **Approval**: Self-review for gate 1, peer review for gate 2
+
+### Enhancement Work (Minor Improvements)
+- **Process**: 2-gate process (Plan → Implement)
+- **Tracking**: Use appropriate tracking document
+- **Testing**: Unit tests and basic integration testing
+- **Documentation**: Update relevant documentation
+- **Approval**: Self-review for gate 1, peer review for gate 2
+
+### Technical Debt Work (Refactoring)
+- **Process**: 2-gate process (Plan → Refactor)
+- **Tracking**: Use technical debt tracking document
+- **Testing**: Ensure no regression, maintain test coverage
+- **Documentation**: Update technical documentation
+- **Approval**: Self-review for gate 1, peer review for gate 2
+
+## References
+
+### Project Documentation
+- **[Release Management Guide](mdc:docs/release-management.md)** - Comprehensive release management framework
+- **[Current Release Tracker](mdc:docs/current-release.md)** - Current release progress and status
+- **[Go Standards - TDD Examples](mdc:docs/go-standards.md#110-test-driven-development-tdd-examples)** - Test-Driven Development process and methodology
+- **[Go Standards - TDD Examples](mdc:docs/go-standards.md#110-test-driven-development-tdd-examples)** - Go-specific TDD examples and patterns
+- **[Implementation Roadmap](mdc:docs/implementation-roadmap.md)** - Technical implementation plan by release
+
+### Development Standards
+- **[Go Development Rules](mdc:.cursor/rules/go-development.mdc)** - Go development standards and practices
+- **[Architecture Guidelines](mdc:.cursor/rules/architecture.mdc)** - Architectural decision making and compliance
+
+### External Resources
+- [Test-Driven Development by Example](mdc:https:/www.amazon.com/Test-Driven-Development-Kent-Beck/dp/0321146530)
+- [Continuous Delivery](mdc:https:/www.amazon.com/Continuous-Delivery-Deployment-Automation-Addison-Wesley/dp/0321601912)
+- [Agile Release Planning](mdc:https:/www.scrum.org/resources/blog/agile-release-planning)

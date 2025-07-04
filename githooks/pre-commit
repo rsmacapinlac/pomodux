@@ -1,0 +1,17 @@
+#!/bin/bash
+set -e
+
+echo "Running Go formatting..."
+gofmt -s -w .
+
+echo "Running linter..."
+golangci-lint run
+
+echo "Running tests..."
+go test ./...
+
+echo "Checking for uncommitted changes..."
+if ! git diff --quiet; then
+    echo "Code formatting changed files. Please review and commit changes."
+    exit 1
+fi 

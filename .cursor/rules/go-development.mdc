@@ -1,0 +1,219 @@
+---
+description: 
+globs: **/*.go
+alwaysApply: false
+---
+# Go Development Rules for Pomodux
+
+## Core Go Development Principles
+
+### Project Structure Standards
+- **Follow Standard Go Project Layout**: Use the established directory structure from `docs/go-standards.md`
+- **Package Organization**: Keep internal packages in `internal/`, public packages in `pkg/`
+- **File Naming**: Use snake_case for file names (e.g., `timer_engine.go`, `session_manager.go`)
+- **Import Organization**: Group imports in order: standard library, third-party, internal
+
+### Code Organization
+- **Package Naming**: Use short, descriptive names without underscores
+- **Interface Design**: Keep interfaces small, define where used, not where implemented
+- **Error Handling**: Always check errors, wrap with context using `fmt.Errorf`
+- **Documentation**: Document all exported functions and packages
+
+### Naming Conventions
+- **Variables/Functions**: Use camelCase for unexported, PascalCase for exported
+- **Constants**: Use PascalCase for exported, camelCase for unexported
+- **Descriptive Names**: Avoid abbreviations, use clear, searchable names
+- **Examples**: `StartWorkTimer()`, `calculateProgress()`, `isTimerRunning`
+
+### Testing Standards
+- **Test Files**: Use `_test.go` suffix, place in same package
+- **Table-Driven Tests**: Use for multiple test cases
+- **Test Coverage**: Aim for 80%+ on critical packages
+- **Test Helpers**: Use `test/helpers/` for common test utilities
+
+### Error Handling Patterns
+```go
+// Always check errors
+if err != nil {
+    return fmt.Errorf("context: %w", err)
+}
+
+// Use custom error types for specific conditions
+type TimerError struct {
+    Op  string
+    Err error
+}
+
+func (e *TimerError) Error() string {
+    return fmt.Sprintf("timer %s: %v", e.Op, e.Err)
+}
+```
+
+### Documentation Standards
+```go
+// Package timer provides core timer functionality for the Pomodux application.
+// It includes session management, progress tracking, and event emission.
+package timer
+
+// Start begins a new timer session with the specified duration.
+// The timer will emit events when started, paused, resumed, and completed.
+// Returns an error if the timer is already running or if the duration is invalid.
+func (t *Timer) Start(duration time.Duration) error {
+    // Implementation...
+}
+```
+
+## Pomodux-Specific Guidelines
+
+### Architecture Compliance
+- **Follow ADR Decisions**: Review `docs/adr/` before making architectural changes
+- **Modular Design**: Maintain clear separation between CLI, TUI, Core Engine, and Plugin System
+- **XDG Compliance**: Use proper configuration file locations
+- **Cross-Platform**: Handle platform differences gracefully
+
+### Timer Engine Development
+- **State Management**: Use clear state transitions and validation
+- **Event System**: Emit events for timer lifecycle (start, pause, resume, complete)
+- **Session Tracking**: Maintain session history and statistics
+- **Progress Calculation**: Provide accurate progress updates
+
+### CLI Development
+- **Cobra Framework**: Use cobra for command structure and help generation
+- **Argument Validation**: Validate all user inputs before processing
+- **Help System**: Provide comprehensive help and usage examples
+- **Tab Completion**: Implement tab completion for commands
+
+### TUI Development
+- **Bubbletea Framework**: Use bubbletea for terminal UI components
+- **Responsive Design**: Handle terminal resize events gracefully
+- **Input Handling**: Support keyboard shortcuts and navigation
+- **Theme System**: Support configuration-based theming
+
+### Plugin System
+- **Lua Integration**: Use gopher-lua for plugin runtime
+- **Hook System**: Implement event hooks for timer lifecycle
+- **API Design**: Provide clear, stable plugin API
+- **Security**: Validate plugin code and limit capabilities
+
+## Development Workflow
+
+### Release Management Integration
+- **Release-based development**: All features must be part of an approved release plan
+- **Approval gates**: Follow the 4-gate approval process for each release
+- **TDD mandatory**: All features must follow Test-Driven Development process
+- **Progress tracking**: Update `docs/current-release.md` regularly
+
+### Code Quality
+- **Formatting**: Use `gofmt` for consistent formatting
+- **Linting**: Use `golangci-lint` with project configuration
+- **Testing**: Write tests before implementation (TDD)
+- **Documentation**: Keep documentation up to date
+
+### Build and Testing
+- **Makefile**: Use provided Makefile targets for common tasks
+- **Git Hooks**: Pre-commit hooks ensure code quality
+- **CI/CD**: Follow GitHub Actions workflow
+- **Cross-Platform**: Test on all target platforms
+
+### Performance Considerations
+- **Profiling**: Use pprof for performance analysis
+- **Memory Management**: Avoid memory leaks in long-running applications
+- **Concurrency**: Use goroutines and channels appropriately
+- **Resource Usage**: Minimize resource consumption for CLI application
+
+## Common Patterns
+
+### Configuration Management
+```go
+type Config struct {
+    Timer struct {
+        DefaultWorkDuration time.Duration `yaml:"default_work_duration"`
+        DefaultBreakDuration time.Duration `yaml:"default_break_duration"`
+    } `yaml:"timer"`
+    
+    TUI struct {
+        Theme string `yaml:"theme"`
+        KeyBindings map[string]string `yaml:"key_bindings"`
+    } `yaml:"tui"`
+}
+```
+
+### Event System
+```go
+type EventType string
+
+const (
+    EventTimerStarted EventType = "timer_started"
+    EventTimerPaused  EventType = "timer_paused"
+    EventTimerResumed EventType = "timer_resumed"
+    EventTimerCompleted EventType = "timer_completed"
+)
+
+type Event struct {
+    Type      EventType
+    Timestamp time.Time
+    Data      map[string]interface{}
+}
+```
+
+### Plugin Hook System
+```go
+type HookManager struct {
+    hooks map[EventType][]Hook
+}
+
+type Hook func(event Event) error
+
+func (hm *HookManager) RegisterHook(eventType EventType, hook Hook) {
+    hm.hooks[eventType] = append(hm.hooks[eventType], hook)
+}
+```
+
+## Security Guidelines
+
+### Input Validation
+- **Validate all inputs**: Check user inputs before processing
+- **Sanitize paths**: Use `path/filepath` for cross-platform path handling
+- **Secure defaults**: Use secure configuration defaults
+- **Error handling**: Don't expose sensitive information in errors
+
+### Plugin Security
+- **Sandboxing**: Limit plugin capabilities and access
+- **Validation**: Validate plugin code before execution
+- **Resource limits**: Set limits on plugin resource usage
+- **Isolation**: Isolate plugin execution from main application
+
+## Performance Guidelines
+
+### Optimization Strategies
+- **Profile first**: Use profiling to identify bottlenecks
+- **Benchmark critical paths**: Use `go test -bench` for performance testing
+- **Memory pools**: Use `sync.Pool` for frequently allocated objects
+- **Efficient algorithms**: Choose appropriate data structures and algorithms
+
+### Concurrency Best Practices
+- **Goroutines**: Use for I/O-bound operations
+- **Channels**: Use for communication between goroutines
+- **Context**: Use for cancellation and timeouts
+- **Avoid goroutine leaks**: Ensure proper cleanup
+
+## References
+
+### Project Documentation
+- **[Go Standards Document](mdc:docs/go-standards.md)** - Comprehensive Go development standards and implementation guidelines
+- **[Development Setup Guide](mdc:docs/development-setup.md)** - Environment setup and development workflow
+- **[Architecture Decision Records](mdc:docs/adr)** - Project architectural decisions and rationale
+- **[Technical Specifications](mdc:docs/technical_specifications.md)** - System architecture and component design
+- **[Release Management Guide](mdc:docs/release-management.md)** - Release-based development with approval gates
+- **[Current Release Tracker](mdc:docs/current-release.md)** - Current release progress and status
+- **[Go Standards - TDD Examples](mdc:docs/go-standards.md#110-test-driven-development-tdd-examples)** - Test-Driven Development process and examples
+
+### External Resources
+- [Go Code Review Comments](mdc:https:/github.com/golang/go/wiki/CodeReviewComments)
+- [Effective Go](mdc:https:/golang.org/doc/effective_go.html)
+- [Standard Go Project Layout](mdc:https:/github.com/golang-standards/project-layout)
+
+### How These Files Work Together
+- **This file (Cursor Rules)**: Provides AI assistants with project-specific patterns and high-level guidance
+- **[Go Standards](mdc:docs/go-standards.md)**: Provides human developers with detailed implementation standards and examples
+- **Together**: Ensure consistent code quality and project architecture across both AI and human contributions
