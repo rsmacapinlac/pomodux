@@ -1,0 +1,202 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# GitHub Issues Integration Rules for Pomodux
+
+## GitHub Issues Workflow
+
+### Issue Creation and Management
+
+- **Always use issue templates**: Use the appropriate template from `.github/ISSUE_TEMPLATE/`
+- **Link to backlog**: Reference items from `docs/backlog.md` when creating issues
+- **Follow release structure**: Organize issues by release (0.1.0, 0.2.0, 0.3.0, 0.4.0)
+- **Use proper labels**: Apply appropriate labels for categorization and tracking
+
+### Issue Templates Usage
+
+#### Feature Request Template
+- **When to use**: New features, improvements, enhancements
+- **Required sections**: Release alignment, user story, acceptance criteria, technical requirements
+- **TDD requirement**: Must include TDD approach and test coverage requirements
+
+#### Bug Report Template
+- **When to use**: Bugs, crashes, unexpected behavior
+- **Required sections**: Environment details, steps to reproduce, error details
+- **State information**: Include configuration and timer state when relevant
+
+#### Release Task Template
+- **When to use**: Implementation tasks within a release
+- **Required sections**: Release info, TDD approach, implementation plan
+- **Technical details**: Dependencies, architecture impact, performance considerations
+
+#### UAT Testing Template
+- **When to use**: User acceptance testing for Gate 3
+- **Required sections**: Test scenarios, results, user feedback
+- **Acceptance decision**: Clear pass/fail criteria and follow-up actions
+
+### Issue Workflow Process
+
+#### 1. Issue Creation
+- Choose appropriate template
+- Fill in all required sections
+- Add appropriate labels and assignees
+- Link to related documentation
+
+#### 2. Issue Triage
+- Review and categorize the issue
+- Assign priority and release milestone
+- Remove `needs-triage` label
+- Update backlog if needed
+
+#### 3. Development Process
+- Follow TDD approach as specified in issue
+- Update issue with progress
+- Link commits to issue numbers
+- Update test coverage metrics
+
+#### 4. Issue Closure
+- Verify all acceptance criteria met
+- Update documentation
+- Close issue with appropriate resolution
+- Update backlog status
+
+### Label System
+
+#### Issue Types
+- `bug` - Bug reports and issues
+- `enhancement` - Feature requests and improvements
+- `release-task` - Release-specific implementation tasks
+- `uat` - User acceptance testing
+
+#### Priority Levels
+- `high` - High priority items
+- `medium` - Medium priority items
+- `low` - Low priority items
+
+#### Status Tracking
+- `needs-triage` - New issues awaiting review
+- `in-progress` - Currently being worked on
+- `blocked` - Blocked by other issues
+- `ready-for-review` - Ready for code review
+- `ready-for-uat` - Ready for user testing
+
+#### Components
+- `timer-engine` - Core timer functionality
+- `cli` - Command-line interface
+- `tui` - Terminal user interface
+- `plugin-system` - Plugin and extension system
+- `configuration` - Configuration management
+- `testing` - Testing and quality assurance
+
+### Milestone Management
+
+#### Release 0.1.0: Foundation & Core Timer Engine ✅
+- **Status**: Complete
+- **Issues**: All closed
+- **Focus**: Basic timer functionality and project foundation
+
+#### Release 0.2.0: CLI Interface & Basic Functionality 🔄
+- **Status**: In Planning
+- **Focus**: Enhanced CLI features and Pomodoro support
+- **Key Issues**: Tab completion, pause/resume, Pomodoro commands
+
+#### Release 0.3.0: Terminal UI (TUI) Development 📋
+- **Status**: Planned
+- **Focus**: Rich terminal interface with Bubbletea
+- **Key Issues**: TUI framework, theme system, interactive menus
+
+#### Release 0.4.0: Plugin System & Advanced Features 📋
+- **Status**: Planned
+- **Focus**: Lua-based plugin system and advanced features
+- **Key Issues**: Plugin architecture, hook system, API design
+
+### Backlog Integration
+
+#### Creating Issues from Backlog
+1. Reference the backlog item in `docs/backlog.md`
+2. Use the appropriate template
+3. Copy relevant information from the backlog
+4. Add issue-specific details and context
+
+#### Updating Backlog
+- Update backlog when issues are created
+- Mark items as completed when issues are closed
+- Add new items as they are identified
+- Reprioritize based on feedback and requirements
+
+### Best Practices
+
+#### Writing Good Issues
+- Use clear, descriptive titles
+- Include user stories for features
+- Provide specific acceptance criteria
+- Include technical requirements
+- Reference related documentation
+
+#### Issue Management
+- Keep issues focused and single-purpose
+- Use labels consistently
+- Update issue status regularly
+- Link related issues
+- Close issues when complete
+
+#### Collaboration
+- Use issue comments for discussion
+- Reference issues in commit messages
+- Link issues to pull requests
+- Update issues with progress
+
+### Integration with Development Process
+
+#### TDD Integration
+- All issues must include TDD approach
+- Test cases must be defined before implementation
+- Test coverage requirements must be specified
+- Test results must be documented
+
+#### Approval Gates Integration
+- Issues support the 4-gate approval process
+- Gate 1: Issue planning and approval
+- Gate 2: Development completion
+- Gate 3: User acceptance testing
+- Gate 4: Release approval
+
+#### Documentation Integration
+- Issues link to relevant documentation
+- Documentation updates tracked in issues
+- Release notes generated from issue history
+- Technical specifications updated with issue progress
+
+### Tools and Automation
+
+#### GitHub Actions Integration
+- Automated testing on issue creation
+- Coverage reporting for pull requests
+- Release automation based on milestones
+- Documentation updates from issue changes
+
+#### Cursor Integration
+- Issue templates available in Cursor
+- Quick issue creation from code context
+- Issue linking in commit messages
+- Progress tracking in development workflow
+
+### Quality Assurance
+
+#### Issue Quality Standards
+- All required sections completed
+- Clear acceptance criteria
+- Proper labeling and categorization
+- Appropriate milestone assignment
+
+#### Process Compliance
+- TDD approach documented
+- Approval gates followed
+- Documentation updated
+- Test coverage requirements met
+
+---
+
+**Note**: This GitHub integration supports the Pomodux development process and ensures all work is properly tracked, tested, and documented according to project standards.

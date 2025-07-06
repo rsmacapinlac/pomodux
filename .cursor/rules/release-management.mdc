@@ -66,9 +66,14 @@ alwaysApply: false
 - [ ] **Testing completed**: Work tested according to type (unit, integration, user)
 - [ ] **Issues addressed**: Any problems found are resolved
 - [ ] **Acceptance criteria met**: Work meets defined success criteria
+- [ ] **State persistence validated**: For releases with state, test across process restarts
+- [ ] **Cross-platform compatibility**: Test on all supported platforms
 
 **Required Activities**:
 - Appropriate testing for work type (unit tests, integration tests, user testing)
+- **User Acceptance Testing**: Comprehensive UAT scenarios covering real-world usage
+- **State Persistence Testing**: Validate state survives process restarts (for applicable features)
+- **Regression Testing**: Ensure no regression in existing functionality
 - Bug fixes and improvements as needed
 - Validation that work meets requirements
 
@@ -77,14 +82,17 @@ alwaysApply: false
 **Before public release** (applies only to releases):
 
 - [ ] **Final testing completed**: All tests pass in release environment
-- [ ] **Release notes prepared**: Complete release documentation
-- [ ] **Installation procedures documented**: Clear installation instructions
-- [ ] **Release artifacts ready**: Binaries and packages prepared
+- [ ] **Release notes prepared**: Complete release documentation with all sections
+- [ ] **Installation procedures documented**: Clear installation instructions for all platforms
+- [ ] **Release artifacts ready**: Binaries and packages prepared for all platforms
+- [ ] **Documentation synchronized**: All project documentation updated and consistent
 
 **Required Deliverables**:
-- Release notes and documentation
-- Installation and upgrade procedures
-- Release artifacts for all platforms
+- **Comprehensive Release Notes**: Include features, fixes, installation, configuration, known issues
+- **Installation and Upgrade Procedures**: Clear instructions for all supported platforms
+- **Release Artifacts**: Binaries and packages for all target platforms
+- **Documentation Updates**: README, roadmap, backlog, and technical docs updated
+- **GitHub Issues**: All issues closed and linked to release
 - Final approval from stakeholders
 
 ## TDD Integration Requirements
@@ -200,6 +208,8 @@ alwaysApply: false
 - **Integration Tests**: Test component interactions
 - **Performance Tests**: Benchmark critical paths
 - **User Acceptance Tests**: Validate user workflows
+- **Regression Tests**: Ensure no regression in existing functionality
+- **Cross-Platform Tests**: Validate functionality across supported platforms
 
 ### Documentation Requirements
 
@@ -207,6 +217,10 @@ alwaysApply: false
 - **User Documentation**: Update user guides and examples
 - **API Documentation**: Document all public APIs
 - **Release Notes**: Prepare comprehensive release notes
+- **GitHub Issues**: Update issue status and link to documentation
+- **Backlog Updates**: Keep backlog synchronized with progress
+- **Documentation Synchronization**: Update all docs simultaneously (roadmap, backlog, README, release notes)
+- **Cross-Reference Consistency**: Ensure all documentation references are consistent and up-to-date
 
 ## Risk Management
 
@@ -217,6 +231,8 @@ alwaysApply: false
 - **Technical Risks**: Implementation challenges and solutions
 - **Quality Risks**: Quality assurance risks and controls
 - **User Acceptance Risks**: User experience risks and validation (if applicable)
+- **Process Risks**: Workflow and approval gate risks
+- **Dependency Risks**: External dependencies and integration risks
 
 ### Risk Mitigation
 
@@ -224,6 +240,8 @@ alwaysApply: false
 - **Contingency planning**: Develop backup plans for high-risk items
 - **Regular monitoring**: Monitor risks throughout development
 - **Stakeholder communication**: Keep stakeholders informed of risks
+- **Process adaptation**: Adjust process when risks materialize
+- **Documentation updates**: Update process documentation based on lessons learned
 
 ## Work Type-Specific Guidelines
 
@@ -262,18 +280,158 @@ alwaysApply: false
 - **Documentation**: Update technical documentation
 - **Approval**: Self-review for gate 1, peer review for gate 2
 
+## GitHub Issues Integration
+
+### Issue Management Workflow
+
+**For all work types**:
+
+- **Issue Creation**: Use appropriate GitHub issue templates
+- **Issue Linking**: Link issues to backlog items and documentation
+- **Progress Tracking**: Update issue status throughout development
+- **Issue Closure**: Close issues with appropriate resolution and documentation
+
+### Issue Templates Usage
+
+- **Feature Request**: For new features and enhancements
+- **Bug Report**: For defects and issues
+- **Release Task**: For release-specific implementation tasks
+- **UAT Testing**: For user acceptance testing
+
+### Issue Status Tracking
+
+- **needs-triage**: New issues awaiting review
+- **in-progress**: Currently being worked on
+- **ready-for-review**: Ready for code review
+- **ready-for-uat**: Ready for user testing
+- **blocked**: Blocked by other issues
+- **closed**: Completed and resolved
+
+## Release Transition Process
+
+### Release Completion
+
+**When a release is completed**:
+
+1. **Update Documentation**:
+   - Mark release as complete in roadmap
+   - Update backlog with completion status
+   - Update README with current status
+   - Archive release documentation
+
+2. **GitHub Issues Management**:
+   - Close all issues for completed release
+   - Update issue status and resolution
+   - Link issues to release notes
+   - Archive completed milestone
+
+3. **Process Review and Evolution**:
+   - Conduct release retrospective
+   - Document lessons learned and process improvements
+   - Update process documentation based on experience
+   - Identify areas for process enhancement
+   - Update this release management document with new insights
+
+### Release Planning Transition
+
+**When starting a new release**:
+
+1. **Planning Phase**:
+   - Validate if a release planning document exists, if not create a release planning document
+   - Review and update backlog
+   - Set release objectives and scope
+   - Define success criteria
+
+2. **Gate 1 Preparation**:
+   - Prepare technical specifications
+   - Plan TDD approach for features
+   - Estimate timeline and resources
+   - Identify risks and mitigation strategies
+
+3. **Documentation Updates**:
+   - Update current release tracker
+   - Create GitHub milestone
+   - Update roadmap status
+   - Prepare issue templates
+
+### Cross-Release Dependencies
+
+**Managing dependencies between releases**:
+
+- **Feature Dependencies**: Track features that depend on previous releases
+- **Technical Dependencies**: Identify technical debt and refactoring needs
+- **Documentation Dependencies**: Ensure documentation consistency across releases
+- **Testing Dependencies**: Maintain test coverage and regression testing
+
+## Continuous Process Improvement
+
+### Process Evolution Framework
+
+**The development process should continuously evolve based on experience**:
+
+#### After Each Release
+1. **Conduct Retrospective**: Review what worked well and what didn't
+2. **Document Lessons**: Capture specific lessons learned
+3. **Update Process**: Modify this document with new insights
+4. **Implement Changes**: Apply process improvements to next release
+
+#### Process Improvement Areas
+- **Gate Requirements**: Refine gate criteria based on experience
+- **Documentation Standards**: Improve documentation requirements
+- **Testing Strategies**: Enhance testing approaches
+- **Quality Metrics**: Adjust quality standards and measurements
+- **Workflow Efficiency**: Streamline development workflows
+
+#### Lessons Integration
+- **Immediate Application**: Apply lessons to current development
+- **Process Updates**: Update this document with new requirements
+- **Team Training**: Share lessons with development team
+- **Best Practices**: Establish new best practices based on experience
+
 ## References
 
 ### Project Documentation
-- **[Release Management Guide](mdc:docs/release-management.md)** - Comprehensive release management framework
+- **[Release Management Guide](mdc:docs/release-management.md)** - Comprehensive release management framework and documentation standards
 - **[Current Release Tracker](mdc:docs/current-release.md)** - Current release progress and status
-- **[Go Standards - TDD Examples](mdc:docs/go-standards.md#110-test-driven-development-tdd-examples)** - Test-Driven Development process and methodology
-- **[Go Standards - TDD Examples](mdc:docs/go-standards.md#110-test-driven-development-tdd-examples)** - Go-specific TDD examples and patterns
 - **[Implementation Roadmap](mdc:docs/implementation-roadmap.md)** - Technical implementation plan by release
+- **[Backlog](mdc:docs/backlog.md)** - Feature backlog organized by release
+- **[Release Notes](mdc:RELEASE_NOTES.md)** - Complete release history and documentation
+- **[Release Documentation](mdc:docs/releases/README.md)** - Release documentation standards and structure
 
-### Development Standards
-- **[Go Development Rules](mdc:.cursor/rules/go-development.mdc)** - Go development standards and practices
-- **[Architecture Guidelines](mdc:.cursor/rules/architecture.mdc)** - Architectural decision making and compliance
+### Process Evolution and Lessons Learned
+
+**The development process evolves based on experience and lessons learned from each release**:
+
+#### Documentation Synchronization
+- **Lesson**: Keep all documentation updated simultaneously during development
+- **Process Update**: Added documentation requirements to all gate deliverables
+- **Implementation**: Update roadmap, backlog, README, and release notes together
+
+#### Test Isolation and Quality
+- **Lesson**: Ensure tests don't interfere with each other, especially with state persistence
+- **Process Update**: Enhanced testing requirements with regression and cross-platform testing
+- **Implementation**: Use isolated test environments and cleanup procedures
+
+#### State Persistence Validation
+- **Lesson**: Validate state persistence across process restarts thoroughly
+- **Process Update**: Added state persistence testing to Gate 3 requirements
+- **Implementation**: Include process restart scenarios in UAT testing
+
+#### User Acceptance Testing
+- **Lesson**: Include comprehensive UAT scenarios covering real-world usage
+- **Process Update**: Enhanced Gate 3 with detailed UAT requirements
+- **Implementation**: Use structured UAT templates and acceptance criteria
+
+#### Release Documentation Completeness
+- **Lesson**: Prepare complete release notes and installation instructions
+- **Process Update**: Enhanced Gate 4 requirements for release documentation
+- **Implementation**: Use release templates and comprehensive documentation checklists
+
+#### Documentation Organization
+- **Lesson**: Maintain single authoritative release documents to avoid confusion
+- **Process Update**: Establish clear document hierarchy and supersession rules
+- **Implementation**: Archive or delete outdated documents, maintain clear document status
+- **Reference**: See [Release Management - Section 3.0](mdc:docs/release-management.md#30-release-documentation-standards) for complete standards
 
 ### External Resources
 - [Test-Driven Development by Example](mdc:https:/www.amazon.com/Test-Driven-Development-Kent-Beck/dp/0321146530)
