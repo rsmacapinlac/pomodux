@@ -11,6 +11,7 @@ type TimerEngine interface {
 	Resume() error
 	GetStatus() TimerStatus
 	GetProgress() float64
+	GetSessionType() SessionType
 }
 
 // TimerStatus represents the state of the timer.
@@ -21,4 +22,13 @@ const (
 	StatusRunning   TimerStatus = "running"
 	StatusPaused    TimerStatus = "paused"
 	StatusCompleted TimerStatus = "completed"
+)
+
+// SessionType represents the type of timer session.
+type SessionType string
+
+const (
+	SessionTypeWork      SessionType = "work"
+	SessionTypeBreak     SessionType = "break"
+	SessionTypeLongBreak SessionType = "long-break"
 )

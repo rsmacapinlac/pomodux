@@ -23,6 +23,7 @@ Release X.Y.Z
 ├── Development Phase
 │   ├── Feature Implementation (TDD)
 │   ├── Documentation Updates
+│   ├── Rebuild Binary: Ensure the CLI binary is rebuilt after any command or CLI changes (e.g., run `make build`)
 │   └── Approval Gate 2: Development Completion
 ├── Testing Phase
 │   ├── User Testing
@@ -30,6 +31,7 @@ Release X.Y.Z
 │   └── Approval Gate 3: User Acceptance
 └── Release Phase
     ├── Final Documentation
+    ├── Rebuild Binary: Rebuild the CLI binary for all target platforms before packaging or distribution (e.g., run `make build`)
     ├── Release Preparation
     └── Approval Gate 4: Release Approval
 ```

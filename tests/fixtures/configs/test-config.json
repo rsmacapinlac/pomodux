@@ -1,0 +1,5 @@
+{
+    "default_work_duration": "1m",
+    "default_break_duration": "30s",
+    "default_long_break_duration": "2m"
+} 

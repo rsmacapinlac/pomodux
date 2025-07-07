@@ -37,7 +37,10 @@ The Pomodux terminal timer application follows a modular architecture with clear
   - Timer state management
   - Session tracking
   - Progress calculation
-  - Event emission
+  - Persistent timer sessions
+  - Interactive keypress controls
+  - Automatic session recording
+  - Real-time progress display
 
 #### TUI Renderer
 - **Purpose**: Terminal user interface rendering
@@ -71,13 +74,19 @@ The Pomodux terminal timer application follows a modular architecture with clear
 - **State Management**: Idle, Running, Paused, Completed states
 - **Duration Handling**: Support for various time formats and durations
 - **Progress Tracking**: Real-time progress calculation and updates
-- **Event Emission**: Emit events for state changes and milestones
+- **Persistent Sessions**: Timer sessions that run continuously until user interaction
+- **Interactive Controls**: Keypress-based control system (p, r, q, s, Ctrl+C)
+- **Automatic Recording**: Sessions automatically recorded upon completion
+- **Real-time Display**: Continuous progress updates with progress bars
 
 #### 2.1.2 Session Management
 - **Session Types**: Work sessions, break sessions, long break sessions
-- **Session History**: Persistent storage of completed sessions
+- **Session History**: Persistent storage of completed sessions with automatic recording
 - **Statistics**: Session duration, completion rates, productivity metrics
 - **Session Configuration**: Customizable session parameters
+- **Automatic Recording**: Sessions automatically recorded upon completion
+- **Session State**: Persistent timer state across process restarts
+- **Session Recorder**: Dedicated component for handling session recording and history management
 
 ### 2.2 TUI Renderer
 
@@ -96,7 +105,7 @@ The Pomodux terminal timer application follows a modular architecture with clear
 ### 2.3 CLI Interface
 
 #### 2.3.1 Command Structure
-- **Root Commands**: Main application commands (start, stop, status)
+- **Root Commands**: Main application commands (start, break, long-break)
 - **Subcommands**: Specialized operations (config, history, stats)
 - **Flags and Options**: Command-line parameters and configuration
 - **Help System**: Comprehensive help and usage documentation
@@ -123,18 +132,24 @@ The Pomodux terminal timer application follows a modular architecture with clear
 
 ## 3.0 Data Flow Architecture
 
-### 3.1 Event-Driven Communication
+### 3.1 Persistent Timer Flow
 ```
 ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│ Timer Engine│───▶│ Event Bus   │───▶│ TUI/CLI     │
-│             │    │             │    │ Components  │
+│ Timer Start │───▶│ Persistent  │───▶│ Keypress    │
+│ Command     │    │ Session     │    │ Handler     │
 └─────────────┘    └─────────────┘    └─────────────┘
-       │                   │                   │
-       │                   ▼                   │
-       │            ┌─────────────┐            │
-       └───────────▶│ Plugin      │◀───────────┘
-                    │ System      │
-                    └─────────────┘
+                           │                   │
+                           ▼                   ▼
+                    ┌─────────────┐    ┌─────────────┐
+                    │ Progress    │    │ Session     │
+                    │ Display     │    │ Recording   │
+                    └─────────────┘    └─────────────┘
+                              │                   │
+                              ▼                   ▼
+                       ┌─────────────┐    ┌─────────────┐
+                       │ Real-time   │    │ History     │
+                       │ Updates     │    │ Persistence │
+                       └─────────────┘    └─────────────┘
 ```
 
 ### 3.2 Configuration Management
@@ -143,10 +158,83 @@ The Pomodux terminal timer application follows a modular architecture with clear
 - **Configuration Validation**: Schema validation and error reporting
 - **Configuration Persistence**: Reliable saving and loading of settings
 
-### 3.3 State Management
+### 3.3 Persistent Timer System
+- **Session Persistence**: Timer state maintained across process restarts
+- **Interactive Controls**: Keypress-based control system during sessions
+- **Real-time Display**: Continuous progress updates with progress bars
+- **Session Recording**: Automatic history recording on timer completion
+- **State Management**: Persistent timer state with background monitoring
+- **Keypress Handling**: Raw terminal mode for reliable input handling
+
+### 3.4 State Management
 - **Application State**: Global application state and settings
 - **Session State**: Current timer and session information
 - **UI State**: Interface state and user preferences
 - **Plugin State**: Plugin-specific state and configuration
+- **Timer State**: Persistent timer state with interactive controls
+- **History State**: Session history and statistics management
+
+## 4.0 Keypress Control System
+
+### 4.1 Control Mapping
+- **'p'**: Pause current timer session
+- **'r'**: Resume paused timer session
+- **'q'**: Stop timer session and exit
+- **'s'**: Stop timer session and exit (alternative)
+- **Ctrl+C**: Emergency exit from timer session
+
+### 4.2 Input Handling
+- **Raw Terminal Mode**: Terminal put into raw mode for reliable keypress detection
+- **Non-blocking Input**: Keypress handling doesn't block timer updates
+- **Graceful Cleanup**: Terminal state restored on exit
+- **Cross-platform**: Works across different terminal environments
+
+### 4.3 Session Flow
+1. **Start**: User starts timer with `pomodux start [duration]`
+2. **Persistent Session**: Timer runs continuously with real-time display
+3. **Interactive Control**: User can pause, resume, or stop via keypresses
+4. **Completion**: Timer completes automatically or user stops manually
+5. **Recording**: Session automatically recorded to history
+6. **Exit**: User exits session and returns to command line
+
+## 5.0 Session Types
+
+### 5.1 Work Sessions
+- **Command**: `pomodux start [duration]`
+- **Default Duration**: 25 minutes (configurable)
+- **Purpose**: Focused work periods
+- **Recording**: Automatically recorded on completion
+
+### 5.2 Break Sessions
+- **Command**: `pomodux break`
+- **Default Duration**: 5 minutes (configurable)
+- **Purpose**: Short breaks between work sessions
+- **Recording**: Automatically recorded on completion
+
+### 5.3 Long Break Sessions
+- **Command**: `pomodux long-break`
+- **Default Duration**: 15 minutes (configurable)
+- **Purpose**: Extended breaks after multiple work sessions
+- **Recording**: Automatically recorded on completion
+
+## 6.0 Data Persistence
+
+### 6.1 Session History
+- **Storage**: JSON file in XDG state directory
+- **Format**: Structured session records with metadata
+- **Access**: Via `pomodux history` command
+- **Statistics**: Automatic calculation of session metrics
+
+### 6.2 Timer State
+- **Storage**: JSON file in XDG state directory
+- **Purpose**: Persist timer state across process restarts
+- **Recovery**: Automatic state restoration on startup
+- **Cleanup**: State cleared when timer completes or stops
+
+### 6.3 Configuration
+- **Storage**: YAML file in XDG config directory
+- **Validation**: Schema-based configuration validation
+- **Defaults**: Sensible defaults for all settings
+- **Migration**: Automatic configuration migration between versions
 
  

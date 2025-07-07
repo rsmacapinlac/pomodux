@@ -1,0 +1,250 @@
+1..105
+ok 1 version command should succeed and show app name
+ok 2 version command should show version information
+ok 3 help command should succeed
+ok 4 help command should show start command
+ok 5 help command should show break command
+ok 6 help command should show long-break command
+ok 7 help command should show config command
+ok 8 help command should show history command
+ok 9 help command should show completion command
+ok 10 completion bash command should succeed
+ok 11 completion bash should contain complete command
+ok 12 completion zsh command should succeed
+ok 13 completion zsh should contain compdef command
+ok 14 config show command should succeed
+ok 15 config show should display work duration
+ok 16 config show should display break duration
+ok 17 config show should display long break duration
+ok 18 config set command should succeed with valid work duration
+ok 19 config set command should succeed with valid break duration
+ok 20 config set command should succeed with valid long break duration
+ok 21 config set should fail with invalid work duration
+ok 22 config set should fail with invalid break duration
+ok 23 config set should fail with invalid long break duration
+ok 24 config set should fail with unknown setting
+not ok 25 config set should accept various duration formats
+# (in test file tests/uat/automated/bats/configuration.bats, line 120)
+#   `[ "$status" -eq 0 ]' failed
+ok 26 config show should display JSON format
+ok 27 config set should handle edge case durations
+not ok 28 help should show keypress instructions
+# (in test file tests/uat/automated/bats/keypress-controls.bats, line 69)
+#   `grep -q "Press 'p' to pause, 'r' to resume, 'q'/'s' to stop, Ctrl+C to exit." output.txt' failed
+not ok 29 q key should stop the timer
+# (in test file tests/uat/automated/bats/keypress-controls.bats, line 92)
+#   `grep -q "Timer stopped." output.txt' failed
+not ok 30 s key should stop the timer
+# (in test file tests/uat/automated/bats/keypress-controls.bats, line 117)
+#   `grep -q "Timer stopped." output.txt' failed
+not ok 31 p key should pause the timer
+# (in test file tests/uat/automated/bats/keypress-controls.bats, line 142)
+#   `grep -q "PAUSED" output.txt' failed
+not ok 32 r key should resume paused timer
+# (in test file tests/uat/automated/bats/keypress-controls.bats, line 165)
+#   `grep -q "RESUMED" output.txt' failed
+not ok 33 pause and resume should maintain progress
+# (in test file tests/uat/automated/bats/keypress-controls.bats, line 190)
+#   `grep -q "PAUSED" output.txt' failed
+# /home/ritchie/workspace/pomodux/tests/uat/automated/bats/keypress-controls.bats: line 181: /proc/1831834/fd/0: No such file or directory
+# /home/ritchie/workspace/pomodux/tests/uat/automated/bats/keypress-controls.bats: line 185: /proc/1831834/fd/0: No such file or directory
+not ok 34 timer should handle multiple keypresses correctly
+# (in test file tests/uat/automated/bats/keypress-controls.bats, line 214)
+#   `grep -q "Timer stopped." output.txt' failed
+not ok 35 timer should show proper status messages
+# (in test file tests/uat/automated/bats/keypress-controls.bats, line 232)
+#   `grep -q "Timer started for" output.txt' failed
+not ok 36 timer should handle invalid keypresses gracefully
+# (in test file tests/uat/automated/bats/keypress-controls.bats, line 265)
+#   `false' failed
+not ok 37 start command should show persistent timer instructions
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 68)
+#   `grep -q "Press 'p' to pause, 'r' to resume, 'q'/'s' to stop, Ctrl+C to exit." output.txt' failed
+not ok 38 start command should show session type information
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 86)
+#   `grep -q "Session type: work" output.txt' failed
+not ok 39 start command should show progress bar
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 104)
+#   `grep -q "█" output.txt || grep -q "░" output.txt' failed
+not ok 40 start command should show percentage and time remaining
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 122)
+#   `grep -q "%" output.txt' failed
+not ok 41 break command should show break session type
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 141)
+#   `grep -q "Session type: break" output.txt' failed
+not ok 42 long-break command should show long break session type
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 159)
+#   `grep -q "Session type: long_break" output.txt' failed
+not ok 43 timer should complete automatically and record session
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 169)
+#   `timeout 10s "$APP_BINARY" start 3s > output.txt 2>&1' failed
+not ok 44 timer should show completion message with session recording
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 186)
+#   `timeout 10s "$APP_BINARY" start 3s > output.txt 2>&1' failed
+not ok 45 timer should handle custom durations correctly
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 198)
+#   `timeout 10s "$APP_BINARY" start 7s > output.txt 2>&1' failed
+not ok 46 timer should use config default work duration when no duration specified
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 237)
+#   `grep -q "2 minute" output.txt' failed
+not ok 47 history command should succeed when no history exists
+# (in test file tests/uat/automated/bats/session-history.bats, line 56)
+#   `[ "$status" -eq 1 ]' failed
+not ok 48 history command should show no history message when empty
+# (in test file tests/uat/automated/bats/session-history.bats, line 61)
+#   `[ "$status" -eq 1 ]' failed
+not ok 49 completed work session should be recorded in history
+# (in test file tests/uat/automated/bats/session-history.bats, line 67)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed
+not ok 50 completed break session should be recorded in history
+# (in test file tests/uat/automated/bats/session-history.bats, line 79)
+#   `"$APP_BINARY" break > /dev/null 2>&1' failed
+not ok 51 completed long break session should be recorded in history
+# (in test file tests/uat/automated/bats/session-history.bats, line 91)
+#   `"$APP_BINARY" long-break > /dev/null 2>&1' failed
+not ok 52 history should show multiple sessions
+# (in test file tests/uat/automated/bats/session-history.bats, line 103)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed
+not ok 53 history file should be created after first session
+# (in test file tests/uat/automated/bats/session-history.bats, line 125)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed
+not ok 54 history file should contain valid JSON
+# (in test file tests/uat/automated/bats/session-history.bats, line 135)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed
+not ok 55 history should show session details
+# (in test file tests/uat/automated/bats/session-history.bats, line 146)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed
+not ok 56 history should show session duration
+# (in test file tests/uat/automated/bats/session-history.bats, line 159)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed
+not ok 57 history should show session timestamps
+# (in test file tests/uat/automated/bats/session-history.bats, line 171)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed
+not ok 58 history should limit to last 10 sessions
+# (in test file tests/uat/automated/bats/session-history.bats, line 185)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed
+not ok 59 history should show most recent sessions first
+# (in test file tests/uat/automated/bats/session-history.bats, line 201)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed
+not ok 60 paused sessions should not be recorded until stopped
+# (in test file tests/uat/automated/bats/session-history.bats, line 220)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed
+not ok 61 auto-completed sessions should be recorded
+# (in test file tests/uat/automated/bats/session-history.bats, line 240)
+#   `"$APP_BINARY" start 1s > /dev/null 2>&1' failed
+not ok 62 history should handle interrupted sessions
+# (in test file tests/uat/automated/bats/session-history.bats, line 254)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed
+not ok 63 history should persist across application restarts
+# (in test file tests/uat/automated/bats/session-history.bats, line 269)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed
+ok 64 history should handle malformed history file gracefully
+not ok 65 history should show different session types correctly
+# (in test file tests/uat/automated/bats/session-history.bats, line 295)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed
+not ok 66 break command should succeed
+# (in test file tests/uat/automated/bats/session-types.bats, line 53)
+#   `[ "$status" -eq 0 ]' failed
+not ok 67 break command should start break session
+# (in test file tests/uat/automated/bats/session-types.bats, line 57)
+#   `"$APP_BINARY" break > /dev/null 2>&1' failed
+not ok 68 break command should use configured break duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 69)
+#   `"$APP_BINARY" break > /dev/null 2>&1' failed
+not ok 69 long-break command should succeed
+# (in test file tests/uat/automated/bats/session-types.bats, line 79)
+#   `[ "$status" -eq 0 ]' failed
+not ok 70 long-break command should start long break session
+# (in test file tests/uat/automated/bats/session-types.bats, line 83)
+#   `"$APP_BINARY" long-break > /dev/null 2>&1' failed
+not ok 71 long-break command should use configured long break duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 95)
+#   `"$APP_BINARY" long-break > /dev/null 2>&1' failed
+not ok 72 start command should start work session by default
+# (in test file tests/uat/automated/bats/session-types.bats, line 104)
+#   `"$APP_BINARY" start > /dev/null 2>&1' failed
+not ok 73 start command should use configured work duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 116)
+#   `"$APP_BINARY" start > /dev/null 2>&1' failed
+not ok 74 break command should fail when timer is already running
+# (in test file tests/uat/automated/bats/session-types.bats, line 126)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed
+not ok 75 long-break command should fail when timer is already running
+# (in test file tests/uat/automated/bats/session-types.bats, line 135)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed
+not ok 76 break command should show error when timer is already running
+# (in test file tests/uat/automated/bats/session-types.bats, line 144)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed
+not ok 77 long-break command should show error when timer is already running
+# (in test file tests/uat/automated/bats/session-types.bats, line 154)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed
+not ok 78 break session should be stoppable
+# (in test file tests/uat/automated/bats/session-types.bats, line 164)
+#   `"$APP_BINARY" break > /dev/null 2>&1' failed
+not ok 79 long-break session should be stoppable
+# (in test file tests/uat/automated/bats/session-types.bats, line 178)
+#   `"$APP_BINARY" long-break > /dev/null 2>&1' failed
+not ok 80 break session should be pausable and resumable
+# (in test file tests/uat/automated/bats/session-types.bats, line 192)
+#   `"$APP_BINARY" break > /dev/null 2>&1' failed
+not ok 81 long-break session should be pausable and resumable
+# (in test file tests/uat/automated/bats/session-types.bats, line 216)
+#   `"$APP_BINARY" long-break > /dev/null 2>&1' failed
+not ok 82 break command should accept custom duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 240)
+#   `[ "$status" -eq 0 ]' failed
+not ok 83 long-break command should accept custom duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 254)
+#   `[ "$status" -eq 0 ]' failed
+not ok 84 break command should fail with invalid duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 260)
+#   `[ "$status" -eq 1 ]' failed
+not ok 85 long-break command should fail with invalid duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 265)
+#   `[ "$status" -eq 1 ]' failed
+not ok 86 break command should show error with invalid duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 270)
+#   `[ "$status" -eq 1 ]' failed
+not ok 87 long-break command should show error with invalid duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 276)
+#   `[ "$status" -eq 1 ]' failed
+not ok 88 session types should be distinguishable in status
+# (in test file tests/uat/automated/bats/session-types.bats, line 284)
+#   `[ "$status" -eq 0 ]' failed
+not ok 89 session types should use appropriate default durations
+# (in test file tests/uat/automated/bats/session-types.bats, line 307)
+#   `[ "$status" -eq 0 ]' failed
+ok 90 start command should succeed with valid duration
+ok 91 start command should show timer started message
+ok 92 start command should show session type
+ok 93 start command should show keypress instructions
+ok 94 start command should fail when timer is already running
+not ok 95 start command should show error when timer is already running
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 108)
+#   `[[ "$output" =~ "error" ]]' failed
+not ok 96 start command should accept various duration formats
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 117)
+#   `[ "$status" -eq 0 ]' failed
+ok 97 start command should fail with zero duration
+ok 98 start command should fail with negative duration
+not ok 99 start command should use default work duration when no duration specified
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 140)
+#   `[ "$status" -eq 0 ]' failed
+not ok 100 break command should start break session
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 146)
+#   `[ "$status" -eq 0 ]' failed
+not ok 101 long-break command should start long break session
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 152)
+#   `[ "$status" -eq 0 ]' failed
+not ok 102 timer should complete automatically
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 158)
+#   `timeout 10s "$APP_BINARY" start 3s > output.txt 2>&1' failed
+not ok 103 timer should record session in history after completion
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 170)
+#   `timeout 10s "$APP_BINARY" start 3s > /dev/null 2>&1' failed
+not ok 104 timer should show progress bar during execution
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 188)
+#   `grep -q "█" output.txt || grep -q "░" output.txt' failed
+not ok 105 timer should show percentage and time remaining
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 206)
+#   `grep -q "%" output.txt' failed

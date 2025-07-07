@@ -1,0 +1,178 @@
+1..104
+ok 1 version command should succeed and show app name
+ok 2 version command should show version information
+ok 3 help command should succeed
+ok 4 help command should show start command
+ok 5 help command should show stop command
+ok 6 help command should show status command
+ok 7 help command should show pause command
+ok 8 help command should show resume command
+ok 9 help command should show break command
+ok 10 help command should show long-break command
+ok 11 help command should show config command
+ok 12 help command should show history command
+ok 13 help command should show completion command
+ok 14 completion bash command should succeed
+ok 15 completion bash should contain complete command
+ok 16 completion zsh command should succeed
+ok 17 completion zsh should contain compdef command
+ok 18 status command should succeed when no timer is running
+ok 19 status command should show idle state when no timer is running
+ok 20 stop command should succeed when no timer is running
+ok 21 stop command should show message when no timer is running
+ok 22 pause command should show message when no timer is running
+ok 23 resume command should show message when no timer is running
+ok 24 config show command should succeed
+ok 25 config show should display work duration
+ok 26 config show should display break duration
+ok 27 config show should display long break duration
+ok 28 config set command should succeed with valid work duration
+ok 29 config set command should succeed with valid break duration
+ok 30 config set command should succeed with valid long break duration
+not ok 31 config set should fail with invalid work duration
+# (in test file tests/uat/automated/bats/configuration.bats, line 91)
+#   `[ "$status" -eq 1 ]' failed
+not ok 32 config set should fail with invalid break duration
+# (in test file tests/uat/automated/bats/configuration.bats, line 96)
+#   `[ "$status" -eq 1 ]' failed
+not ok 33 config set should fail with invalid long break duration
+# (in test file tests/uat/automated/bats/configuration.bats, line 101)
+#   `[ "$status" -eq 1 ]' failed
+not ok 34 config set should fail with unknown setting
+# (in test file tests/uat/automated/bats/configuration.bats, line 106)
+#   `[ "$status" -eq 1 ]' failed
+ok 35 config set should accept various duration formats
+ok 36 config show should display JSON format
+not ok 37 config show should display valid JSON
+# (in test file tests/uat/automated/bats/configuration.bats, line 135)
+#   `echo "$output" | jq . > /dev/null 2>&1' failed with status 127
+ok 38 config set should handle edge case durations
+not ok 39 history command should succeed when no history exists
+# (in test file tests/uat/automated/bats/session-history.bats, line 56)
+#   `[ "$status" -eq 1 ]' failed
+not ok 40 history command should show no history message when empty
+# (in test file tests/uat/automated/bats/session-history.bats, line 61)
+#   `[ "$status" -eq 1 ]' failed
+ok 41 completed work session should be recorded in history
+ok 42 completed break session should be recorded in history
+ok 43 completed long break session should be recorded in history
+ok 44 history should show multiple sessions
+ok 45 history file should be created after first session
+not ok 46 history file should contain valid JSON
+# (in test file tests/uat/automated/bats/session-history.bats, line 141)
+#   `[ "$status" -eq 0 ]' failed
+ok 47 history should show session details
+ok 48 history should show session duration
+ok 49 history should show session timestamps
+ok 50 history should limit to last 10 sessions
+not ok 51 history should show most recent sessions first
+# (in test file tests/uat/automated/bats/session-history.bats, line 215)
+#   `[[ "$first_session" =~ "2m" ]] || [[ "$first_session" =~ "120" ]]' failed
+not ok 52 paused sessions should not be recorded until stopped
+# (in test file tests/uat/automated/bats/session-history.bats, line 226)
+#   `[ "$status" -eq 1 ]' failed
+ok 53 auto-completed sessions should be recorded
+not ok 54 history should handle interrupted sessions
+# (in test file tests/uat/automated/bats/session-history.bats, line 264)
+#   `[[ "$output" =~ "interrupted" ]] || [[ "$output" =~ "stopped" ]]' failed
+ok 55 history should persist across application restarts
+ok 56 history should handle malformed history file gracefully
+ok 57 history should show different session types correctly
+ok 58 break command should succeed
+ok 59 break command should start break session
+not ok 60 break command should use configured break duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 74)
+#   `[[ "$output" =~ "45s" ]] || [[ "$output" =~ "45" ]]' failed
+ok 61 long-break command should succeed
+ok 62 long-break command should start long break session
+not ok 63 long-break command should use configured long break duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 100)
+#   `[[ "$output" =~ "3m" ]] || [[ "$output" =~ "180" ]]' failed
+ok 64 start command should start work session by default
+not ok 65 start command should use configured work duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 121)
+#   `[[ "$output" =~ "35m" ]] || [[ "$output" =~ "2100" ]]' failed
+not ok 66 break command should fail when timer is already running
+# (in test file tests/uat/automated/bats/session-types.bats, line 130)
+#   `[ "$status" -eq 1 ]' failed
+not ok 67 long-break command should fail when timer is already running
+# (in test file tests/uat/automated/bats/session-types.bats, line 139)
+#   `[ "$status" -eq 1 ]' failed
+not ok 68 break command should show error when timer is already running
+# (in test file tests/uat/automated/bats/session-types.bats, line 148)
+#   `[ "$status" -eq 1 ]' failed
+not ok 69 long-break command should show error when timer is already running
+# (in test file tests/uat/automated/bats/session-types.bats, line 158)
+#   `[ "$status" -eq 1 ]' failed
+ok 70 break session should be stoppable
+ok 71 long-break session should be stoppable
+ok 72 break session should be pausable and resumable
+ok 73 long-break session should be pausable and resumable
+not ok 74 break command should accept custom duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 245)
+#   `[[ "$output" =~ "45s" ]] || [[ "$output" =~ "45" ]]' failed
+not ok 75 long-break command should accept custom duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 255)
+#   `[[ "$output" =~ "5m" ]] || [[ "$output" =~ "300" ]]' failed
+not ok 76 break command should fail with invalid duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 260)
+#   `[ "$status" -eq 1 ]' failed
+not ok 77 long-break command should fail with invalid duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 265)
+#   `[ "$status" -eq 1 ]' failed
+not ok 78 break command should show error with invalid duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 270)
+#   `[ "$status" -eq 1 ]' failed
+not ok 79 long-break command should show error with invalid duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 276)
+#   `[ "$status" -eq 1 ]' failed
+ok 80 session types should be distinguishable in status
+not ok 81 session types should use appropriate default durations
+# (in test file tests/uat/automated/bats/session-types.bats, line 308)
+#   `[[ "$output" =~ "1m" ]] || [[ "$output" =~ "60" ]]' failed
+ok 82 start command should succeed with custom duration
+ok 83 start command should succeed with default duration
+not ok 84 start command should fail with invalid duration
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 63)
+#   `[ "$status" -eq 1 ]' failed
+not ok 85 start command should show error with invalid duration
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 68)
+#   `[ "$status" -eq 1 ]' failed
+not ok 86 start command should fail when timer is already running
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 78)
+#   `[ "$status" -eq 1 ]' failed
+not ok 87 start command should show error when timer is already running
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 87)
+#   `[ "$status" -eq 1 ]' failed
+ok 88 start command with force flag should succeed when timer is running
+ok 89 status command should show running state when timer is active
+not ok 90 status command should show remaining time when timer is running
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 117)
+#   `[[ "$output" =~ "remaining" ]]' failed
+ok 91 pause command should succeed when timer is running
+ok 92 status command should show paused state when timer is paused
+ok 93 resume command should succeed when timer is paused
+ok 94 status command should show running state after resume
+ok 95 stop command should succeed when timer is running
+ok 96 stop command should succeed when timer is paused
+ok 97 status command should show idle state after stop
+not ok 98 pause command should fail when timer is not running
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 206)
+#   `[ "$status" -eq 1 ]' failed
+not ok 99 resume command should fail when timer is not paused
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 211)
+#   `[ "$status" -eq 1 ]' failed
+not ok 100 stop command should fail when timer is not running
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 216)
+#   `[ "$status" -eq 1 ]' failed
+ok 101 timer should preserve remaining time when paused
+ok 102 start command should accept various duration formats
+not ok 103 start command should fail with zero duration
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 262)
+#   `[ "$status" -eq 1 ]' failed
+ok 104 start command should fail with negative duration
+
+The following warnings were encountered during tests:
+BW01: `run`'s command `jq . /home/ritchie/.local/state/pomodux/session_history.json` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/session-history.bats, line 140)

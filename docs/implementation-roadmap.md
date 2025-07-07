@@ -9,7 +9,8 @@
 The Pomodux implementation is divided into **4 releases**, each building upon the previous release:
 
 - **Release 0.1.0**: Project Foundation & Core Timer Engine ✅ **COMPLETE**
-- **Release 0.2.0**: CLI Interface & Basic Functionality 🔄 **IN PLANNING**
+- **Release 0.2.0**: CLI Interface & Basic Functionality ✅ **COMPLETE**
+- **Release 0.2.1**: Persistent Timer with Keypress Controls ✅ **COMPLETE**
 - **Release 0.3.0**: Terminal UI (TUI) Development 📋 **PLANNED**
 - **Release 0.4.0**: Plugin System & Advanced Features 📋 **PLANNED**
 
@@ -22,7 +23,7 @@ Each release is considered complete when:
 - Cross-platform compatibility is verified
 - Performance benchmarks are met
 
-## 2.0 Release 0.1.0: Project Foundation & Core Timer Engine
+## 2.0 Release 0.1.0: Project Foundation & Core Timer Engine ✅ **COMPLETE**
 
 ### 2.1 Objectives
 - Establish project structure and development environment
@@ -101,10 +102,10 @@ const (
 - **Dependencies**: None (foundation release)
 - **Risk Level**: Low
 
-## 3.0 Release 0.2.0: CLI Interface & Basic Functionality 🔄 **IN PLANNING**
+## 3.0 Release 0.2.0: CLI Interface & Basic Functionality ✅ **COMPLETE**
 
 ### 3.1 Objectives
-- Implement enhanced CLI interface features (pause/resume, Pomodoro)
+- Implement enhanced CLI interface features (pause/resume, Pomodoro technique)
 - Add Pomodoro technique support
 - Implement configuration management commands
 - Add help system and tab completion
@@ -112,30 +113,32 @@ const (
 ### 3.2 Deliverables
 
 #### 3.2.1 CLI Framework
-- [ ] Set up Cobra CLI framework
-- [ ] Implement command structure and routing
-- [ ] Add comprehensive help system
-- [ ] Implement tab completion for commands
+- [x] Set up Cobra CLI framework
+- [x] Implement command structure and routing
+- [x] Add comprehensive help system
+- [x] Implement tab completion for commands
 
 #### 3.2.2 Timer Commands
-- [ ] `pomodux start` - Start a work timer
-- [ ] `pomodux pomodoro` - Start a pomodoro session
-- [ ] `pomodux break` - Start a break timer
-- [ ] `pomodux pause` - Pause current timer
-- [ ] `pomodux resume` - Resume paused timer
-- [ ] `pomodux stop` - Stop current timer
-- [ ] `pomodux status` - Show current timer status
+- [x] `pomodux start` - Start a work timer
+- [x] `pomodux break` - Start a break timer
+- [x] `pomodux long-break` - Start a long break timer
+- [x] `pomodux pause` - Pause current timer
+- [x] `pomodux resume` - Resume paused timer
+- [x] `pomodux stop` - Stop current timer
+- [x] `pomodux status` - Show current timer status
 
 #### 3.2.3 Configuration Commands
-- [ ] `pomodux config` - Manage configuration
-- [ ] `pomodux config show` - Display current configuration
-- [ ] `pomodux config edit` - Edit configuration file
-- [ ] `pomodux config reset` - Reset to default configuration
+- [x] `pomodux config` - Manage configuration
+- [x] `pomodux config show` - Display current configuration
+- [x] `pomodux config edit` - Edit configuration file
+- [x] `pomodux config reset` - Reset to default configuration
+- [x] `pomodux config set` - Set configuration values
 
 #### 3.2.4 Utility Commands
-- [ ] `pomodux version` - Show version information
-- [ ] `pomodux help` - Show help information
-- [ ] `pomodux completion` - Generate shell completion
+- [x] `pomodux version` - Show version information
+- [x] `pomodux help` - Show help information
+- [x] `pomodux completion` - Generate shell completion
+- [x] `pomodux history` - Show session history
 
 ### 3.3 Technical Implementation
 
@@ -179,44 +182,125 @@ var configShowCmd = &cobra.Command{
 - **Dependencies**: Release 0.1.0 completion
 - **Risk Level**: Low
 
-## 4.0 Release 0.3.0: Terminal UI (TUI) Development
+## 4.0 Release 0.2.1: Persistent Timer with Keypress Controls ✅ **COMPLETE**
 
 ### 4.1 Objectives
+- Implement persistent timer sessions with interactive keypress controls
+- Add automatic session recording on completion
+- Create real-time progress display with progress bars
+- Implement session type support (work, break, long-break)
+- Remove separate pause/resume/stop commands in favor of keypress controls
+
+### 4.2 Deliverables
+
+#### 4.2.1 Persistent Timer Implementation
+- [x] Persistent timer session implementation
+- [x] Interactive keypress controls (p, r, q, s, Ctrl+C)
+- [x] Real-time progress display with progress bars
+- [x] Automatic session recording on completion
+- [x] Session completion handling
+
+#### 4.2.2 Keypress Control System
+- [x] Keypress handler implementation
+- [x] Pause/resume controls ('p'/'r')
+- [x] Stop controls ('q'/'s')
+- [x] Exit controls (Ctrl+C)
+- [x] Raw terminal mode handling
+
+#### 4.2.3 Real-time Progress Display
+- [x] Progress bar implementation
+- [x] Real-time progress updates
+- [x] Time remaining display
+- [x] Session type display
+- [x] Control instructions display
+
+#### 4.2.4 Session Management
+- [x] Automatic session recording on completion
+- [x] Session history persistence
+- [x] Session statistics calculation
+- [x] History file management
+
+### 4.3 Technical Implementation
+
+#### 4.3.1 Persistent Timer
+```go
+// Persistent timer session
+type PersistentTimer struct {
+    timer    *Timer
+    session  *Session
+    display  *ProgressDisplay
+    controls *KeypressHandler
+}
+
+func (pt *PersistentTimer) Start() error {
+    // Start persistent session with keypress controls
+    // Real-time progress display
+    // Automatic session recording
+}
+```
+
+#### 4.3.2 Keypress Controls
+```go
+// Keypress control mapping
+const (
+    KeyPause  = 'p'
+    KeyResume = 'r'
+    KeyStop   = 'q'
+    KeyStopAlt = 's'
+    KeyExit   = 3 // Ctrl+C
+)
+
+// Keypress handler
+type KeypressHandler struct {
+    timer    *Timer
+    done     chan bool
+    controls map[rune]func()
+}
+```
+
+### 4.4 Timeline
+- **Duration**: 1-2 weeks
+- **Dependencies**: Release 0.2.0 completion
+- **Risk Level**: Medium
+
+## 5.0 Release 0.3.0: Terminal UI (TUI) Development
+
+### 5.1 Objectives
 - Implement rich terminal user interface using Bubbletea
 - Add progress bars and visual feedback
 - Implement keyboard shortcuts and navigation
 - Add theme system and customization
 
-### 4.2 Deliverables
+### 5.2 Deliverables
 
-#### 4.2.1 TUI Framework
+#### 5.2.1 TUI Framework
 - [ ] Set up Bubbletea TUI framework
 - [ ] Implement main application model
 - [ ] Create component-based UI architecture
 - [ ] Add terminal resize handling
 
-#### 4.2.2 UI Components
+#### 5.2.2 UI Components
 - [ ] Timer display component with progress bar
 - [ ] Status information panel
 - [ ] Session history display
 - [ ] Configuration panel
 - [ ] Help and navigation overlay
 
-#### 4.2.3 User Interaction
+#### 5.2.3 User Interaction
 - [ ] Keyboard shortcut system
 - [ ] Input handling and validation
 - [ ] Navigation between UI sections
 - [ ] Modal dialogs for configuration
 
-#### 4.2.4 Visual Design
+#### 5.2.4 Visual Design
 - [ ] Theme system with multiple themes
 - [ ] Progress bar animations
 - [ ] Status indicators and icons
 - [ ] Responsive layout system
 
-### 4.3 Technical Implementation
+### 5.3 Technical Implementation
 
-#### 4.3.1 TUI Architecture
+#### 5.3.1 TUI Architecture
 ```go
 // Main application model
 type Model struct {
@@ -244,7 +328,7 @@ const (
 )
 ```
 
-#### 4.3.2 Theme System
+#### 5.3.2 Theme System
 ```go
 // Theme configuration
 type Theme struct {
@@ -264,155 +348,97 @@ type Theme struct {
 }
 ```
 
-### 4.4 Timeline
+### 5.4 Timeline
 - **Duration**: 3-4 weeks
-- **Dependencies**: Release 0.2.0 completion
+- **Dependencies**: Release 0.2.1 completion
 - **Risk Level**: Medium
 
-## 5.0 Release 0.4.0: Plugin System & Advanced Features
+## 6.0 Release 0.4.0: Plugin System & Advanced Features
 
-### 5.1 Objectives
+### 6.1 Objectives
 - Implement Lua-based plugin system
 - Add hook system for timer events
 - Create plugin API and documentation
 - Implement advanced features and integrations
 
-### 5.2 Deliverables
+### 6.2 Deliverables
 
-#### 5.2.1 Plugin System
+#### 6.2.1 Plugin System
 - [ ] Set up Gopher-lua runtime
 - [ ] Implement plugin loading and management
 - [ ] Create plugin API and documentation
 - [ ] Add plugin security and sandboxing
 
-#### 5.2.2 Hook System
+#### 6.2.2 Hook System
 - [ ] Implement event hook system
 - [ ] Add timer lifecycle hooks
 - [ ] Create plugin event API
 - [ ] Add hook execution and error handling
 
-#### 5.2.3 Plugin API
+#### 6.2.3 Plugin API
 - [ ] Timer control API
 - [ ] Configuration access API
 - [ ] Notification API
 - [ ] File system access API (limited)
 
-#### 5.2.4 Advanced Features
+#### 6.2.4 Advanced Features
 - [ ] Desktop notifications
 - [ ] Session statistics and reporting
 - [ ] Export functionality (JSON, CSV)
 - [ ] Integration with external services
 
-### 5.3 Technical Implementation
+### 6.3 Technical Implementation
 
-#### 5.3.1 Plugin System Architecture
+#### 6.3.1 Plugin System Architecture
 ```go
 // Plugin manager
 type PluginManager struct {
-    runtime *lua.LState
-    plugins map[string]*Plugin
-    hooks   map[EventType][]Hook
+    runtime   *lua.LState
+    plugins   map[string]*Plugin
+    hooks     map[string][]Hook
+    api       *PluginAPI
 }
 
-// Plugin structure
-type Plugin struct {
-    Name        string
-    Version     string
-    Description string
-    Author      string
-    Script      string
-    Enabled     bool
+// Plugin interface
+type Plugin interface {
+    Name() string
+    Version() string
+    Init() error
+    Shutdown() error
+    OnTimerEvent(event TimerEvent) error
 }
-
-// Hook function type
-type Hook func(event Event) error
 ```
 
-#### 5.3.2 Plugin API
-```lua
--- Example plugin API
-local pomodux = require("pomodux")
-
--- Register hooks
-pomodux.on("timer_started", function(event)
-    print("Timer started: " .. event.duration)
-end)
-
-pomodux.on("timer_completed", function(event)
-    pomodux.notify("Timer completed!", "Your work session is done.")
-end)
-
--- Timer control
-pomodux.timer.start(25 * 60)  -- 25 minutes
-pomodux.timer.pause()
-pomodux.timer.resume()
-pomodux.timer.stop()
-```
-
-### 5.4 Timeline
+### 6.4 Timeline
 - **Duration**: 4-5 weeks
 - **Dependencies**: Release 0.3.0 completion
 - **Risk Level**: High
 
-## 6.0 Implementation Strategy
+## 7.0 Future Considerations
 
-### 6.1 Development Approach
+### 7.1 Performance Optimization
+- Memory usage optimization for long-running sessions
+- CPU usage optimization for real-time displays
+- Startup time optimization
+- Cross-platform performance tuning
 
-#### 6.1.1 Iterative Development
-- **Sprint-based**: 2-week sprints with clear deliverables
-- **Test-driven**: Write tests before implementation
-- **Continuous integration**: Automated testing and quality checks
-- **Regular reviews**: Code reviews and architecture reviews
+### 7.2 User Experience Enhancements
+- Advanced notification system
+- Customizable themes and layouts
+- Accessibility improvements
+- Mobile companion app (future consideration)
 
-#### 6.1.2 Quality Assurance
-- **Code coverage**: Maintain 80%+ test coverage
-- **Performance testing**: Regular benchmarking and profiling
-- **Cross-platform testing**: Test on all target platforms
-- **Security review**: Regular security audits
+### 7.3 Integration Opportunities
+- Calendar integration
+- Task management system integration
+- Time tracking service integration
+- Productivity analytics and reporting
 
-### 6.2 Risk Management
-
-#### 6.2.1 Technical Risks
-- **TUI Complexity**: Risk of complex terminal UI implementation
-  - **Mitigation**: Start with simple CLI, gradually add TUI features
-- **Plugin System**: Risk of security vulnerabilities in plugin system
-  - **Mitigation**: Implement strict sandboxing and validation
-- **Cross-Platform**: Risk of platform-specific issues
-  - **Mitigation**: Test early and often on all target platforms
-
-#### 6.2.2 Timeline Risks
-- **Scope Creep**: Risk of adding features beyond planned scope
-  - **Mitigation**: Strict adherence to release deliverables
-- **Learning Curve**: Risk of slower development due to Go learning
-  - **Mitigation**: Provide learning resources and pair programming
-
-### 6.3 Success Metrics
-
-#### 6.3.1 Technical Metrics
-- **Code Coverage**: 80%+ test coverage maintained
-- **Performance**: Sub-second startup time, minimal memory usage
-- **Reliability**: Zero critical bugs in production
-- **Security**: No security vulnerabilities in plugin system
-
-#### 6.3.2 User Experience Metrics
-- **Usability**: Intuitive command-line interface
-- **Responsiveness**: Smooth TUI interactions
-- **Customization**: Flexible configuration and theming
-- **Extensibility**: Rich plugin ecosystem
-
-## 7.0 Post-Implementation
-
-### 7.1 Maintenance Plan
-- **Regular updates**: Security patches and bug fixes
-- **Feature enhancements**: Based on user feedback
-- **Performance optimization**: Continuous monitoring and improvement
-- **Documentation updates**: Keep documentation current
-
-### 7.2 Future Enhancements
-- **Web interface**: Optional web-based configuration
-- **Mobile integration**: Sync with mobile apps
-- **Cloud sync**: Configuration and data synchronization
-- **Advanced analytics**: Detailed time tracking and insights
+### 7.4 Community and Ecosystem
+- Plugin marketplace
+- Community themes and configurations
+- Documentation and tutorials
+- Community support and feedback channels
 
 ---
 

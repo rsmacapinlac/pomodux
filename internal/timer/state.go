@@ -11,10 +11,11 @@ import (
 
 // State represents the persistent timer state
 type State struct {
-	Status    TimerStatus   `json:"status"`
-	Duration  time.Duration `json:"duration"`
-	StartTime time.Time     `json:"start_time"`
-	Elapsed   time.Duration `json:"elapsed"`
+	Status      TimerStatus   `json:"status"`
+	SessionType SessionType   `json:"session_type"`
+	Duration    time.Duration `json:"duration"`
+	StartTime   time.Time     `json:"start_time"`
+	Elapsed     time.Duration `json:"elapsed"`
 }
 
 // StateManager handles persistent timer state
@@ -40,10 +41,11 @@ func (sm *StateManager) SaveState(timer *Timer) error {
 	defer sm.mu.Unlock()
 
 	state := State{
-		Status:    timer.status,
-		Duration:  timer.duration,
-		StartTime: timer.startTime,
-		Elapsed:   timer.elapsed,
+		Status:      timer.status,
+		SessionType: timer.sessionType,
+		Duration:    timer.duration,
+		StartTime:   timer.startTime,
+		Elapsed:     timer.elapsed,
 	}
 
 	// Ensure state directory exists

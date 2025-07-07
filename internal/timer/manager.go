@@ -2,75 +2,47 @@ package timer
 
 import (
 	"sync"
-	"time"
 )
 
-// Manager provides a singleton timer instance for the application
-type Manager struct {
-	timer *Timer
-	mu    sync.RWMutex
-}
-
+// Global timer instance
 var (
-	manager *Manager
-	once    sync.Once
+	globalTimer          *Timer
+	timerOnce            sync.Once
+	globalStateManager   *StateManager
+	globalHistoryManager *HistoryManager
 )
 
-// GetManager returns the singleton timer manager instance
-func GetManager() *Manager {
-	once.Do(func() {
-		manager = &Manager{
-			timer: NewTimer(),
+// GetGlobalTimer returns the global timer instance.
+// This ensures all CLI commands use the same timer.
+func GetGlobalTimer() *Timer {
+	timerOnce.Do(func() {
+		// Create state manager
+		stateManager, err := NewStateManager()
+		if err != nil {
+			// If we can't create state manager, create timer without persistence
+			globalTimer = NewTimer()
+			return
 		}
+		globalStateManager = stateManager
+
+		// Create history manager
+		historyManager, err := NewHistoryManager()
+		if err != nil {
+			// If we can't create history manager, create timer without history
+			globalTimer = NewTimerWithManagers(stateManager, nil)
+			return
+		}
+		globalHistoryManager = historyManager
+
+		// Create timer with both managers
+		globalTimer = NewTimerWithManagers(stateManager, historyManager)
 	})
-	return manager
+
+	return globalTimer
 }
 
-// GetTimer returns the current timer instance
-func (m *Manager) GetTimer() *Timer {
-	m.mu.RLock()
-	defer m.mu.RUnlock()
-	return m.timer
-}
-
-// StartTimer starts the timer with the given duration
-func (m *Manager) StartTimer(duration time.Duration) error {
-	m.mu.Lock()
-	defer m.mu.Unlock()
-	return m.timer.Start(duration)
-}
-
-// StopTimer stops the current timer
-func (m *Manager) StopTimer() error {
-	m.mu.Lock()
-	defer m.mu.Unlock()
-	return m.timer.Stop()
-}
-
-// PauseTimer pauses the current timer
-func (m *Manager) PauseTimer() error {
-	m.mu.Lock()
-	defer m.mu.Unlock()
-	return m.timer.Pause()
-}
-
-// ResumeTimer resumes the current timer
-func (m *Manager) ResumeTimer() error {
-	m.mu.Lock()
-	defer m.mu.Unlock()
-	return m.timer.Resume()
-}
-
-// GetStatus returns the current timer status
-func (m *Manager) GetStatus() TimerStatus {
-	m.mu.RLock()
-	defer m.mu.RUnlock()
-	return m.timer.GetStatus()
-}
-
-// GetProgress returns the current timer progress
-func (m *Manager) GetProgress() float64 {
-	m.mu.RLock()
-	defer m.mu.RUnlock()
-	return m.timer.GetProgress()
+// ShutdownGlobalTimer gracefully shuts down the global timer.
+// This should be called when the application exits.
+func ShutdownGlobalTimer() {
+	// Nothing to do for the simplified timer
 }

@@ -1,0 +1,21 @@
+1..10
+ok 1 start command should show persistent timer instructions
+not ok 2 start command should show session type information
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 76)
+#   `grep -q "work\|Work" output.txt' failed
+ok 3 start command should show progress information
+ok 4 start command should show time information
+ok 5 break command should show break session type
+ok 6 long-break command should show long break session type
+not ok 7 timer should complete automatically and record session
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 158)
+#   `timeout 10s "$APP_BINARY" start 3s > output.txt 2>&1' failed
+not ok 8 timer should show completion message with session recording
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 175)
+#   `timeout 10s "$APP_BINARY" start 3s > output.txt 2>&1' failed
+not ok 9 timer should handle custom durations correctly
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 188)
+#   `[ "$status" -eq 0 ]' failed
+not ok 10 timer should use config default work duration when no duration specified
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 203)
+#   `[ "$status" -eq 0 ]' failed

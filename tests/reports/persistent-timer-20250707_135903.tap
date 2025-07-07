@@ -1,0 +1,27 @@
+1..10
+not ok 1 start command should work with custom duration
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 70)
+#   `[ "$status" -eq 0 ]' failed
+not ok 2 start command should work without duration
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 76)
+#   `[ "$status" -eq 0 ]' failed
+not ok 3 break command should work
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 82)
+#   `[ "$status" -eq 0 ]' failed
+not ok 4 long-break command should work
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 88)
+#   `[ "$status" -eq 0 ]' failed
+not ok 5 start command should show timer started message
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 98)
+#   `grep -q "Timer started" output.txt' failed
+not ok 6 start command should show session type
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 112)
+#   `grep -q "Session type" output.txt' failed
+not ok 7 start command should show keypress instructions
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 126)
+#   `grep -q "Press" output.txt' failed
+ok 8 break command should show break session
+ok 9 long-break command should show long break session
+not ok 10 timer should handle very short durations
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 164)
+#   `[ "$status" -eq 0 ]' failed

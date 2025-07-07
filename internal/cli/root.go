@@ -10,13 +10,13 @@ var (
 
 	rootCmd = &cobra.Command{
 		Use:   "pomodux",
-		Short: "A terminal-based timer and Pomodoro application",
+		Short: "A terminal-based timer application with Pomodoro support",
 		Long: `Pomodux is a powerful terminal timer application that helps you 
-manage your time effectively with work sessions, breaks, and Pomodoro technique.
+manage your time effectively with work sessions and breaks, including Pomodoro technique support.
 
 Features:
   • Start work timers with custom durations
-  • Pomodoro technique support
+  • Pomodoro technique support (via 'start' and 'break' commands)
   • Break timer management
   • Session tracking and statistics
   • Rich terminal user interface

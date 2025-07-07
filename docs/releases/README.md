@@ -8,7 +8,8 @@ This directory contains all release-related documentation for Pomodux, following
 docs/releases/
 ├── README.md                    # This file - documentation standards
 ├── release-0.1.0-final.md       # ✅ Official Release 0.1.0 record
-└── release-0.2.0-planning.md    # 🔄 Release 0.2.0 planning document
+├── release-0.2.0-final.md       # ✅ Official Release 0.2.0 record
+└── release-0.2.1-final.md       # ✅ Official Release 0.2.1 record
 ```
 
 ## 📋 Documentation Standards
@@ -42,13 +43,20 @@ docs/releases/
 ### Release 0.1.0 ✅ RELEASED
 - **Document**: `release-0.1.0-final.md`
 - **Status**: Foundation and Core Timer Engine
-- **Date**: 2025-07-26
+- **Date**: [Release Date]
 - **Gates**: All 4 gates approved
 
-### Release 0.2.0 🔄 IN PLANNING
-- **Document**: `release-0.2.0-planning.md`
+### Release 0.2.0 ✅ RELEASED
+- **Document**: `release-0.2.0-final.md`
 - **Status**: CLI Interface & Basic Functionality
-- **Gates**: Gate 1 Pending
+- **Date**: [Release Date]
+- **Gates**: All 4 gates approved
+
+### Release 0.2.1 ✅ RELEASED
+- **Document**: `release-0.2.1-final.md`
+- **Status**: Persistent Timer with Keypress Controls
+- **Date**: [Release Date]
+- **Gates**: All 4 gates approved
 
 ## 🔗 Related Documentation
 

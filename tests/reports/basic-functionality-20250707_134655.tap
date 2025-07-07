@@ -1,0 +1,14 @@
+1..13
+ok 1 version command should succeed and show app name
+ok 2 version command should show version information
+ok 3 help command should succeed
+ok 4 help command should show start command
+ok 5 help command should show break command
+ok 6 help command should show long-break command
+ok 7 help command should show config command
+ok 8 help command should show history command
+ok 9 help command should show completion command
+ok 10 completion bash command should succeed
+ok 11 completion bash should contain complete command
+ok 12 completion zsh command should succeed
+ok 13 completion zsh should contain compdef command

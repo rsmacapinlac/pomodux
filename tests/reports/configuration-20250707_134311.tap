@@ -1,0 +1,17 @@
+1..14
+ok 1 config show command should succeed
+ok 2 config show should display work duration
+ok 3 config show should display break duration
+ok 4 config show should display long break duration
+ok 5 config set command should succeed with valid work duration
+ok 6 config set command should succeed with valid break duration
+ok 7 config set command should succeed with valid long break duration
+ok 8 config set should fail with invalid work duration
+ok 9 config set should fail with invalid break duration
+ok 10 config set should fail with invalid long break duration
+ok 11 config set should fail with unknown setting
+not ok 12 config set should accept various duration formats
+# (in test file tests/uat/automated/bats/configuration.bats, line 120)
+#   `[ "$status" -eq 0 ]' failed
+ok 13 config show should display JSON format
+ok 14 config set should handle edge case durations

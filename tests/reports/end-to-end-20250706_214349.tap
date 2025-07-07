@@ -1,0 +1,66 @@
+1..11
+not ok 1 complete pomodoro workflow: work -> break -> work -> long break
+# (in test file tests/uat/automated/integration/end-to-end.bats, line 57)
+#   `[ "$status" -eq 0 ]' failed
+not ok 2 pause and resume workflow
+# (in test file tests/uat/automated/integration/end-to-end.bats, line 116)
+#   `[ "$status" -eq 0 ]' failed
+not ok 3 configuration management workflow
+# (in test file tests/uat/automated/integration/end-to-end.bats, line 155)
+#   `[ "$status" -eq 0 ]' failed
+not ok 4 force flag workflow
+# (in test file tests/uat/automated/integration/end-to-end.bats, line 193)
+#   `[ "$status" -eq 0 ]' failed
+not ok 5 error handling workflow
+# (in test file tests/uat/automated/integration/end-to-end.bats, line 217)
+#   `[ "$status" -eq 1 ]' failed
+not ok 6 real-time timer completion workflow
+# (in test file tests/uat/automated/integration/end-to-end.bats, line 246)
+#   `[ "$status" -eq 0 ]' failed
+not ok 7 session history workflow
+# (in test file tests/uat/automated/integration/end-to-end.bats, line 265)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 8 completion commands workflow
+# (in test file tests/uat/automated/integration/end-to-end.bats, line 294)
+#   `[ "$status" -eq 0 ]' failed
+not ok 9 version and help workflow
+# (in test file tests/uat/automated/integration/end-to-end.bats, line 306)
+#   `[ "$status" -eq 0 ]' failed
+not ok 10 state persistence workflow
+# (in test file tests/uat/automated/integration/end-to-end.bats, line 327)
+#   `[ "$status" -eq 0 ]' failed
+not ok 11 complex pause and resume workflow
+# (in test file tests/uat/automated/integration/end-to-end.bats, line 352)
+#   `[ "$status" -eq 0 ]' failed
+
+The following warnings were encountered during tests:
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/integration/../../../pomodux start 1m` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/integration/end-to-end.bats, line 56)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/integration/../../../pomodux start 2m` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/integration/end-to-end.bats, line 115)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/integration/../../../pomodux config show` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/integration/end-to-end.bats, line 154)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/integration/../../../pomodux start 1m` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/integration/end-to-end.bats, line 192)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/integration/../../../pomodux invalid-command` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/integration/end-to-end.bats, line 216)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/integration/../../../pomodux start 1s` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/integration/end-to-end.bats, line 245)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/integration/../../../pomodux completion bash` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/integration/end-to-end.bats, line 293)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/integration/../../../pomodux version` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/integration/end-to-end.bats, line 305)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/integration/../../../pomodux start 2m` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/integration/end-to-end.bats, line 326)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/integration/../../../pomodux start 3m` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/integration/end-to-end.bats, line 351)

@@ -1,0 +1,507 @@
+1..116
+not ok 1 version command should succeed and show app name
+# (in test file tests/uat/automated/bats/basic-functionality.bats, line 49)
+#   `[ "$status" -eq 0 ]' failed
+not ok 2 version command should show version information
+# (in test file tests/uat/automated/bats/basic-functionality.bats, line 55)
+#   `[ "$status" -eq 0 ]' failed
+not ok 3 help command should succeed
+# (in test file tests/uat/automated/bats/basic-functionality.bats, line 61)
+#   `[ "$status" -eq 0 ]' failed
+not ok 4 help command should show start command
+# (in test file tests/uat/automated/bats/basic-functionality.bats, line 66)
+#   `[ "$status" -eq 0 ]' failed
+not ok 5 help command should show pause command
+# (in test file tests/uat/automated/bats/basic-functionality.bats, line 74)
+#   `[ "$status" -eq 0 ]' failed
+not ok 6 help command should show resume command
+# (in test file tests/uat/automated/bats/basic-functionality.bats, line 80)
+#   `[ "$status" -eq 0 ]' failed
+not ok 7 help command should show break command
+# (in test file tests/uat/automated/bats/basic-functionality.bats, line 86)
+#   `[ "$status" -eq 0 ]' failed
+not ok 8 help command should show long-break command
+# (in test file tests/uat/automated/bats/basic-functionality.bats, line 92)
+#   `[ "$status" -eq 0 ]' failed
+not ok 9 help command should show config command
+# (in test file tests/uat/automated/bats/basic-functionality.bats, line 98)
+#   `[ "$status" -eq 0 ]' failed
+not ok 10 help command should show history command
+# (in test file tests/uat/automated/bats/basic-functionality.bats, line 104)
+#   `[ "$status" -eq 0 ]' failed
+not ok 11 help command should show completion command
+# (in test file tests/uat/automated/bats/basic-functionality.bats, line 110)
+#   `[ "$status" -eq 0 ]' failed
+not ok 12 completion bash command should succeed
+# (in test file tests/uat/automated/bats/basic-functionality.bats, line 116)
+#   `[ "$status" -eq 0 ]' failed
+not ok 13 completion bash should contain complete command
+# (in test file tests/uat/automated/bats/basic-functionality.bats, line 121)
+#   `[ "$status" -eq 0 ]' failed
+not ok 14 completion zsh command should succeed
+# (in test file tests/uat/automated/bats/basic-functionality.bats, line 127)
+#   `[ "$status" -eq 0 ]' failed
+not ok 15 completion zsh should contain compdef command
+# (in test file tests/uat/automated/bats/basic-functionality.bats, line 132)
+#   `[ "$status" -eq 0 ]' failed
+not ok 16 pause command should show message when no timer is running
+# (in test file tests/uat/automated/bats/basic-functionality.bats, line 140)
+#   `[ "$status" -eq 0 ]' failed
+not ok 17 resume command should show message when no timer is running
+# (in test file tests/uat/automated/bats/basic-functionality.bats, line 146)
+#   `[ "$status" -eq 0 ]' failed
+not ok 18 config show command should succeed
+# (in test file tests/uat/automated/bats/configuration.bats, line 53)
+#   `[ "$status" -eq 0 ]' failed
+not ok 19 config show should display work duration
+# (in test file tests/uat/automated/bats/configuration.bats, line 58)
+#   `[ "$status" -eq 0 ]' failed
+not ok 20 config show should display break duration
+# (in test file tests/uat/automated/bats/configuration.bats, line 64)
+#   `[ "$status" -eq 0 ]' failed
+not ok 21 config show should display long break duration
+# (in test file tests/uat/automated/bats/configuration.bats, line 70)
+#   `[ "$status" -eq 0 ]' failed
+not ok 22 config set command should succeed with valid work duration
+# (in test file tests/uat/automated/bats/configuration.bats, line 76)
+#   `[ "$status" -eq 0 ]' failed
+not ok 23 config set command should succeed with valid break duration
+# (in test file tests/uat/automated/bats/configuration.bats, line 81)
+#   `[ "$status" -eq 0 ]' failed
+not ok 24 config set command should succeed with valid long break duration
+# (in test file tests/uat/automated/bats/configuration.bats, line 86)
+#   `[ "$status" -eq 0 ]' failed
+not ok 25 config set should fail with invalid work duration
+# (in test file tests/uat/automated/bats/configuration.bats, line 91)
+#   `[ "$status" -eq 1 ]' failed
+not ok 26 config set should fail with invalid break duration
+# (in test file tests/uat/automated/bats/configuration.bats, line 96)
+#   `[ "$status" -eq 1 ]' failed
+not ok 27 config set should fail with invalid long break duration
+# (in test file tests/uat/automated/bats/configuration.bats, line 101)
+#   `[ "$status" -eq 1 ]' failed
+not ok 28 config set should fail with unknown setting
+# (in test file tests/uat/automated/bats/configuration.bats, line 106)
+#   `[ "$status" -eq 1 ]' failed
+not ok 29 config set should accept various duration formats
+# (in test file tests/uat/automated/bats/configuration.bats, line 112)
+#   `[ "$status" -eq 0 ]' failed
+not ok 30 config show should display JSON format
+# (in test file tests/uat/automated/bats/configuration.bats, line 125)
+#   `[ "$status" -eq 0 ]' failed
+not ok 31 config set should handle edge case durations
+# (in test file tests/uat/automated/bats/configuration.bats, line 133)
+#   `[ "$status" -eq 0 ]' failed
+ok 32 help should show keypress instructions
+not ok 33 q key should stop the timer
+# (in test file tests/uat/automated/bats/keypress-controls.bats, line 92)
+#   `grep -q "Timer stopped." output.txt' failed
+not ok 34 s key should stop the timer
+# (in test file tests/uat/automated/bats/keypress-controls.bats, line 117)
+#   `grep -q "Timer stopped." output.txt' failed
+not ok 35 p key should pause the timer
+# (in test file tests/uat/automated/bats/keypress-controls.bats, line 142)
+#   `grep -q "PAUSED" output.txt' failed
+not ok 36 r key should resume paused timer
+# (in test file tests/uat/automated/bats/keypress-controls.bats, line 165)
+#   `grep -q "RESUMED" output.txt' failed
+not ok 37 pause and resume should maintain progress
+# (in test file tests/uat/automated/bats/keypress-controls.bats, line 190)
+#   `grep -q "PAUSED" output.txt' failed
+# /home/ritchie/workspace/pomodux/tests/uat/automated/bats/keypress-controls.bats: line 181: /proc/1666618/fd/0: No such file or directory
+# /home/ritchie/workspace/pomodux/tests/uat/automated/bats/keypress-controls.bats: line 185: /proc/1666618/fd/0: No such file or directory
+not ok 38 timer should handle multiple keypresses correctly
+# (in test file tests/uat/automated/bats/keypress-controls.bats, line 214)
+#   `grep -q "Timer stopped." output.txt' failed
+not ok 39 timer should show proper status messages
+# (in test file tests/uat/automated/bats/keypress-controls.bats, line 232)
+#   `grep -q "Timer started for" output.txt' failed
+not ok 40 timer should handle invalid keypresses gracefully
+# (in test file tests/uat/automated/bats/keypress-controls.bats, line 265)
+#   `false' failed
+not ok 41 start command should show persistent timer instructions
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 68)
+#   `grep -q "Press 'p' to pause, 'r' to resume, 'q'/'s' to stop, Ctrl+C to exit." output.txt' failed
+not ok 42 start command should show session type information
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 86)
+#   `grep -q "Session type: work" output.txt' failed
+not ok 43 start command should show progress bar
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 104)
+#   `grep -q "█" output.txt || grep -q "░" output.txt' failed
+not ok 44 start command should show percentage and time remaining
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 122)
+#   `grep -q "%" output.txt' failed
+not ok 45 break command should show break session type
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 141)
+#   `grep -q "Session type: break" output.txt' failed
+not ok 46 long-break command should show long break session type
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 159)
+#   `grep -q "Session type: long_break" output.txt' failed
+not ok 47 timer should complete automatically and record session
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 169)
+#   `timeout 10s "$APP_BINARY" start 3s > output.txt 2>&1' failed
+not ok 48 timer should show completion message with session recording
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 186)
+#   `timeout 10s "$APP_BINARY" start 3s > output.txt 2>&1' failed
+not ok 49 timer should handle custom durations correctly
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 198)
+#   `timeout 10s "$APP_BINARY" start 7s > output.txt 2>&1' failed
+not ok 50 timer should use config default work duration when no duration specified
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 237)
+#   `grep -q "2 minute" output.txt' failed
+not ok 51 history command should succeed when no history exists
+# (in test file tests/uat/automated/bats/session-history.bats, line 56)
+#   `[ "$status" -eq 1 ]' failed
+not ok 52 history command should show no history message when empty
+# (in test file tests/uat/automated/bats/session-history.bats, line 61)
+#   `[ "$status" -eq 1 ]' failed
+not ok 53 completed work session should be recorded in history
+# (in test file tests/uat/automated/bats/session-history.bats, line 67)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 54 completed break session should be recorded in history
+# (in test file tests/uat/automated/bats/session-history.bats, line 79)
+#   `"$APP_BINARY" break > /dev/null 2>&1' failed with status 127
+not ok 55 completed long break session should be recorded in history
+# (in test file tests/uat/automated/bats/session-history.bats, line 91)
+#   `"$APP_BINARY" long-break > /dev/null 2>&1' failed with status 127
+not ok 56 history should show multiple sessions
+# (in test file tests/uat/automated/bats/session-history.bats, line 103)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 57 history file should be created after first session
+# (in test file tests/uat/automated/bats/session-history.bats, line 125)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 58 history file should contain valid JSON
+# (in test file tests/uat/automated/bats/session-history.bats, line 135)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 59 history should show session details
+# (in test file tests/uat/automated/bats/session-history.bats, line 146)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 60 history should show session duration
+# (in test file tests/uat/automated/bats/session-history.bats, line 159)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 61 history should show session timestamps
+# (in test file tests/uat/automated/bats/session-history.bats, line 171)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 62 history should limit to last 10 sessions
+# (in test file tests/uat/automated/bats/session-history.bats, line 185)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 63 history should show most recent sessions first
+# (in test file tests/uat/automated/bats/session-history.bats, line 201)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 64 paused sessions should not be recorded until stopped
+# (in test file tests/uat/automated/bats/session-history.bats, line 220)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 65 auto-completed sessions should be recorded
+# (in test file tests/uat/automated/bats/session-history.bats, line 240)
+#   `"$APP_BINARY" start 1s > /dev/null 2>&1' failed with status 127
+not ok 66 history should handle interrupted sessions
+# (in test file tests/uat/automated/bats/session-history.bats, line 254)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 67 history should persist across application restarts
+# (in test file tests/uat/automated/bats/session-history.bats, line 269)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 68 history should handle malformed history file gracefully
+# (in test file tests/uat/automated/bats/session-history.bats, line 290)
+#   `[ "$status" -eq 0 ]' failed
+not ok 69 history should show different session types correctly
+# (in test file tests/uat/automated/bats/session-history.bats, line 295)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 70 break command should succeed
+# (in test file tests/uat/automated/bats/session-types.bats, line 53)
+#   `[ "$status" -eq 0 ]' failed
+not ok 71 break command should start break session
+# (in test file tests/uat/automated/bats/session-types.bats, line 57)
+#   `"$APP_BINARY" break > /dev/null 2>&1' failed with status 127
+not ok 72 break command should use configured break duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 66)
+#   `"$APP_BINARY" config set default_break_duration 45s > /dev/null 2>&1' failed with status 127
+not ok 73 long-break command should succeed
+# (in test file tests/uat/automated/bats/session-types.bats, line 79)
+#   `[ "$status" -eq 0 ]' failed
+not ok 74 long-break command should start long break session
+# (in test file tests/uat/automated/bats/session-types.bats, line 83)
+#   `"$APP_BINARY" long-break > /dev/null 2>&1' failed with status 127
+not ok 75 long-break command should use configured long break duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 92)
+#   `"$APP_BINARY" config set default_long_break_duration 3m > /dev/null 2>&1' failed with status 127
+not ok 76 start command should start work session by default
+# (in test file tests/uat/automated/bats/session-types.bats, line 104)
+#   `"$APP_BINARY" start > /dev/null 2>&1' failed with status 127
+not ok 77 start command should use configured work duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 113)
+#   `"$APP_BINARY" config set default_work_duration 35m > /dev/null 2>&1' failed with status 127
+not ok 78 break command should fail when timer is already running
+# (in test file tests/uat/automated/bats/session-types.bats, line 126)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 79 long-break command should fail when timer is already running
+# (in test file tests/uat/automated/bats/session-types.bats, line 135)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 80 break command should show error when timer is already running
+# (in test file tests/uat/automated/bats/session-types.bats, line 144)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 81 long-break command should show error when timer is already running
+# (in test file tests/uat/automated/bats/session-types.bats, line 154)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 82 break session should be stoppable
+# (in test file tests/uat/automated/bats/session-types.bats, line 164)
+#   `"$APP_BINARY" break > /dev/null 2>&1' failed with status 127
+not ok 83 long-break session should be stoppable
+# (in test file tests/uat/automated/bats/session-types.bats, line 178)
+#   `"$APP_BINARY" long-break > /dev/null 2>&1' failed with status 127
+not ok 84 break session should be pausable and resumable
+# (in test file tests/uat/automated/bats/session-types.bats, line 192)
+#   `"$APP_BINARY" break > /dev/null 2>&1' failed with status 127
+not ok 85 long-break session should be pausable and resumable
+# (in test file tests/uat/automated/bats/session-types.bats, line 216)
+#   `"$APP_BINARY" long-break > /dev/null 2>&1' failed with status 127
+not ok 86 break command should accept custom duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 240)
+#   `[ "$status" -eq 0 ]' failed
+not ok 87 long-break command should accept custom duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 250)
+#   `[ "$status" -eq 0 ]' failed
+not ok 88 break command should fail with invalid duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 260)
+#   `[ "$status" -eq 1 ]' failed
+not ok 89 long-break command should fail with invalid duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 265)
+#   `[ "$status" -eq 1 ]' failed
+not ok 90 break command should show error with invalid duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 270)
+#   `[ "$status" -eq 1 ]' failed
+not ok 91 long-break command should show error with invalid duration
+# (in test file tests/uat/automated/bats/session-types.bats, line 276)
+#   `[ "$status" -eq 1 ]' failed
+not ok 92 session types should be distinguishable in status
+# (in test file tests/uat/automated/bats/session-types.bats, line 282)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 93 session types should use appropriate default durations
+# (in test file tests/uat/automated/bats/session-types.bats, line 305)
+#   `"$APP_BINARY" start > /dev/null 2>&1' failed with status 127
+not ok 94 start command should succeed with custom duration
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 53)
+#   `[ "$status" -eq 0 ]' failed
+not ok 95 start command should succeed with default duration
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 58)
+#   `[ "$status" -eq 0 ]' failed
+not ok 96 start command should fail with invalid duration
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 63)
+#   `[ "$status" -eq 1 ]' failed
+not ok 97 start command should show error with invalid duration
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 68)
+#   `[ "$status" -eq 1 ]' failed
+not ok 98 start command should fail when timer is already running
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 74)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 99 start command should show error when timer is already running
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 83)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 100 start command with force flag should succeed when timer is running
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 93)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 101 status command should show running state when timer is active
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 102)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 102 status command should show remaining time when timer is running
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 112)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 103 pause command should succeed when timer is running
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 122)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 104 status command should show paused state when timer is paused
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 131)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 105 resume command should succeed when timer is paused
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 144)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 106 status command should show running state after resume
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 156)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 107 stop command should succeed when timer is running
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 172)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 108 stop command should succeed when timer is paused
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 181)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 109 status command should show idle state after stop
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 193)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 110 pause command should fail when timer is not running
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 206)
+#   `[ "$status" -eq 1 ]' failed
+not ok 111 resume command should fail when timer is not paused
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 211)
+#   `[ "$status" -eq 1 ]' failed
+not ok 112 stop command should fail when timer is not running
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 216)
+#   `[ "$status" -eq 1 ]' failed
+not ok 113 timer should preserve remaining time when paused
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 221)
+#   `"$APP_BINARY" start 1m > /dev/null 2>&1' failed with status 127
+not ok 114 start command should accept various duration formats
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 246)
+#   `[ "$status" -eq 0 ]' failed
+not ok 115 start command should fail with zero duration
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 262)
+#   `[ "$status" -eq 1 ]' failed
+not ok 116 start command should fail with negative duration
+# (in test file tests/uat/automated/bats/timer-operations.bats, line 267)
+#   `[ "$status" -eq 1 ]' failed
+
+The following warnings were encountered during tests:
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux version` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/basic-functionality.bats, line 48)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux version` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/basic-functionality.bats, line 54)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux --help` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/basic-functionality.bats, line 60)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux --help` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/basic-functionality.bats, line 65)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux --help` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/basic-functionality.bats, line 73)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux --help` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/basic-functionality.bats, line 79)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux --help` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/basic-functionality.bats, line 85)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux --help` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/basic-functionality.bats, line 91)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux --help` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/basic-functionality.bats, line 97)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux --help` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/basic-functionality.bats, line 103)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux --help` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/basic-functionality.bats, line 109)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux completion bash` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/basic-functionality.bats, line 115)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux completion bash` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/basic-functionality.bats, line 120)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux completion zsh` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/basic-functionality.bats, line 126)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux completion zsh` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/basic-functionality.bats, line 131)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux pause` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/basic-functionality.bats, line 139)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux resume` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/basic-functionality.bats, line 145)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux config show` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/configuration.bats, line 52)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux config show` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/configuration.bats, line 57)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux config show` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/configuration.bats, line 63)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux config show` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/configuration.bats, line 69)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux config set default_work_duration 25m` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/configuration.bats, line 75)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux config set default_break_duration 5m` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/configuration.bats, line 80)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux config set default_long_break_duration 15m` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/configuration.bats, line 85)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux config set default_work_duration invalid` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/configuration.bats, line 90)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux config set default_break_duration invalid` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/configuration.bats, line 95)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux config set default_long_break_duration invalid` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/configuration.bats, line 100)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux config set unknown_setting 10m` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/configuration.bats, line 105)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux config set default_work_duration 25m` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/configuration.bats, line 111)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux config show` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/configuration.bats, line 124)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux config set default_break_duration 1s` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/configuration.bats, line 132)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux history` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/session-history.bats, line 55)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux history` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/session-history.bats, line 60)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux history` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/session-history.bats, line 289)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux break` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/session-types.bats, line 52)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux long-break` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/session-types.bats, line 78)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux break 45s` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/session-types.bats, line 239)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux long-break 5m` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/session-types.bats, line 249)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux break invalid` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/session-types.bats, line 259)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux long-break invalid` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/session-types.bats, line 264)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux break invalid` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/session-types.bats, line 269)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux long-break invalid` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/session-types.bats, line 275)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux start 1m` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/timer-operations.bats, line 52)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux start` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/timer-operations.bats, line 57)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux start invalid` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/timer-operations.bats, line 62)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux start invalid` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/timer-operations.bats, line 67)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux pause` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/timer-operations.bats, line 205)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux resume` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/timer-operations.bats, line 210)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux stop` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/timer-operations.bats, line 215)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux start 5m` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/timer-operations.bats, line 245)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux start 0m` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/timer-operations.bats, line 261)
+BW01: `run`'s command `/home/ritchie/workspace/pomodux/tests/uat/automated/bats/../../../../pomodux start -1m` exited with code 127, indicating 'Command not found'. Use run's return code checks, e.g. `run -127`, to fix this message.
+      (from function `run' in file /usr/lib/bats-core/test_functions.bash, line 418,
+       in test file tests/uat/automated/bats/timer-operations.bats, line 266)

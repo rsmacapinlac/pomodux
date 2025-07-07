@@ -12,9 +12,10 @@ import (
 // Config represents the Pomodux configuration structure
 type Config struct {
 	Timer struct {
-		DefaultWorkDuration  time.Duration `yaml:"default_work_duration"`
-		DefaultBreakDuration time.Duration `yaml:"default_break_duration"`
-		AutoStartBreaks      bool          `yaml:"auto_start_breaks"`
+		DefaultWorkDuration      time.Duration `yaml:"default_work_duration"`
+		DefaultBreakDuration     time.Duration `yaml:"default_break_duration"`
+		DefaultLongBreakDuration time.Duration `yaml:"default_long_break_duration"`
+		AutoStartBreaks          bool          `yaml:"auto_start_breaks"`
 	} `yaml:"timer"`
 
 	TUI struct {
@@ -36,6 +37,7 @@ func DefaultConfig() *Config {
 	// Timer defaults
 	config.Timer.DefaultWorkDuration = 25 * time.Minute
 	config.Timer.DefaultBreakDuration = 5 * time.Minute
+	config.Timer.DefaultLongBreakDuration = 15 * time.Minute
 	config.Timer.AutoStartBreaks = false
 
 	// TUI defaults
@@ -137,6 +139,10 @@ func Validate(config *Config) error {
 
 	if config.Timer.DefaultBreakDuration <= 0 {
 		return fmt.Errorf("default break duration must be positive")
+	}
+
+	if config.Timer.DefaultLongBreakDuration <= 0 {
+		return fmt.Errorf("default long break duration must be positive")
 	}
 
 	if config.TUI.Theme == "" {
