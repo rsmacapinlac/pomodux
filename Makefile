@@ -19,6 +19,10 @@ help:
 build:
 	@echo "Building pomodux..."
 	go build -o bin/pomodux cmd/pomodux/main.go
+	@echo "Build complete: bin/pomodux"
+	@echo "Testing executable..."
+	@bin/pomodux --help > /dev/null 2>&1 || (echo "Build verification failed!" && exit 1)
+	@echo "Build verification successful!"
 
 # Run tests
 test:

@@ -1,8 +1,3 @@
----
-description: Architecture principles and Architecture documentation standards
-globs:
-alwaysApply: true
----
 # Architecture Guidelines
 
 ## Core Principles
@@ -18,6 +13,109 @@ alwaysApply: true
 ### New Component Selection Criteria
 - **Must be compatible with existing components**: New components must integrate seamlessly with current architecture and not break existing functionality
 - **Must be actively maintained**: Components must have recent updates, active development, and community support
+
+## Pre-Development Architecture Review
+
+### Mandatory Pre-Development Process
+
+**Before any development begins on new features, the following architecture review process must be completed:**
+
+#### 1. ADR Audit Phase
+- [ ] **Review all existing ADRs** in `docs/adr/` for relevance and constraints
+- [ ] **Identify architectural patterns** that must be followed
+- [ ] **Check for conflicting decisions** that might impact the new feature
+- [ ] **Document architectural constraints** that the new feature must respect
+
+#### 2. Architecture Proposal Phase
+- [ ] **Create architecture proposal** for the new feature
+- [ ] **Define integration points** with existing components
+- [ ] **Identify potential architectural impacts** on current system
+- [ ] **Propose architectural patterns** to be used
+- [ ] **Document any deviations** from established patterns with rationale
+
+#### 3. Architecture Review Phase
+- [ ] **Present architecture proposal** to stakeholders
+- [ ] **Review against existing ADRs** and architectural constraints
+- [ ] **Validate architectural assumptions** through proof-of-concept if needed
+- [ ] **Obtain explicit approval** before development begins
+
+#### 4. Documentation Phase
+- [ ] **Create new ADR** if architectural decisions are made
+- [ ] **Update relevant documentation** with architectural decisions
+- [ ] **Document integration approach** and constraints
+
+### Architecture Review Criteria
+
+**The architecture review must validate:**
+
+#### Compatibility
+- [ ] **Existing Components**: New feature integrates with current architecture
+- [ ] **Established Patterns**: Follows documented architectural patterns
+- [ ] **Performance Impact**: No negative impact on existing functionality
+- [ ] **Security Model**: Maintains established security patterns
+
+#### Maintainability
+- [ ] **Code Organization**: Follows established file and package structure
+- [ ] **Testing Approach**: Integrates with existing testing patterns
+- [ ] **Documentation**: Maintains documentation standards
+- [ ] **Error Handling**: Follows established error handling patterns
+
+#### Scalability
+- [ ] **Future Growth**: Architecture supports future enhancements
+- [ ] **Performance**: Meets performance requirements
+- [ ] **Resource Usage**: Efficient use of system resources
+- [ ] **Extensibility**: Allows for future feature additions
+
+### Architecture Review Output
+
+**Required Deliverables:**
+1. **ADR Audit Report**: Summary of relevant ADRs and constraints
+2. **Architecture Proposal**: Detailed architectural approach for the feature
+3. **Integration Plan**: How the feature integrates with existing components
+4. **Risk Assessment**: Potential architectural risks and mitigation strategies
+5. **Approval Documentation**: Explicit approval to proceed with development
+
+**Approval Criteria:**
+- Architecture proposal is complete and well-documented
+- All architectural constraints are addressed
+- Integration approach is sound and tested
+- Risks are identified and mitigated
+- Stakeholders approve the architectural approach
+
+### Integration with Release Management
+
+**Pre-Development Architecture Review is integrated with the release management process:**
+
+#### Gate 0: Architecture Review (New)
+- **Purpose**: Ensure architectural soundness before development begins
+- **Deliverables**: ADR audit, architecture proposal, integration plan
+- **Approval Criteria**: Architecture is sound, compatible, and approved
+- **Process**: Must be completed before any development work begins
+
+#### Integration with Existing Gates
+- **Gate 1**: Release Plan Approval - Architecture review results inform planning
+- **Gate 2**: Development Completion - Architecture decisions guide implementation
+- **Gate 3**: User Acceptance - Architecture supports user requirements
+- **Gate 4**: Release Approval - Architecture decisions are validated
+
+### Failure Criteria
+
+**Development must NOT proceed if:**
+- ADR audit reveals conflicting architectural decisions
+- Architecture proposal doesn't address all constraints
+- Integration approach is not validated
+- Performance or security impacts are not mitigated
+- Stakeholders do not approve the architectural approach
+
+### Continuous Improvement
+
+**After each release:**
+- Review architecture decisions for effectiveness
+- Update ADRs based on lessons learned
+- Refine architecture review process based on outcomes
+- Document architectural patterns that worked well
+
+This pre-development architecture review ensures that all new features are architecturally sound before development begins, preventing costly rework and maintaining system integrity.
 
 ## Decision Documentation Guidelines
 
@@ -181,6 +279,11 @@ type: technical
 
 ### ADR Categories
 - **technical**: Technology, architecture, or implementation decisions
+- **content**: Content strategy, organization, or presentation decisions
+- **process**: Development workflow, deployment, or operational decisions
+
+---
+
 - **content**: Content strategy, organization, or presentation decisions
 - **process**: Development workflow, deployment, or operational decisions
 

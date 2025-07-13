@@ -5,28 +5,34 @@ A powerful terminal-based timer and Pomodoro application built in Go, designed f
 ## 🚀 Current Status
 
 **Release 0.1.0** ✅ **COMPLETE** - Foundation and Core Timer Engine released on 2025-07-26  
-**Release 0.2.0** 🔄 **IN PLANNING** - CLI Interface & Basic Functionality (Gate 1 Pending)
+**Release 0.2.0** ✅ **COMPLETE** - CLI Interface & Basic Functionality released on 2025-01-27  
+**Release 0.2.1** ✅ **COMPLETE** - Persistent Timer with Keypress Controls released on 2025-01-27  
+**Release 0.3.0** 🔄 **IN PLANNING** - CLI Improvements & Plugin System Foundation (Gate 1 Pending)
 
 ## 📋 Features
 
-### ✅ Released (v0.1.0)
+### ✅ Released (v0.1.0, v0.2.0, v0.2.1)
 - **Core Timer Engine**: Robust timer with state management
-- **Basic CLI Interface**: Start, stop, and status commands
+- **Persistent Timer Sessions**: Interactive keypress controls (p, r, q, s, Ctrl+C)
+- **Real-time Progress Display**: Visual progress bars and time remaining
+- **Pomodoro Technique**: Dedicated work/break commands
+- **Enhanced CLI Interface**: Start, pause, resume, stop, and status commands
 - **State Persistence**: Timer state survives process restarts
 - **Configuration System**: XDG-compliant configuration management
+- **Session History**: Track and display session statistics
+- **Tab Completion**: Shell completion for all commands
 - **Cross-Platform**: Linux, macOS, and Windows support
 - **Comprehensive Testing**: 80%+ test coverage with TDD approach
 
-### 🔄 Planned (v0.2.0)
-- **Enhanced Timer Control**: Pause/resume functionality
-- **Pomodoro Technique**: Dedicated work/break commands
-- **Tab Completion**: Shell completion for all commands
-- **Configuration Commands**: View and edit configuration
-- **Session History**: Track and display session statistics
+### 🔄 Planned (v0.3.0)
+- **Enhanced CLI Functionality**: Improved status reporting and user experience
+- **Plugin System Foundation**: Architecture for extensibility
+- **Advanced Notifications**: Enhanced notification system
+- **Performance Optimizations**: Improved performance and resource usage
 
 ### 📋 Future Releases
-- **v0.3.0**: Terminal UI (TUI) with Bubbletea
 - **v0.4.0**: Plugin system and advanced features
+- **TUI**: See [TUI Development Documentation](docs/tui-development.md) for details
 
 ## 🛠️ Installation
 
@@ -183,21 +189,21 @@ cli:
 
 ## 📈 Roadmap
 
-### Release 0.2.0 (In Planning)
-- Enhanced CLI features (pause/resume, Pomodoro)
-- Tab completion for all commands
-- Configuration management commands
-- Session history and statistics
-
-### Release 0.3.0 (Planned)
-- Terminal UI (TUI) with Bubbletea
-- Interactive menus and themes
-- Real-time progress visualization
-- Keyboard shortcuts
+### Release 0.3.0 (In Planning)
+- Enhanced CLI functionality and user experience
+- Plugin system architecture and foundation
+- Advanced notification system
+- Performance optimizations
 
 ### Release 0.4.0 (Planned)
 - Lua-based plugin system
 - Advanced features and integrations
+- Enhanced extensibility
+
+### TUI Development
+- See [TUI Development Documentation](docs/tui-development.md) for details
+- Moved to backlog due to complexity
+- Will be reconsidered when simpler approach is identified
 - Custom workflows and automation
 - Extended configuration options
 

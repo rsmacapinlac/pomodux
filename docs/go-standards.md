@@ -167,7 +167,53 @@ func loadConfig(path string) (*Config, error) {
 }
 ```
 
-### 3.3 Testing Standards
+### 3.3 Build and Executable Standards
+
+#### Build Commands
+- **Always use the Makefile target**: `make build` for standard builds
+- **Manual builds must use**: `go build -o bin/pomodux cmd/pomodux/main.go`
+- **Never build to project root**: Executables must go in `bin/` directory
+- **Cross-platform builds**: Use `make build-all` for multiple platforms
+
+#### Executable Location
+- **Standard location**: `bin/pomodux` (relative to project root)
+- **Cross-platform builds**: `bin/pomodux-{os}-{arch}` or `bin/pomodux-{os}-{arch}.exe`
+- **Clean builds**: Always run `make clean` before new builds to ensure clean state
+
+#### Build Verification
+- **Test executable location**: Verify `bin/pomodux` exists after build
+- **Test functionality**: Run `bin/pomodux --help` to verify build success
+- **Clean project root**: Ensure no executables are left in project root
+
+```bash
+# Correct build process
+make build                    # Standard build
+# OR
+go build -o bin/pomodux cmd/pomodux/main.go
+
+# Verify build
+ls -la bin/pomodux           # Should exist and be executable
+bin/pomodux --help          # Should show help
+
+# Clean if needed
+make clean                   # Removes bin/ directory
+```
+
+#### Common Build Mistakes to Avoid
+- **❌ Don't**: `go build cmd/pomodux/main.go` (creates executable in root)
+- **❌ Don't**: `go build -o pomodux cmd/pomodux/main.go` (wrong location)
+- **❌ Don't**: `go build .` (creates executable in root)
+- **✅ Do**: `make build` or `go build -o bin/pomodux cmd/pomodux/main.go`
+
+#### Build Checklist
+Before committing or testing:
+1. [ ] Run `make build` or correct manual build command
+2. [ ] Verify `bin/pomodux` exists and is executable
+3. [ ] Test `bin/pomodux --help` works
+4. [ ] Ensure no executables in project root
+5. [ ] Run `make test` to verify functionality
+
+### 3.4 Testing Standards
 
 #### Test File Organization
 - Create test files with `_test.go` suffix

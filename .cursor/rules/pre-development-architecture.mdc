@@ -1,0 +1,158 @@
+# Pre-Development Architecture Review Rule
+
+## Purpose
+This rule ensures that all new features undergo proper architectural validation before development begins. It prevents development on features with fundamental architectural issues and maintains system integrity.
+
+## Trigger Conditions
+- New feature development planning
+- Major architectural changes
+- Integration of new components or technologies
+- Multi-process or complex feature development
+
+## Pre-Development Architecture Review Process
+
+### 1. ADR Audit Phase
+
+**Objective**: Review existing architectural decisions and identify constraints
+
+**Required Actions**:
+- [ ] **Review all existing ADRs** in `docs/adr/` for relevance and constraints
+- [ ] **Identify architectural patterns** that must be followed
+- [ ] **Check for conflicting decisions** that might impact the new feature
+- [ ] **Document architectural constraints** that the new feature must respect
+
+**ADR Audit Checklist**:
+- [ ] Review ADR-001: Programming Language Selection
+- [ ] Review ADR-002: Persistent Timer Design
+- [ ] Review ADR-003: UAT Testing Approach
+- [ ] Check for any other relevant ADRs
+- [ ] Document any architectural conflicts or constraints
+
+**Output**: ADR Audit Report with relevant constraints and patterns
+
+### 2. Architecture Proposal Phase
+
+**Objective**: Create comprehensive architecture proposal for the new feature
+
+**Required Actions**:
+- [ ] **Create architecture proposal** for the new feature
+- [ ] **Define integration points** with existing components
+- [ ] **Identify potential architectural impacts** on current system
+- [ ] **Propose architectural patterns** to be used
+- [ ] **Document any deviations** from established patterns with rationale
+
+**Architecture Proposal Requirements**:
+- Integration approach with existing timer engine
+- File organization and package structure
+- Testing strategy and approach
+- Error handling patterns
+- Performance considerations
+- Security implications
+
+**Output**: Detailed Architecture Proposal document
+
+### 3. Architecture Review Phase
+
+**Objective**: Validate architecture proposal and obtain approval
+
+**Required Actions**:
+- [ ] **Present architecture proposal** to stakeholders
+- [ ] **Review against existing ADRs** and architectural constraints
+- [ ] **Validate architectural assumptions** through proof-of-concept if needed
+- [ ] **Obtain explicit approval** before development begins
+
+**Review Criteria**:
+- [ ] **Compatibility**: Integrates with existing components and patterns
+- [ ] **Maintainability**: Follows established code organization and testing patterns
+- [ ] **Scalability**: Supports future enhancements and growth
+- [ ] **Performance**: Meets performance requirements
+- [ ] **Security**: Maintains established security patterns
+
+**Output**: Architecture Review Approval or rejection with feedback
+
+### 4. Documentation Phase
+
+**Objective**: Document architectural decisions and integration approach
+
+**Required Actions**:
+- [ ] **Create new ADR** if architectural decisions are made
+- [ ] **Update relevant documentation** with architectural decisions
+- [ ] **Document integration approach** and constraints
+- [ ] **Update release planning** with architecture decisions
+
+**Documentation Requirements**:
+- New ADR if architectural decisions are made
+- Updated technical specifications
+- Integration documentation
+- Updated release planning documents
+
+## Architecture Review Criteria
+
+### Compatibility Assessment
+- [ ] **Existing Components**: New feature integrates with current architecture
+- [ ] **Established Patterns**: Follows documented architectural patterns
+- [ ] **Performance Impact**: No negative impact on existing functionality
+- [ ] **Security Model**: Maintains established security patterns
+
+### Maintainability Assessment
+- [ ] **Code Organization**: Follows established file and package structure
+- [ ] **Testing Approach**: Integrates with existing testing patterns
+- [ ] **Documentation**: Maintains documentation standards
+- [ ] **Error Handling**: Follows established error handling patterns
+
+### Scalability Assessment
+- [ ] **Future Growth**: Architecture supports future enhancements
+- [ ] **Performance**: Meets performance requirements
+- [ ] **Resource Usage**: Efficient use of system resources
+- [ ] **Extensibility**: Allows for future feature additions
+
+## Integration with Release Management
+
+### Gate 0: Architecture Review
+- **Purpose**: Ensure architectural soundness before development begins
+- **Deliverables**: ADR audit, architecture proposal, integration plan
+- **Approval Criteria**: Architecture is sound, compatible, and approved
+- **Process**: Must be completed before any development work begins
+
+### Failure Criteria
+**Development must NOT proceed if**:
+- ADR audit reveals conflicting architectural decisions
+- Architecture proposal doesn't address all constraints
+- Integration approach is not validated
+- Performance or security impacts are not mitigated
+- Stakeholders do not approve the architectural approach
+
+## Output Requirements
+
+### Required Deliverables
+1. **ADR Audit Report**: Summary of relevant ADRs and constraints
+2. **Architecture Proposal**: Detailed architectural approach for the feature
+3. **Integration Plan**: How the feature integrates with existing components
+4. **Risk Assessment**: Potential architectural risks and mitigation strategies
+5. **Approval Documentation**: Explicit approval to proceed with development
+
+### Documentation Standards
+- All documents must follow established documentation standards
+- Architecture proposals must be clear and comprehensive
+- Integration plans must be detailed and testable
+- Risk assessments must include mitigation strategies
+
+## Continuous Improvement
+
+### Post-Review Assessment
+- Review architecture decisions for effectiveness after implementation
+- Update ADRs based on lessons learned
+- Refine architecture review process based on outcomes
+- Document architectural patterns that worked well
+
+### Process Refinement
+- Update review criteria based on project experience
+- Improve documentation templates and checklists
+- Enhance integration with release management process
+- Maintain lessons learned for future reviews
+
+This pre-development architecture review ensures that all new features are architecturally sound before development begins, preventing costly rework and maintaining system integrity.
+
+---
+alwaysApply: false
+---

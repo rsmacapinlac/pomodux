@@ -231,6 +231,10 @@ help:
 build:
 	@echo "Building pomodux..."
 	go build -o bin/pomodux cmd/pomodux/main.go
+	@echo "Build complete: bin/pomodux"
+	@echo "Testing executable..."
+	@bin/pomodux --help > /dev/null 2>&1 || (echo "Build verification failed!" && exit 1)
+	@echo "Build verification successful!"
 
 # Run tests
 test:
@@ -348,7 +352,59 @@ issues:
         - dupl
 ```
 
-## 5.0 Testing Setup
+## 5.0 Build Best Practices
+
+### 5.1 Build Commands and Locations
+
+**IMPORTANT**: Always build to the `bin/` directory, never to the project root.
+
+#### Correct Build Commands
+```bash
+# Preferred: Use Makefile
+make build
+
+# Manual build (if needed)
+go build -o bin/pomodux cmd/pomodux/main.go
+
+# Cross-platform builds
+make build-all
+```
+
+#### Incorrect Build Commands (Avoid These)
+```bash
+# ❌ DON'T: Creates executable in project root
+go build cmd/pomodux/main.go
+
+# ❌ DON'T: Wrong output location
+go build -o pomodux cmd/pomodux/main.go
+
+# ❌ DON'T: Creates executable in current directory
+go build .
+```
+
+### 5.2 Build Verification
+
+After building, always verify:
+```bash
+# Check executable exists and is in correct location
+ls -la bin/pomodux
+
+# Test executable functionality
+bin/pomodux --help
+
+# Ensure no executables in project root
+ls -la pomodux 2>/dev/null && echo "WARNING: Executable found in project root!"
+```
+
+### 5.3 Build Workflow
+
+1. **Clean previous builds**: `make clean`
+2. **Build application**: `make build`
+3. **Verify build**: Check `bin/pomodux` exists and works
+4. **Test functionality**: `make test`
+5. **Run application**: `bin/pomodux [command]`
+
+## 6.0 Testing Setup
 
 ### 5.1 Test Configuration
 

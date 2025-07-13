@@ -198,6 +198,129 @@
   - [x] Test display updates
   - [x] Test session information
 
+---
+
+## Release 0.3.0: CLI Improvements & Plugin System Foundation 🔄 **IN PROGRESS**
+
+### High Priority Features
+
+#### Enhanced CLI Functionality 🔄
+- **Issue Type**: Release Task
+- **Priority**: High
+- **Component**: CLI
+- **Description**: Improve existing CLI functionality and user experience
+- **User Story**: As a user, I want enhanced CLI features so that I can use Pomodux more effectively
+- **Acceptance Criteria**:
+  - [ ] Enhanced timer status reporting
+  - [ ] Improved session history display
+  - [ ] Better configuration management
+  - [ ] Advanced notification system
+  - [ ] Performance optimizations
+- **TDD Approach**:
+  - [ ] Test enhanced CLI features
+  - [ ] Test improved status reporting
+  - [ ] Test configuration enhancements
+  - [ ] Test notification system
+
+#### Plugin System Architecture 🔄
+- **Issue Type**: Feature Request
+- **Priority**: High
+- **Component**: Plugin System
+- **Description**: Design and implement plugin system foundation
+- **User Story**: As a developer, I want a plugin system so that I can extend Pomodux functionality
+- **Acceptance Criteria**:
+  - [ ] Plugin system architecture design
+  - [ ] Plugin loading and management
+  - [ ] Event system for plugin hooks
+  - [ ] Plugin API documentation
+  - [ ] Example plugins
+- **TDD Approach**:
+  - [ ] Test plugin loading
+  - [ ] Test plugin lifecycle
+  - [ ] Test event system
+  - [ ] Test plugin API
+
+---
+
+## Future Releases
+
+### Terminal UI (TUI) Development 📋 **BACKLOG**
+
+> **Note**: TUI development has been moved to separate documentation due to complexity.  
+> **See**: [TUI Development Documentation](docs/tui-development.md) for detailed information.
+
+**Status**: Moved to backlog due to cross-process synchronization complexity  
+**Future Consideration**: Will be reconsidered when simpler technical approach is identified
+
+#### Key Challenges
+- Cross-process timer synchronization complexity
+- State file monitoring and real-time updates
+- Debug complexity for troubleshooting
+- Resource requirements for complex implementation
+
+#### Alternative Approaches to Consider
+1. Single-process TUI (replace CLI)
+2. IPC communication (sockets, pipes)
+3. Shared memory implementation
+4. Event system for real-time updates
+
+### High Priority Features
+
+#### Persistent Timer Implementation ✅
+- **Issue Type**: Release Task
+- **Priority**: High
+- **Component**: Timer Engine
+- **Description**: Implement persistent timer sessions with interactive keypress controls
+- **User Story**: As a user, I want persistent timer sessions with interactive controls so that I can manage my time effectively without separate commands
+- **Acceptance Criteria**:
+  - [x] Persistent timer sessions that run continuously
+  - [x] Interactive keypress controls (p, r, q, s, Ctrl+C)
+  - [x] Real-time progress display with progress bars
+  - [x] Automatic session recording on completion
+  - [x] Session type support (work, break, long-break)
+- **TDD Approach**:
+  - [x] Test persistent timer sessions
+  - [x] Test keypress controls
+  - [x] Test progress display
+  - [x] Test session recording
+  - [x] Test session types
+
+#### Interactive Keypress Controls ✅
+- **Issue Type**: Feature Request
+- **Priority**: High
+- **Component**: Timer Engine, CLI
+- **Description**: Implement keypress-based control system for timer sessions
+- **User Story**: As a user, I want to control my timer with keypresses so that I can pause, resume, and stop without leaving the session
+- **Acceptance Criteria**:
+  - [x] 'p' key pauses current timer session
+  - [x] 'r' key resumes paused timer session
+  - [x] 'q' or 's' key stops timer session and exits
+  - [x] Ctrl+C exits timer session immediately
+  - [x] Raw terminal mode for reliable keypress detection
+- **TDD Approach**:
+  - [x] Test keypress handling
+  - [x] Test control mapping
+  - [x] Test terminal mode
+  - [x] Test error handling
+
+#### Real-time Progress Display ✅
+- **Issue Type**: Feature Request
+- **Priority**: High
+- **Component**: Timer Engine, Display
+- **Description**: Implement real-time progress display with progress bars
+- **User Story**: As a user, I want to see real-time progress so that I can track my timer visually
+- **Acceptance Criteria**:
+  - [x] Real-time progress bar updates
+  - [x] Time remaining display
+  - [x] Session type display
+  - [x] Control instructions display
+  - [x] Smooth progress updates
+- **TDD Approach**:
+  - [x] Test progress bar generation
+  - [x] Test time formatting
+  - [x] Test display updates
+  - [x] Test session information
+
 #### Automatic Session Recording ✅
 - **Issue Type**: Feature Request
 - **Priority**: High
@@ -273,98 +396,100 @@
 
 ---
 
-## Release 0.3.0: Terminal UI (TUI) Development 📋 **PLANNED**
+## Release 0.3.0: CLI Improvements & Plugin System Foundation 📋 **PLANNED**
 
 ### High Priority Features
 
-#### TUI Framework Implementation
+#### Enhanced CLI Functionality
 - **Issue Type**: Feature Request
 - **Priority**: High
-- **Component**: TUI
-- **Description**: Implement rich terminal user interface using Bubbletea
-- **User Story**: As a user, I want a rich terminal interface so that I can interact with Pomodux visually
+- **Component**: CLI
+- **Description**: Enhance CLI functionality and user experience
+- **User Story**: As a user, I want improved CLI functionality so that I can use Pomodux more effectively
 - **Acceptance Criteria**:
-  - [ ] Bubbletea TUI framework integration
-  - [ ] Main application model implementation
-  - [ ] Component-based UI architecture
-  - [ ] Terminal resize handling
+  - [ ] Enhanced timer status reporting
+  - [ ] Improved session history display
+  - [ ] Better configuration management
+  - [ ] Advanced notification system
+  - [ ] Performance optimizations
 - **TDD Approach**:
-  - [ ] Test TUI framework integration
-  - [ ] Test application model
-  - [ ] Test component architecture
-  - [ ] Test resize handling
+  - [ ] Test enhanced CLI features
+  - [ ] Test improved status reporting
+  - [ ] Test configuration enhancements
+  - [ ] Test notification system
 
-#### Timer Display Component
+#### Plugin System Architecture
 - **Issue Type**: Feature Request
 - **Priority**: High
-- **Component**: TUI, Timer Engine
-- **Description**: Create timer display component with progress visualization
-- **User Story**: As a user, I want to see my timer visually so that I can track progress easily
+- **Component**: Plugin System
+- **Description**: Design and implement plugin system foundation
+- **User Story**: As a developer, I want a plugin system so that I can extend Pomodux functionality
 - **Acceptance Criteria**:
-  - [ ] Timer display with progress bar
-  - [ ] Time remaining display
-  - [ ] Session type display
-  - [ ] Status information panel
+  - [ ] Plugin system architecture design
+  - [ ] Plugin loading and management
+  - [ ] Event system for plugin hooks
+  - [ ] Plugin API documentation
+  - [ ] Example plugins
 - **TDD Approach**:
-  - [ ] Test timer display component
-  - [ ] Test progress visualization
-  - [ ] Test time display
-  - [ ] Test status display
+  - [ ] Test plugin loading
+  - [ ] Test plugin lifecycle
+  - [ ] Test event system
+  - [ ] Test plugin API
 
 ### Medium Priority Features
 
-#### Interactive Controls
+#### Advanced Notifications
 - **Issue Type**: Feature Request
 - **Priority**: Medium
-- **Component**: TUI
-- **Description**: Implement interactive controls for timer management
-- **User Story**: As a user, I want interactive controls so that I can manage my timer visually
+- **Component**: Notifications
+- **Description**: Implement advanced notification system
+- **User Story**: As a user, I want advanced notifications so that I can stay informed about my timer
 - **Acceptance Criteria**:
-  - [ ] Keyboard shortcut system
-  - [ ] Input handling and validation
-  - [ ] Navigation between UI sections
-  - [ ] Modal dialogs for configuration
+  - [ ] Enhanced notification system
+  - [ ] Cross-platform notification support
+  - [ ] Customizable notification settings
+  - [ ] Notification history and management
 - **TDD Approach**:
-  - [ ] Test keyboard shortcuts
-  - [ ] Test input handling
-  - [ ] Test navigation
-  - [ ] Test modal dialogs
+  - [ ] Test notification system
+  - [ ] Test cross-platform support
+  - [ ] Test notification settings
+  - [ ] Test system integration
 
-#### Theme System
+#### Performance Optimizations
 - **Issue Type**: Feature Request
 - **Priority**: Medium
-- **Component**: TUI, Configuration
-- **Description**: Implement theme system for UI customization
-- **User Story**: As a user, I want to customize the UI theme so that I can personalize my experience
+- **Component**: Core System
+- **Description**: Implement performance optimizations
+- **User Story**: As a user, I want better performance so that Pomodux runs smoothly
 - **Acceptance Criteria**:
-  - [ ] Multiple theme options
-  - [ ] Configurable colors and styles
-  - [ ] Theme switching
-  - [ ] Custom theme creation
+  - [ ] Memory usage optimization
+  - [ ] Startup time improvements
+  - [ ] Timer accuracy enhancements
+  - [ ] Resource usage monitoring
 - **TDD Approach**:
-  - [ ] Test theme system
-  - [ ] Test theme switching
-  - [ ] Test theme configuration
-  - [ ] Test custom themes
+  - [ ] Test performance benchmarks
+  - [ ] Test memory usage
+  - [ ] Test startup time
+  - [ ] Test resource monitoring
 
 ### Low Priority Features
 
-#### Session History Display
+#### Documentation and Testing
 - **Issue Type**: Feature Request
 - **Priority**: Low
-- **Component**: TUI, Session Management
-- **Description**: Display session history in TUI
-- **User Story**: As a user, I want to see my session history visually so that I can review my productivity
+- **Component**: Documentation
+- **Description**: Enhance documentation and testing
+- **User Story**: As a user, I want comprehensive documentation so that I can use Pomodux effectively
 - **Acceptance Criteria**:
-  - [ ] Session history display
-  - [ ] Session filtering and search
-  - [ ] Session statistics visualization
-  - [ ] Export functionality
+  - [ ] Enhanced user documentation
+  - [ ] API documentation updates
+  - [ ] Test coverage improvements
+  - [ ] Integration testing
 - **TDD Approach**:
-  - [ ] Test history display
-  - [ ] Test filtering and search
-  - [ ] Test statistics visualization
-  - [ ] Test export functionality
+  - [ ] Test new features
+  - [ ] Test integration scenarios
+  - [ ] Test documentation examples
+  - [ ] Test performance benchmarks
 
 ---
 

@@ -106,6 +106,7 @@ func (t *Timer) Stop() error {
 
 	t.status = StatusIdle
 	t.elapsed = 0
+
 	// Save state
 	if t.stateManager != nil {
 		t.stateManager.SaveState(t)
@@ -326,6 +327,27 @@ func (t *Timer) StartPersistent(duration time.Duration, sessionType SessionType)
 		}
 	}()
 
+	// Channel to signal external stop
+	externalStopChan := make(chan struct{}, 1)
+
+	// Goroutine to check for external status changes
+	go func() {
+		ticker := time.NewTicker(500 * time.Millisecond) // Check every 500ms
+		defer ticker.Stop()
+		for {
+			select {
+			case <-ctx.Done():
+				return
+			case <-ticker.C:
+				currentStatus := t.GetStatus()
+				if currentStatus == StatusIdle {
+					externalStopChan <- struct{}{}
+					return
+				}
+			}
+		}
+	}()
+
 	go func() {
 		<-interruptChan
 		cancel()
@@ -349,6 +371,10 @@ func (t *Timer) StartPersistent(duration time.Duration, sessionType SessionType)
 			fmt.Print("\r" + strings.Repeat(" ", 120) + "\r")
 			fmt.Println("Timer stopped.")
 			t.Stop()
+			return nil
+		case <-externalStopChan:
+			fmt.Print("\r" + strings.Repeat(" ", 120) + "\r")
+			fmt.Println("Timer stopped externally.")
 			return nil
 		case <-pauseChan:
 			if !paused {
