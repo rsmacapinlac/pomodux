@@ -127,12 +127,14 @@ go test ./internal/timer/...
 
 ## 📚 Documentation
 
-- **[Technical Specifications](docs/technical_specifications.md)** - Detailed technical documentation
-- **[Implementation Roadmap](docs/implementation-roadmap.md)** - Development roadmap and releases
-- **[Release Notes](RELEASE_NOTES.md)** - Complete release history
-- **[Release Management](docs/release-management.md)** - Release process and documentation standards
-- **[Architecture Decisions](docs/adr/)** - Architecture Decision Records (ADRs)
-- **[Development Setup](docs/development-setup.md)** - Development environment setup
+- **[Requirements](docs/requirements.md)** - Project requirements and goals
+- **[Technical Specifications](docs/technical_specifications.md)** - Technical architecture and design
+- **[Development Setup](docs/development-setup.md)** - Development environment and tools
+- **[Go Standards](docs/go-standards.md)** - Go coding standards and conventions
+- **[Release Management](docs/release-management.md)** - Release process and approval gates
+- **[Releases](docs/releases/)** - Historical release documentation
+- **[Backlog](docs/backlog/)** - Planning and requirements (current & future work)
+- **[ADR](docs/adr/)** - Architecture Decision Records
 
 ## 🤝 Contributing
 

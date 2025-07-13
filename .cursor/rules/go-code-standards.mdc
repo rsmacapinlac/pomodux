@@ -245,7 +245,7 @@ func (t *Timer) Start(duration time.Duration) error {
 - **Release-based development**: All features must be part of an approved release plan
 - **Approval gates**: Follow the 4-gate approval process for each release
 - **TDD mandatory**: All features must follow Test-Driven Development process
-- **Progress tracking**: Update `docs/current-release.md` regularly
+- **Progress tracking**: Update backlog files regularly
 
 ### Build and Testing
 - **Makefile**: Use provided Makefile targets for common tasks

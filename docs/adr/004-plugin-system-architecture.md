@@ -146,5 +146,10 @@ The plugin system has been successfully implemented and integrated into Pomodux:
 - **Real-world Testing**: Tested with actual notification plugin to validate practical use cases
 - **Event Coverage**: Verified all timer lifecycle events (start, pause, resume, stop, complete) work correctly
 
+## Related Documentation
+
+- [Release Management](../release-management.md)
+- [Backlog](../backlog/)
+
 ---
 **Last Updated:** 2025-07-13 

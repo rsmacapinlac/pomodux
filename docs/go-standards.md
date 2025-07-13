@@ -990,8 +990,7 @@ go tool cover -html=coverage.out -o coverage.html
 ### Project Documentation
 - **[Cursor Rules](.cursor/rules/go-development.mdc)** - AI assistant guidance and project-specific patterns
 - **[Development Setup Guide](docs/development-setup.md)** - Environment setup and development workflow
-- **[Implementation Roadmap](docs/implementation-roadmap.md)** - Development phases and priorities
-- **[Architecture Decision Records](docs/adr/)** - Project architectural decisions and rationale
+- **[ADR](docs/adr/)** - Architecture Decision Records
 - **[Technical Specifications](docs/technical_specifications.md)** - System architecture and component design
 
 ### External Resources

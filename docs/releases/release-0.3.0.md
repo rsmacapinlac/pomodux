@@ -198,8 +198,6 @@ Release 0.3.0 successfully delivered enhanced CLI functionality and implemented 
 ## 🔗 Related Documentation
 
 - **[Release Management](docs/release-management.md)** - Complete release process and standards
-- **[Implementation Roadmap](docs/implementation-roadmap.md)** - Development roadmap
-- **[Current Release](docs/current-release.md)** - Active release tracking
 - **[Backlog](docs/backlog/)** - Planning and requirements (current & future work)
 
 ---

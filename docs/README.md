@@ -2,30 +2,20 @@
 
 This directory contains comprehensive documentation for the Pomodux project, organized to support development, planning, and historical reference.
 
-## 📁 Documentation Structure
+## 📚 Documentation Structure
 
-```
-docs/
-├── README.md                    # This file - documentation overview
-├── backlog/                     # PLANNING & REQUIREMENTS
-│   ├── README.md               # Backlog organization guide
-│   ├── release-0.3.1.md        # Current work (in progress)
-│   ├── release-0.4.0.md        # Planned work (next release)
-│   └── future-releases.md      # Long-term ideas
-├── releases/                    # HISTORICAL RECORDS
-│   ├── README.md               # Release documentation guide
-│   ├── release-0.1.0-final.md  # What was delivered in 0.1.0
-│   ├── release-0.2.0-final.md  # What was delivered in 0.2.0
-│   ├── release-0.2.1-final.md  # What was delivered in 0.2.1
-│   └── release-0.3.0-final.md  # ✅ What was delivered in 0.3.0
-├── retrospectives/              # RETROSPECTIVE ANALYSIS
-│   └── README.md               # Retrospective documentation
-├── adr/                        # ARCHITECTURE DECISION RECORDS
-│   ├── 001-programming-language-selection.md
-│   ├── 002-persistent-timer-design.md
-│   └── 003-uat-testing-approach.md
-└── [other documentation files]
-```
+The documentation is organized into the following key areas:
+
+1. **[Release Management](release-management.md)** - Release process and approval gates
+2. **[Requirements](requirements.md)** - Project requirements and specifications
+3. **[Technical Specifications](technical_specifications.md)** - Technical architecture and design
+4. **[Development Setup](development-setup.md)** - Development environment and tools
+5. **[Go Standards](go-standards.md)** - Go coding standards and conventions
+6. **[Logging Standards](logging-standards.md)** - Logging configuration and standards
+7. **[Releases](releases/)** - Historical release documentation
+8. **[Backlog](backlog/)** - Planning and requirements (current & future work)
+9. **[ADR](adr/)** - Architecture Decision Records
+10. **[Retrospectives](retrospectives/)** - Release retrospectives and lessons learned
 
 ## 🎯 Quick Navigation by Audience
 
@@ -44,92 +34,40 @@ docs/
 2. **[Retrospectives](retrospectives/)** - Lessons learned and improvements
 3. **[ADR](adr/)** - Architecture decision records
 
-## 📋 Documentation by Category
+## 📋 Documentation by Purpose
 
-### **Planning & Requirements**
-| Document | Purpose | Audience |
-|----------|---------|----------|
-| [backlog/](backlog/) | Planning and requirements for current/future work | Developers, Product Managers |
-| [current-release.md](current-release.md) | Active release tracking and progress | Developers, Stakeholders |
-| [implementation-roadmap.md](implementation-roadmap.md) | Development roadmap and timeline | Stakeholders, Developers |
-| [requirements.md](requirements.md) | Project requirements and goals | All stakeholders |
-
-### **Historical Records**
-| Document | Purpose | Audience |
-|----------|---------|----------|
-| [releases/](releases/) | What was actually delivered in each release | Users, Support Teams |
-| [retrospectives/](retrospectives/) | Lessons learned and improvements | Developers, Stakeholders |
-| [ADR](adr/) | Architecture decision records | Developers, Architects |
-
-### **Development & Technical**
-| Document | Purpose | Audience |
-|----------|---------|----------|
-| [development-setup.md](development-setup.md) | Development environment setup | Developers |
-| [go-standards.md](go-standards.md) | Coding standards and practices | Developers |
+| Document | Purpose | Primary Audience |
+|----------|---------|------------------|
+| [release-management.md](release-management.md) | Release process and approval gates | Developers, Stakeholders |
+| [requirements.md](requirements.md) | Project requirements and specifications | Stakeholders, Developers |
 | [technical_specifications.md](technical_specifications.md) | Technical architecture and design | Developers, Architects |
-| [tui-development.md](tui-development.md) | TUI development guidelines | Developers |
-
-### **Process & Standards**
-| Document | Purpose | Audience |
-|----------|---------|----------|
-| [release-management.md](release-management.md) | Release process and standards | All stakeholders |
-
-## 🎯 Documentation Organization
-
-### **Clear Separation of Concerns**
-
-#### **`backlog/` Folder - Planning & Requirements**
-- **Purpose**: Define what work needs to be done
-- **Contains**: User stories, acceptance criteria, TDD approach, technical planning
-- **Audience**: Developers, product managers, stakeholders
-- **Lifecycle**: Planning → In Progress → Complete → Move to releases
-
-#### **`releases/` Folder - Historical Records**
-- **Purpose**: Document what was actually delivered
-- **Contains**: 
-  - Final release documents (what was implemented, quality metrics, UAT results)
-  - Complete feature documentation and technical implementation details
-- **Audience**: Users, support teams, stakeholders, developers (for historical reference)
-- **Lifecycle**: Created after release is complete
-
-### **Documentation Types**
-
-#### **Planning Documents** (`backlog/`)
-- User stories and requirements
-- Acceptance criteria and test scenarios
-- TDD approach and technical planning
-- Current and future work
-
-#### **Historical Records** (`releases/`)
-- What was actually delivered
-- Quality metrics and performance data
-- UAT results and user feedback
-- Release notes and changelog
-
-#### **Process Documents**
-- Release management and standards
-- Development setup and guidelines
-- Architecture decision records
-- Retrospective analysis
-
-#### **Technical Documents**
-- Technical specifications
-- Implementation roadmap
-- Coding standards
-- Development guidelines
+| [development-setup.md](development-setup.md) | Development environment and tools | Developers |
+| [go-standards.md](go-standards.md) | Go coding standards and conventions | Developers |
+| [logging-standards.md](logging-standards.md) | Logging configuration and standards | Developers, DevOps |
+| [releases/](releases/) | Historical release documentation | All stakeholders |
+| [backlog/](backlog/) | Planning and requirements | Stakeholders, Developers |
+| [adr/](adr/) | Architecture Decision Records | Developers, Architects |
+| [retrospectives/](retrospectives/) | Release retrospectives and lessons learned | All stakeholders |
 
 ## 📊 Current Status
 
-### **Active Development**
-- **Current Release**: 0.3.1 (Logging Enhancements)
-- **Current Gate**: Gate 0 (Architecture Review)
-- **Next Release**: 0.4.0 (Plugin System Implementation)
+### ✅ Completed Releases
+- **Release 0.1.0**: Project Foundation & Core Timer Engine
+- **Release 0.2.0**: CLI Interface & Basic Functionality  
+- **Release 0.2.1**: Persistent Timer with Keypress Controls
+- **Release 0.3.0**: CLI Improvements & Plugin System Foundation
 
-### **Documentation Quality**
-- ✅ **Complete**: All major documents are up to date
-- ✅ **Organized**: Clear separation between planning and historical records
-- ✅ **Cross-Referenced**: Documents link to related information
-- ✅ **Standards**: Follows industry best practices
+### 📋 Available for Future Releases
+- **Terminal User Interface (TUI)** - Interactive terminal interface
+- **Plugin System Implementation** - Complete the plugin system foundation
+- **Data Export and Import** - Session data management
+- **Advanced Statistics** - Enhanced analytics and reporting
+- **Logging Enhancements** - Log rotation, analysis tools, enhanced configuration
+
+### 🔗 Key Documentation
+- **[Release Management](release-management.md)** - Complete release process and standards
+- **[Backlog](backlog/)** - Planning and requirements for future work
+- **[Releases](releases/)** - Historical records of completed releases
 
 ## 🔄 Documentation Workflow
 

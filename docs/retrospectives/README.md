@@ -24,7 +24,7 @@ Examples:
 
 ## Retrospective Process
 
-The retrospective process is defined in the `.cursorrules` file and includes:
+The retrospective process is defined in the `.cursor/rules/release-process.mdc` file and includes:
 
 1. **Brainstorm Lessons Learned**: Comprehensive review of the release experience
 2. **Capture User Feedback**: Direct insights from the user's perspective

@@ -107,38 +107,223 @@
 **Purpose**: Analyze release outcomes and drive continuous improvement
 
 **Process**:
-1. **Lessons Learned Analysis**
+1. **Brainstorm Lessons Learned**
    - [ ] Review entire release lifecycle from planning to completion
-   - [ ] Identify technical, process, communication, and user experience lessons
+   - [ ] Consider technical, process, communication, and user experience aspects
+   - [ ] Focus on both successes and failures
    - [ ] Identify patterns that could be improved
-   - [ ] Capture stakeholder and user feedback and insights
+   
+   **Key Areas to Examine**:
+   - **Planning Phase**: Were requirements clear? Was the scope appropriate?
+   - **Development Phase**: Did TDD work effectively? Were there technical challenges?
+   - **Testing Phase**: Was user testing comprehensive? Were issues caught early?
+   - **Release Phase**: Were all gates properly executed? Was documentation complete?
 
-2. **Documentation Audit**
-   - [ ] Review all files in `docs/` directory for consistency and completeness
-   - [ ] Verify release documents follow naming conventions
-   - [ ] Check ADRs for current relevance and status
-   - [ ] Validate process documentation is current
-   - [ ] Ensure project documentation reflects actual outcomes
+2. **Capture User Lessons Learned**
+   - [ ] Ask the user to share their experience with the release process
+   - [ ] Focus on their direct observations and insights
+   - [ ] Capture both positive feedback and areas for improvement
+   - [ ] Document specific examples and scenarios
+   
+   **Key Questions for User**:
+   - How did the release planning process work for you?
+   - Were the approval gates helpful or burdensome?
+   - What aspects of development went smoothly?
+   - What challenges did you encounter?
+   - How effective was the user testing phase?
+   - What would you change about the release process?
+   - Were there any communication or coordination issues?
+   - How well did the documentation support the process?
 
-3. **Cursor Rules Audit**
+3. **Complete Documentation Audit**
+   - [ ] Review all files in the `docs/` directory for consistency and completeness
+   - [ ] Verify links and references work correctly
+   - [ ] Assess documentation quality and usefulness
+   
+   **Documentation Categories to Audit**:
+   
+   **Release Documentation (`docs/releases/`)**:
+   - [ ] Verify all release documents follow naming conventions
+   - [ ] Check that final release documents supersede planning documents
+   - [ ] Ensure release status indicators are accurate
+   - [ ] Verify all gate approvals are properly documented
+   - [ ] Check that release artifacts and installation instructions are current
+   
+   **Architecture Decision Records (`docs/adr/`)**:
+   - [ ] Review all ADRs for current relevance
+   - [ ] Check that new architectural decisions are documented
+   - [ ] Verify ADR status indicators (approved/pending/deprecated)
+   - [ ] Ensure ADRs include required component information
+   - [ ] Check for any superseded or outdated decisions
+   
+   **Process Documentation**:
+   - [ ] **Release Management** (`docs/release-management.md`)
+     - [ ] Verify gate processes are current
+     - [ ] Check approval criteria are appropriate
+     - [ ] Ensure documentation standards are followed
+   - [ ] **Development Setup** (`docs/development-setup.md`)
+     - [ ] Verify setup instructions are current
+     - [ ] Check tool versions and dependencies
+     - [ ] Ensure environment requirements are accurate
+   - [ ] **Go Standards** (`docs/go-standards.md`)
+     - [ ] Review coding standards for relevance
+     - [ ] Check that standards align with current practices
+     - [ ] Verify testing requirements are appropriate
+   
+   **Project Documentation**:
+   - [ ] **Requirements** (`docs/requirements.md`)
+     - [ ] Verify requirements reflect current project state
+     - [ ] Check for any new requirements discovered during release
+     - [ ] Ensure requirements are testable and measurable
+   - [ ] **Technical Specifications** (`docs/technical_specifications.md`)
+     - [ ] Review technical approach for current relevance
+     - [ ] Check that specifications align with implementation
+     - [ ] Verify architecture decisions are reflected
+   
+   **Backlog**:
+   - [ ] **Backlog** (`docs/backlog.md`)
+     - [ ] Update priorities based on release experience
+     - [ ] Add new items discovered during release
+     - [ ] Remove or adjust items based on lessons learned
+   
+   **Documentation Quality Checklist**:
+   - [ ] All documents are current and accurate
+   - [ ] Links and references work correctly
+   - [ ] Information is consistent across documents
+   - [ ] Documentation follows established standards
+   - [ ] No outdated or superseded information remains
+   - [ ] All required sections are present and complete
+
+4. **Complete Cursor Rules Audit**
    - [ ] Review all cursor rules for relevance and effectiveness
    - [ ] Check for conflicts or redundancies
    - [ ] Verify rules support current development practices
    - [ ] Assess rule clarity and usability
-   - [ ] Identify areas for improvement
+   
+   **Rules to Audit**:
+   
+   **Architecture Guidelines**:
+   - [ ] Review ADR philosophy and requirements
+   - [ ] Check component selection criteria
+   - [ ] Verify decision documentation guidelines
+   - [ ] Ensure process workflows are current
+   
+   **Development Standards**:
+   - [ ] Review coding style preferences
+   - [ ] Check file organization patterns
+   - [ ] Verify documentation patterns
+   - [ ] Ensure error handling standards are appropriate
+   
+   **Workflow Integration**:
+   - [ ] Check development process alignment
+   - [ ] Verify quality assurance requirements
+   - [ ] Review context awareness guidelines
+   - [ ] Ensure communication standards are effective
+   
+   **Rule Quality Checklist**:
+   - [ ] Rules are clear and unambiguous
+   - [ ] Rules support current project goals
+   - [ ] No conflicting or redundant rules
+   - [ ] Rules are practical and implementable
+   - [ ] Rules align with documented processes
+   - [ ] Rules support quality and consistency
 
-4. **Improvement Proposals**
+5. **Suggest Updates and Improvements**
    - [ ] Propose process improvements based on lessons learned
    - [ ] Suggest documentation updates and new documentation needs
    - [ ] Recommend cursor rules updates for clarity and effectiveness
    - [ ] Identify technical improvements and architectural enhancements
    - [ ] Prioritize changes based on impact and effort
+   
+   **Update Categories**:
+   
+   **Process Improvements**:
+   - **Release Management**: Suggest changes to gate processes, approval criteria, or documentation requirements
+   - **Development Workflow**: Propose improvements to TDD process, testing approaches, or quality assurance
+   - **Communication**: Recommend changes to stakeholder communication or status reporting
+   
+   **Documentation Updates**:
+   - **New Documentation**: Identify gaps that need new documentation
+   - **Updated Documentation**: Suggest specific updates to existing documents
+   - **Documentation Standards**: Propose improvements to documentation processes or templates
+   
+   **Cursor Rules Updates**:
+   - **New Rules**: Propose new rules based on lessons learned
+   - **Rule Modifications**: Suggest changes to existing rules for clarity or effectiveness
+   - **Rule Removal**: Identify obsolete or ineffective rules that should be removed
+   
+   **Technical Improvements**:
+   - **Architecture Changes**: Suggest architectural improvements based on release experience
+   - **Tooling Updates**: Propose changes to development tools or processes
+   - **Quality Enhancements**: Recommend improvements to testing, code quality, or performance
 
 **Required Deliverables**:
 - Lessons learned summary and user feedback document
 - Documentation audit report with findings
 - Cursor rules audit report with recommendations
 - Specific update proposals with rationale and implementation steps
+
+**Output Format**:
+- Create a new file: `docs/retrospectives/retrospective-release-X.Y.Z.md`
+- Include all findings and recommendations
+- Link to relevant documentation and rules
+- Provide clear action items for implementation
+
+**User Feedback Documentation Format**:
+```markdown
+## User Retrospective Feedback - Release X.Y.Z
+
+### Positive Experiences
+- [List specific positive aspects]
+
+### Areas for Improvement
+- [List specific areas that need work]
+
+### Process Observations
+- [List observations about the release process]
+
+### Technical Insights
+- [List technical lessons learned]
+
+### Recommendations
+- [List specific recommendations for future releases]
+```
+
+**Update Proposal Format**:
+```markdown
+## Proposed Updates - Release X.Y.Z Retrospective
+
+### Process Improvements
+#### [Specific Process Area]
+- **Current State**: [Description of current process]
+- **Issue**: [Problem or opportunity identified]
+- **Proposed Change**: [Specific change to implement]
+- **Rationale**: [Why this change is beneficial]
+- **Impact**: [Expected impact on future releases]
+
+### Documentation Updates
+#### [Document Name]
+- **Current State**: [Description of current documentation]
+- **Issue**: [Problem or gap identified]
+- **Proposed Change**: [Specific update to implement]
+- **Rationale**: [Why this update is needed]
+- **Implementation**: [How to implement the change]
+
+### Cursor Rules Updates
+#### [Rule Category]
+- **Current Rule**: [Description of current rule]
+- **Issue**: [Problem or opportunity identified]
+- **Proposed Change**: [Specific change to implement]
+- **Rationale**: [Why this change is beneficial]
+- **Implementation**: [How to implement the change]
+```
+
+**Follow-up Actions**:
+- Schedule review of proposed updates
+- Prioritize changes based on impact and effort
+- Implement approved changes before next release
+- Update documentation and rules as needed
+- Communicate changes to stakeholders
 
 ## TDD Integration Requirements
 
@@ -246,8 +431,6 @@
 
 ### Project Documentation
 - **[Release Management Guide](@docs/release-management.md)** - Comprehensive release management framework
-- **[Current Release Tracker](@docs/current-release.md)** - Current release progress and status
-- **[Implementation Roadmap](@docs/implementation-roadmap.md)** - Technical implementation plan
 - **[Backlog](@docs/backlog.md)** - Feature backlog organized by release
 - **[Release Notes](@RELEASE_NOTES.md)** - Complete release history
 - **[Architecture Decision Records](@docs/adr)** - Project architectural decisions

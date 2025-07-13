@@ -123,16 +123,8 @@ This rule is triggered after the completion or failure of a release to perform a
   - [ ] Review technical approach for current relevance
   - [ ] Check that specifications align with implementation
   - [ ] Verify architecture decisions are reflected
-- [ ] **Implementation Roadmap** (`docs/implementation-roadmap.md`)
-  - [ ] Update roadmap based on release experience
-  - [ ] Adjust timelines and priorities as needed
-  - [ ] Incorporate lessons learned into future planning
 
-#### 3.5 Current Release and Backlog
-- [ ] **Current Release** (`docs/current-release.md`)
-  - [ ] Update with actual release outcomes
-  - [ ] Document any deviations from plan
-  - [ ] Record lessons learned for future reference
+#### 3.5 Backlog
 - [ ] **Backlog** (`docs/backlog.md`)
   - [ ] Update priorities based on release experience
   - [ ] Add new items discovered during release

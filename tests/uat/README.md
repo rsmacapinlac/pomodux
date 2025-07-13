@@ -281,12 +281,11 @@ bats --verbose tests/uat/automated/bats/basic-functionality.bats
 - **Security Testing**: Automated security vulnerability scanning
 - **Advanced Reporting**: Enhanced test analytics and metrics
 
-## Related Documentation
+## 🔗 Related Documentation
 
-- **[ADR 003: UAT Testing Approach](docs/adr/003-uat-testing-approach.md)** - Comprehensive testing strategy
-- **[Release Management](docs/release-management.md)** - Integration with approval process
-- **[Current Release](docs/current-release.md)** - Current release status and testing requirements
-- **[Go Standards](docs/go-standards.md)** - Development standards and testing requirements
+- **[Release Management](docs/release-management.md)** - Release process and approval gates
+- **[Backlog](docs/backlog/)** - Planning and requirements (current & future work)
+- **[Releases](docs/releases/)** - Historical release documentation
 
 ## Contributing
 

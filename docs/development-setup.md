@@ -652,8 +652,7 @@ After completing the setup:
 ### Project Documentation
 - **[Go Standards Document](docs/go-standards.md)** - Comprehensive Go development standards and implementation guidelines
 - **[Cursor Rules](.cursor/rules/go-development.mdc)** - AI assistant guidance and project-specific patterns
-- **[Implementation Roadmap](docs/implementation-roadmap.md)** - Development phases and priorities
-- **[Architecture Decision Records](docs/adr/)** - Project architectural decisions and rationale
+- **[ADR](docs/adr/)** - Architecture Decision Records
 
 ### External Resources
 - [Go Installation Guide](https://golang.org/doc/install)
@@ -667,3 +666,10 @@ After completing the setup:
 - **[Go Standards](docs/go-standards.md)**: Provides detailed implementation standards and examples
 - **[Cursor Rules](.cursor/rules/go-development.mdc)**: Provides AI assistants with project-specific patterns
 - **Together**: Create a complete development ecosystem for both human developers and AI assistants
+
+## 📚 Additional Resources
+
+- **[Go Standards](docs/go-standards.md)** - Go coding standards and conventions
+- **[Release Management](docs/release-management.md)** - Release process and approval gates
+- **[Logging Standards](docs/logging-standards.md)** - Logging configuration and standards
+- **[ADR](docs/adr/)** - Architecture Decision Records
