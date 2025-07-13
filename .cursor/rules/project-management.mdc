@@ -1,0 +1,199 @@
+# Project Management Rules for Pomodux
+
+## Core Project Management Principles
+
+### Documentation Organization Philosophy
+- **Clear Separation of Concerns**: Backlog contains planning, releases contain historical records
+- **No Duplication**: Information should not be duplicated between backlog and releases
+- **Move, don't copy**: When releases complete, move planning files from backlog to releases
+- **Consistent Structure**: Follow established naming conventions and folder organization
+
+## Primary Commands
+
+### `Organize documentation`
+**Purpose**: Maintain proper documentation structure and organization
+
+**Process**:
+1. **Backlog Organization**
+   - [ ] Ensure backlog contains only current and future work
+   - [ ] Verify one file per release in `docs/backlog/`
+   - [ ] Check naming conventions (`release-X.Y.Z.md`)
+   - [ ] Remove any completed releases from backlog
+   - [ ] Update backlog README with current status
+
+2. **Releases Organization**
+   - [ ] Verify releases folder contains only completed work
+   - [ ] Check final documents follow naming conventions
+   - [ ] Ensure no active planning exists in releases
+   - [ ] Update releases README with completion status
+   - [ ] Archive completed release documentation
+
+3. **Cross-Reference Maintenance**
+   - [ ] Update all README files with current status
+   - [ ] Verify status indicators are consistent (✅ COMPLETE, 🔄 IN PROGRESS, 📋 PLANNED)
+   - [ ] Check file paths are accurate and up-to-date
+   - [ ] Ensure documentation links work correctly
+   - [ ] Maintain clear separation between planning and historical records
+
+**Required Deliverables**:
+- Properly organized backlog with current work only
+- Correctly structured releases folder with completed work
+- Updated README files with accurate status
+- Consistent cross-references and links
+- Documentation quality audit report
+
+### `Update project status`
+**Purpose**: Maintain current project status and progress tracking
+
+**Process**:
+1. **Status Documentation Updates**
+   - [ ] Update `docs/current-release.md` with progress
+   - [ ] Update `docs/implementation-roadmap.md` with current release status and feature priorities
+   - [ ] Update `docs/backlog/release-X.Y.Z.md` with individual feature completion status
+   - [ ] Update `docs/README.md`, `docs/backlog/README.md`, and `docs/releases/README.md` with current state
+   - [ ] Update `docs/current-release.md` with milestone completion status and progress metrics
+
+2. **Progress Tracking**
+   - [ ] Update `docs/current-release.md` with development progress percentages and milestone status
+   - [ ] Update `docs/current-release.md` with test coverage percentages and quality metrics from test reports
+   - [ ] Update `docs/current-release.md` with documentation completion status and cross-reference updates
+   - [ ] Update `docs/current-release.md` with release readiness checklist status and gate completion
+
+3. **Communication Updates**
+   - [ ] Update status indicators consistently across all documentation
+   - [ ] Update `docs/README.md` with current project status for stakeholder visibility
+   - [ ] Update cross-references and links between all documentation
+   - [ ] Maintain accurate project state across all tracking documents
+   - [ ] Update `docs/current-release.md` with deviation notes and plan adjustments
+
+**Required Deliverables**:
+- Updated current release tracker (`docs/current-release.md`)
+- Current project status documentation across all README files
+- Progress reports and metrics in current release tracker
+- Updated cross-references between all documentation
+- Stakeholder communication updates in main README
+
+## Documentation Organization Rules
+
+### Backlog Folder Rules (`docs/backlog/`)
+
+#### Structure
+- **One file per release**: Each release gets its own file (e.g., `release-0.3.1.md`)
+- **Current releases only**: Backlog should contain only the current working release
+- **No completed releases**: Completed releases must be moved to releases folder
+
+#### Content
+- User stories and requirements
+- Acceptance criteria and TDD approach
+- Technical planning and implementation details
+- Feature breakdown and priorities
+- Dependencies and relationships
+
+#### Naming Convention
+- `release-{major}.{minor}.{patch}.md` (e.g., `release-0.3.1.md`)
+- `future-releases.md` for long-term planning
+
+### Releases Folder Rules (`docs/releases/`)
+
+#### Structure
+- **Final documents**: `release-X.Y.Z.md` (what was delivered)
+- **Historical records only**: No active planning or backlog duplication
+
+#### Content
+- **Final documents**: What was actually implemented, quality metrics, UAT results
+- **No active planning**: Releases folder is for historical records only
+
+#### Naming Convention
+- `release-{major}.{minor}.{patch}-final.md` (e.g., `release-0.3.0-final.md`)
+
+### Release Lifecycle Rules
+
+#### When a Release is Complete
+1. **Move backlog file**: `docs/backlog/release-X.Y.Z.md` → `docs/releases/release-X.Y.Z-backlog.md`
+2. **Create final document**: `docs/releases/release-X.Y.Z-final.md` (if not exists)
+3. **Update documentation**: Update README files and cross-references
+4. **Remove from backlog**: Ensure backlog only contains current/future work
+
+#### When Starting a New Release
+1. **Create new backlog file**: `docs/backlog/release-X.Y.Z.md`
+2. **Update current release tracking**: Update `docs/current-release.md`
+3. **Update documentation**: Update README files and cross-references
+
+## Quality Assurance Rules
+
+### Documentation Quality Standards
+
+#### Before Committing Documentation Changes
+- [ ] Verify no duplication between backlog and releases
+- [ ] Ensure backlog contains only current/future work
+- [ ] Confirm releases contain only completed work
+- [ ] Update all README files and cross-references
+- [ ] Check that status indicators are accurate
+
+#### Documentation Review Checklist
+- [ ] Clear separation between planning and historical records
+- [ ] Consistent naming conventions
+- [ ] Accurate cross-references
+- [ ] Up-to-date status indicators
+- [ ] No orphaned or duplicate files
+
+## Integration with Release Process
+
+### Release Process Integration
+- All release process rules are defined in @release-process.mdc
+- This file handles documentation organization and status tracking
+- Release process handles development workflow and execution
+- Use `Organize a release` from @release-process.mdc for release planning
+- Use `Organize documentation` from this file for documentation structure
+- Use `Update project status` from this file for status tracking
+
+### Documentation Integration
+- Documentation updates tracked throughout release process
+- Release notes generated from development progress
+- Technical specifications updated with implementation progress
+- Cross-references maintained between all documentation
+
+## Maintenance Tasks
+
+### Cleanup Tasks
+- Remove completed releases from backlog
+- Update status indicators
+- Fix broken cross-references
+- Archive outdated documentation
+
+## Integration with Other Rules
+
+### Release Process Integration
+- All release process rules are defined in @release-process.mdc
+- Follow approval gates and TDD requirements from release process
+- Maintain progress tracking and documentation
+- Use retrospective process for improvements
+
+### Architecture Integration
+- All architecture standards are defined in @architecture-standards.mdc
+- Follow ADR decisions and architectural patterns
+- Document architectural decisions properly
+- Maintain architectural consistency
+
+### Code Standards Integration
+- All code standards are defined in @go-code-standards.mdc
+- Follow Go development patterns and conventions
+- Maintain code quality and testing standards
+- Apply security and performance guidelines
+
+## References
+
+### Project Documentation
+- **[Release Management Guide](@docs/release-management.md)** - Comprehensive release management framework
+- **[Current Release Tracker](@docs/current-release.md)** - Current release progress and status
+- **[Implementation Roadmap](@docs/implementation-roadmap.md)** - Technical implementation plan
+- **[Backlog](@docs/backlog.md)** - Feature backlog organized by release
+- **[Release Notes](@RELEASE_NOTES.md)** - Complete release history
+- **[Release Documentation](@docs/releases/README.md)** - Release documentation standards
+
+---
+
+**Note**: This project management file focuses on documentation organization and status tracking. For release process and development workflow, use @release-process.mdc. The two files work together to provide complete project management coverage.
+description: Project management and documentation organization for Pomodux project
+alwaysApply: true
+---

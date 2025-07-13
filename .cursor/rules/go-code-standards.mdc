@@ -1,0 +1,317 @@
+# Code Standards for Pomodux
+
+## Core Go Development Principles
+
+### Project Structure Standards
+- **Follow Standard Go Project Layout**: Use the established directory structure from `docs/go-standards.md`
+- **Package Organization**: Keep internal packages in `internal/`, public packages in `pkg/`
+- **File Naming**: Use snake_case for file names (e.g., `timer_engine.go`, `session_manager.go`)
+- **Import Organization**: Group imports in order: standard library, third-party, internal
+
+### Code Organization
+- **Package Naming**: Use short, descriptive names without underscores
+- **Interface Design**: Keep interfaces small, define where used, not where implemented
+- **Error Handling**: Always check errors, wrap with context using `fmt.Errorf`
+- **Documentation**: Document all exported functions and packages
+
+### Naming Conventions
+- **Variables/Functions**: Use camelCase for unexported, PascalCase for exported
+- **Constants**: Use PascalCase for exported, camelCase for unexported
+- **Descriptive Names**: Avoid abbreviations, use clear, searchable names
+- **Examples**: `StartWorkTimer()`, `calculateProgress()`, `isTimerRunning`
+
+## Primary Commands
+
+### `Apply Go standards`
+**Purpose**: Apply Go-specific development patterns and conventions
+
+**Process**:
+1. **Code Structure Validation**
+   - [ ] Verify project structure follows Go standards
+   - [ ] Check package organization and naming
+   - [ ] Validate file naming conventions
+   - [ ] Review import organization
+   - [ ] Ensure proper error handling patterns
+
+2. **Code Quality Application**
+   - [ ] Apply naming conventions consistently
+   - [ ] Implement proper error handling
+   - [ ] Add comprehensive documentation
+   - [ ] Follow interface design principles
+   - [ ] Apply logging standards with structured logging
+
+3. **Testing Standards**
+   - [ ] Use `_test.go` suffix for test files
+   - [ ] Implement table-driven tests for multiple cases
+   - [ ] Achieve 80%+ test coverage overall
+   - [ ] Achieve 95%+ coverage for critical paths
+   - [ ] Use test helpers from `test/helpers/`
+
+**Required Deliverables**:
+- Code that follows Go project structure standards
+- Consistent naming conventions throughout
+- Proper error handling and documentation
+- Comprehensive test coverage
+- Structured logging implementation
+
+### `Validate code quality`
+**Purpose**: Ensure code meets quality standards and requirements
+
+**Process**:
+1. **Linting and Formatting**
+   - [ ] Run `gofmt` for consistent formatting
+   - [ ] Execute `golangci-lint` with project configuration
+   - [ ] Fix all linting issues and warnings
+   - [ ] Ensure code follows project style guidelines
+   - [ ] Validate import organization
+
+2. **Testing Validation**
+   - [ ] Run all tests and verify they pass
+   - [ ] Check test coverage meets requirements (80%+ overall, 95%+ critical)
+   - [ ] Validate integration tests work correctly
+   - [ ] Ensure performance tests pass
+   - [ ] Verify cross-platform compatibility
+
+3. **Documentation Review**
+   - [ ] Verify all exported functions are documented
+   - [ ] Check package documentation is complete
+   - [ ] Validate API documentation is current
+   - [ ] Ensure examples are working and current
+   - [ ] Review inline comments for clarity
+
+**Required Deliverables**:
+- Code that passes all linting and formatting checks
+- Test results with coverage reports
+- Complete and current documentation
+- Performance benchmarks (if applicable)
+- Cross-platform compatibility verification
+
+### `Review security patterns`
+**Purpose**: Ensure code follows security and performance best practices
+
+**Process**:
+1. **Security Validation**
+   - [ ] Validate all user inputs before processing
+   - [ ] Use `path/filepath` for cross-platform path handling
+   - [ ] Implement secure configuration defaults
+   - [ ] Ensure error messages don't expose sensitive information
+   - [ ] Apply plugin security measures (sandboxing, validation)
+
+2. **Performance Optimization**
+   - [ ] Profile code to identify bottlenecks
+   - [ ] Benchmark critical paths using `go test -bench`
+   - [ ] Use `sync.Pool` for frequently allocated objects
+   - [ ] Choose appropriate data structures and algorithms
+   - [ ] Optimize memory usage and avoid leaks
+
+3. **Concurrency Best Practices**
+   - [ ] Use goroutines for I/O-bound operations
+   - [ ] Implement proper channel communication
+   - [ ] Use context for cancellation and timeouts
+   - [ ] Avoid goroutine leaks with proper cleanup
+   - [ ] Apply concurrency patterns consistently
+
+**Required Deliverables**:
+- Security audit report with findings
+- Performance profiling results
+- Concurrency safety validation
+- Memory usage optimization
+- Security and performance recommendations
+
+## Pomodux-Specific Guidelines
+
+### Architecture Compliance
+- **Follow ADR Decisions**: Review `docs/adr/` before making architectural changes
+- **Modular Design**: Maintain clear separation between CLI, TUI, Core Engine, and Plugin System
+- **XDG Compliance**: Use proper configuration file locations
+- **Cross-Platform**: Handle platform differences gracefully
+
+### Timer Engine Development
+- **State Management**: Use clear state transitions and validation
+- **Event System**: Emit events for timer lifecycle (start, pause, resume, complete)
+- **Session Tracking**: Maintain session history and statistics
+- **Progress Calculation**: Provide accurate progress updates
+
+### CLI Development
+- **Cobra Framework**: Use cobra for command structure and help generation
+- **Argument Validation**: Validate all user inputs before processing
+- **Help System**: Provide comprehensive help and usage examples
+- **Tab Completion**: Implement tab completion for commands
+
+### TUI Development
+- **Bubbletea Framework**: Use bubbletea for terminal UI components
+- **Responsive Design**: Handle terminal resize events gracefully
+- **Input Handling**: Support keyboard shortcuts and navigation
+- **Theme System**: Support configuration-based theming
+
+### Plugin System
+- **Lua Integration**: Use gopher-lua for plugin runtime
+- **Hook System**: Implement event hooks for timer lifecycle
+- **API Design**: Provide clear, stable plugin API
+- **Security**: Validate plugin code and limit capabilities
+
+## Common Patterns
+
+### Configuration Management
+```go
+type Config struct {
+    Timer struct {
+        DefaultWorkDuration time.Duration `yaml:"default_work_duration"`
+        DefaultBreakDuration time.Duration `yaml:"default_break_duration"`
+    } `yaml:"timer"`
+    
+    TUI struct {
+        Theme string `yaml:"theme"`
+        KeyBindings map[string]string `yaml:"key_bindings"`
+    } `yaml:"tui"`
+}
+```
+
+### Event System
+```go
+type EventType string
+
+const (
+    EventTimerStarted EventType = "timer_started"
+    EventTimerPaused  EventType = "timer_paused"
+    EventTimerResumed EventType = "timer_resumed"
+    EventTimerCompleted EventType = "timer_completed"
+)
+
+type Event struct {
+    Type      EventType
+    Timestamp time.Time
+    Data      map[string]interface{}
+}
+```
+
+### Plugin Hook System
+```go
+type HookManager struct {
+    hooks map[EventType][]Hook
+}
+
+type Hook func(event Event) error
+
+func (hm *HookManager) RegisterHook(eventType EventType, hook Hook) {
+    hm.hooks[eventType] = append(hm.hooks[eventType], hook)
+}
+```
+
+### Error Handling Patterns
+```go
+// Always check errors
+if err != nil {
+    return fmt.Errorf("context: %w", err)
+}
+
+// Use custom error types for specific conditions
+type TimerError struct {
+    Op  string
+    Err error
+}
+
+func (e *TimerError) Error() string {
+    return fmt.Sprintf("timer %s: %v", e.Op, e.Err)
+}
+```
+
+### Documentation Standards
+```go
+// Package timer provides core timer functionality for the Pomodux application.
+// It includes session management, progress tracking, and event emission.
+package timer
+
+// Start begins a new timer session with the specified duration.
+// The timer will emit events when started, paused, resumed, and completed.
+// Returns an error if the timer is already running or if the duration is invalid.
+func (t *Timer) Start(duration time.Duration) error {
+    // Implementation...
+}
+```
+
+## Logging Standards
+
+### Structured Logging with Logrus
+- **Follow Logging Standards**: Use structured logging with Logrus as defined in `docs/logging-standards.md`
+- **Structured Fields**: Always include relevant context in log entries
+- **Log Levels**: Use appropriate levels (debug, info, warn, error) consistently
+- **Performance**: Avoid excessive logging in performance-critical paths
+- **Testing**: Ensure critical log paths are covered by tests
+
+## Development Workflow Integration
+
+### Release Management Integration
+- **Release-based development**: All features must be part of an approved release plan
+- **Approval gates**: Follow the 4-gate approval process for each release
+- **TDD mandatory**: All features must follow Test-Driven Development process
+- **Progress tracking**: Update `docs/current-release.md` regularly
+
+### Build and Testing
+- **Makefile**: Use provided Makefile targets for common tasks
+- **Git Hooks**: Pre-commit hooks ensure code quality
+- **CI/CD**: Follow GitHub Actions workflow
+- **Cross-Platform**: Test on all target platforms
+
+## Quality Assurance Standards
+
+### Code Quality Requirements
+- **Linting**: All code must pass project linting rules
+- **Formatting**: All code must follow project formatting standards
+- **Documentation**: All public functions must be documented
+- **Error Handling**: Proper error handling and validation
+
+### Testing Requirements
+- **Unit Tests**: Comprehensive unit test coverage
+- **Integration Tests**: Test component interactions
+- **Performance Tests**: Benchmark critical paths
+- **User Acceptance Tests**: Validate user workflows
+- **Regression Tests**: Ensure no regression in existing functionality
+- **Cross-Platform Tests**: Validate functionality across supported platforms
+
+## Integration with Other Rules
+
+### Development Process Integration
+- All development process rules are defined in @release-process.mdc
+- Follow TDD process for all code changes
+- Use approval gates for quality control
+- Maintain documentation standards
+
+### Architecture Integration
+- All architecture standards are defined in @architecture-standards.mdc
+- Follow ADR decisions and architectural patterns
+- Validate component selection and integration
+- Maintain architectural consistency
+
+### Project Management Integration
+- All project management rules are defined in @project-management.mdc
+- Follow documentation organization standards
+- Use GitHub issues for tracking
+- Maintain project status and progress
+
+## References
+
+### Project Documentation
+- **[Go Standards Document](@docs/go-standards.md)** - Comprehensive Go development standards and implementation guidelines
+- **[Logging Standards](@docs/logging-standards.md)** - Structured logging standards and best practices
+- **[Development Setup Guide](@docs/development-setup.md)** - Environment setup and development workflow
+- **[Architecture Decision Records](@docs/adr)** - Project architectural decisions and rationale
+- **[Technical Specifications](@docs/technical_specifications.md)** - System architecture and component design
+
+### External Resources
+- [Go Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments)
+- [Effective Go](https://golang.org/doc/effective_go.html)
+- [Standard Go Project Layout](https://github.com/golang-standards/project-layout)
+
+---
+
+**Note**: This consolidated code standards file provides consistent command patterns while maintaining all Go development quality standards and conventions. Use the primary commands to guide all code development activities.
+description: Go development standards and conventions for Pomodux project
+globs:
+  - "**/*.go"
+  - "**/*_test.go"
+  - "**/*.go.tmpl"
+  - "**/*.gohtml"
+  - "**/*.gotmpl"
+alwaysApply: false
+---

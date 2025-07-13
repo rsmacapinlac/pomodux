@@ -1,66 +1,152 @@
-# Architecture Guidelines
+# Architecture Standards for Pomodux
 
-## Core Principles
+## Core Architecture Principles
 
 ### Architecture Decision Records (ADR) Philosophy
-
 - **Always audit the Decision Log folder**: Review existing ADRs (`docs/adr/*`) before making architectural changes. Only consider approved decisions.
 - **Context preservation**: Understand historical decisions and their rationale before proposing changes
 - **Consistency over novelty**: Prefer established patterns unless there's clear justification for deviation
 - **Documentation-driven development**: Architectural decisions guide implementation, not the reverse
 - **ADR's must contain the link to the website or GitHub repository**: All architectural decisions must include direct links to component documentation and source code for transparency and verification
 
-### New Component Selection Criteria
+### Component Selection Criteria
 - **Must be compatible with existing components**: New components must integrate seamlessly with current architecture and not break existing functionality
 - **Must be actively maintained**: Components must have recent updates, active development, and community support
+- **Must have comprehensive documentation**: Components should have clear documentation and examples
+- **Must align with project constraints**: Components should fit within performance, security, and licensing requirements
 
-## Pre-Development Architecture Review
+## Primary Commands
 
-### Mandatory Pre-Development Process
+### `Review architecture decisions`
+**Purpose**: Audit existing architectural decisions and identify constraints
 
+**Process**:
+1. **ADR Audit Phase**
+   - [ ] Review all existing ADRs in `docs/adr/` for relevance and constraints
+   - [ ] Identify architectural patterns that must be followed
+   - [ ] Check for conflicting decisions that might impact new work
+   - [ ] Document architectural constraints that must be respected
+   - [ ] Verify ADR status indicators (approved/pending/deprecated)
+
+2. **Context Analysis**
+   - [ ] Understand historical decisions and their rationale
+   - [ ] Identify patterns that have worked well
+   - [ ] Document any superseded or outdated decisions
+   - [ ] Map dependencies between architectural decisions
+   - [ ] Assess impact of decisions on current system
+
+3. **Constraint Documentation**
+   - [ ] Document all architectural constraints for new work
+   - [ ] Identify integration points and patterns
+   - [ ] List performance and security requirements
+   - [ ] Document compatibility requirements
+   - [ ] Establish decision boundaries and scope
+
+**Required Deliverables**:
+- ADR audit report with status and relevance
+- Architectural constraints document
+- Integration patterns and requirements
+- Decision dependency mapping
+- Context preservation documentation
+
+### `Propose architectural changes`
+**Purpose**: Create comprehensive architecture proposals for new features or changes
+
+**Process**:
+1. **Architecture Proposal Phase**
+   - [ ] Create detailed architecture proposal for the change
+   - [ ] Define integration points with existing components
+   - [ ] Identify potential architectural impacts on current system
+   - [ ] Propose architectural patterns to be used
+   - [ ] Document any deviations from established patterns with rationale
+
+2. **Component Selection**
+   - [ ] Identify any required third party libraries
+   - [ ] Evaluate components against selection criteria
+   - [ ] Assess compatibility with existing architecture
+   - [ ] Verify maintenance status and community support
+   - [ ] Document licensing and security implications
+
+3. **Impact Assessment**
+   - [ ] Analyze impact on existing functionality
+   - [ ] Assess performance implications
+   - [ ] Evaluate security considerations
+   - [ ] Consider maintainability and scalability
+   - [ ] Document migration path and risks
+
+**Required Deliverables**:
+- Detailed architecture proposal document
+- Component evaluation and selection rationale
+- Integration plan with technical details
+- Impact assessment with risk mitigation
+- Migration path and implementation strategy
+
+### `Validate component selection`
+**Purpose**: Evaluate third-party components and libraries for architectural fit
+
+**Process**:
+1. **Component Research**
+   - [ ] Research component alternatives and options
+   - [ ] Evaluate against project requirements
+   - [ ] Check compatibility with existing stack
+   - [ ] Assess community support and maintenance
+   - [ ] Review documentation quality and completeness
+
+2. **Technical Evaluation**
+   - [ ] Test component integration with existing code
+   - [ ] Verify performance characteristics
+   - [ ] Assess security implications
+   - [ ] Check licensing compatibility
+   - [ ] Evaluate learning curve and team familiarity
+
+3. **Decision Documentation**
+   - [ ] Create ADR if component selection is architectural decision
+   - [ ] Document selection rationale and alternatives considered
+   - [ ] Include component links and documentation references
+   - [ ] Specify integration requirements and constraints
+   - [ ] Document maintenance and support plans
+
+**Required Deliverables**:
+- Component evaluation report
+- Technical compatibility assessment
+- Integration requirements and constraints
+- ADR (if architectural decision)
+- Implementation and maintenance plan
+
+## Architecture Review Process
+
+### Mandatory Pre-Development Review
 **Before any development begins on new features, the following architecture review process must be completed:**
 
-#### 1. ADR Audit Phase
-- [ ] **Review all existing ADRs** in `docs/adr/` for relevance and constraints
-- [ ] **Identify architectural patterns** that must be followed
-- [ ] **Check for conflicting decisions** that might impact the new feature
-- [ ] **Document architectural constraints** that the new feature must respect
+#### 1. Architecture Review Phase
+- [ ] Present architecture proposal to stakeholders
+- [ ] Review against existing ADRs and architectural constraints
+- [ ] Validate architectural assumptions through proof-of-concept if needed
+- [ ] Obtain explicit approval before development begins
+- [ ] Document approval and any conditions
 
-#### 2. Architecture Proposal Phase
-- [ ] **Create architecture proposal** for the new feature
-- [ ] **Define integration points** with existing components
-- [ ] **Identify potential architectural impacts** on current system
-- [ ] **Propose architectural patterns** to be used
-- [ ] **Document any deviations** from established patterns with rationale
-
-#### 3. Architecture Review Phase
-- [ ] **Present architecture proposal** to stakeholders
-- [ ] **Review against existing ADRs** and architectural constraints
-- [ ] **Validate architectural assumptions** through proof-of-concept if needed
-- [ ] **Obtain explicit approval** before development begins
-
-#### 4. Documentation Phase
-- [ ] **Create new ADR** if architectural decisions are made
-- [ ] **Update relevant documentation** with architectural decisions
-- [ ] **Document integration approach** and constraints
+#### 2. Integration Validation
+- [ ] Verify integration approach is sound and tested
+- [ ] Validate component compatibility and performance
+- [ ] Confirm security and licensing compliance
+- [ ] Test integration with existing components
+- [ ] Document integration requirements and constraints
 
 ### Architecture Review Criteria
 
-**The architecture review must validate:**
-
-#### Compatibility
+#### Compatibility Assessment
 - [ ] **Existing Components**: New feature integrates with current architecture
 - [ ] **Established Patterns**: Follows documented architectural patterns
 - [ ] **Performance Impact**: No negative impact on existing functionality
 - [ ] **Security Model**: Maintains established security patterns
 
-#### Maintainability
+#### Maintainability Assessment
 - [ ] **Code Organization**: Follows established file and package structure
 - [ ] **Testing Approach**: Integrates with existing testing patterns
 - [ ] **Documentation**: Maintains documentation standards
 - [ ] **Error Handling**: Follows established error handling patterns
 
-#### Scalability
+#### Scalability Assessment
 - [ ] **Future Growth**: Architecture supports future enhancements
 - [ ] **Performance**: Meets performance requirements
 - [ ] **Resource Usage**: Efficient use of system resources
@@ -68,61 +154,25 @@
 
 ### Architecture Review Output
 
-**Required Deliverables:**
+**Required Deliverables**:
 1. **ADR Audit Report**: Summary of relevant ADRs and constraints
 2. **Architecture Proposal**: Detailed architectural approach for the feature
 3. **Integration Plan**: How the feature integrates with existing components
 4. **Risk Assessment**: Potential architectural risks and mitigation strategies
 5. **Approval Documentation**: Explicit approval to proceed with development
 
-**Approval Criteria:**
+**Approval Criteria**:
 - Architecture proposal is complete and well-documented
 - All architectural constraints are addressed
 - Integration approach is sound and tested
 - Risks are identified and mitigated
 - Stakeholders approve the architectural approach
 
-### Integration with Release Management
-
-**Pre-Development Architecture Review is integrated with the release management process:**
-
-#### Gate 0: Architecture Review (New)
-- **Purpose**: Ensure architectural soundness before development begins
-- **Deliverables**: ADR audit, architecture proposal, integration plan
-- **Approval Criteria**: Architecture is sound, compatible, and approved
-- **Process**: Must be completed before any development work begins
-
-#### Integration with Existing Gates
-- **Gate 1**: Release Plan Approval - Architecture review results inform planning
-- **Gate 2**: Development Completion - Architecture decisions guide implementation
-- **Gate 3**: User Acceptance - Architecture supports user requirements
-- **Gate 4**: Release Approval - Architecture decisions are validated
-
-### Failure Criteria
-
-**Development must NOT proceed if:**
-- ADR audit reveals conflicting architectural decisions
-- Architecture proposal doesn't address all constraints
-- Integration approach is not validated
-- Performance or security impacts are not mitigated
-- Stakeholders do not approve the architectural approach
-
-### Continuous Improvement
-
-**After each release:**
-- Review architecture decisions for effectiveness
-- Update ADRs based on lessons learned
-- Refine architecture review process based on outcomes
-- Document architectural patterns that worked well
-
-This pre-development architecture review ensures that all new features are architecturally sound before development begins, preventing costly rework and maintaining system integrity.
-
 ## Decision Documentation Guidelines
 
 ### Architectural Decisions vs Implementation Details
 
 #### Decisions That Require ADR Documentation
-
 **Architectural decisions** are strategic choices that affect the overall system design, have long-term implications, or establish patterns that guide future development. These **MUST** be documented as ADRs:
 
 - **Technology Stack Choices**: Framework selection, programming language decisions, database choices
@@ -135,7 +185,6 @@ This pre-development architecture review ensures that all new features are archi
 - **Component Selection**: Library and tool choices that become part of the core architecture
 
 #### Implementation Details (No ADR Required)
-
 **Implementation details** are tactical choices that follow established architectural patterns and don't establish new architectural direction. These are documented in implementation plans and technical specifications, **NOT** as ADRs:
 
 - **Configuration Settings**: Specific component versions, build settings, environment variables
@@ -147,7 +196,6 @@ This pre-development architecture review ensures that all new features are archi
 - **Performance Optimization**: Specific caching rules, image optimization settings, minification
 
 #### Decision Classification Framework
-
 Use these questions to determine if a decision requires an ADR:
 
 1. **Does this establish a new architectural pattern or approach?**
@@ -170,13 +218,13 @@ Use these questions to determine if a decision requires an ADR:
    - **Yes** → ADR required
    - **No** → Implementation detail
 
-## Process
+## ADR Process
 
-### Documenting a Decision Log
+### Documenting Architectural Decisions
 
 #### ADR Creation Process
 1. **Identify the decision**: Clearly state what architectural choice needs to be made
-2. **Research existing ADRs**: Check `docs/Decision Log/` for related decisions
+2. **Research existing ADRs**: Check `docs/adr/` for related decisions
 3. **Analyze alternatives**: Consider multiple approaches with pros/cons
 4. **Document the decision**: Use the ADR template with full context and rationale
 5. **Update status**: Mark as approved, pending, or deprecated as appropriate
@@ -194,9 +242,31 @@ Use these questions to determine if a decision requires an ADR:
 3. **Consistency validation**: Ensure new changes align with established patterns
 4. **Documentation updates**: Update ADRs when decisions become deprecated or superseded
 
-## Templates
+## Integration with Development Process
 
-### Architecture Decision Record
+### Gate 0: Architecture Review (New)
+- **Purpose**: Ensure architectural soundness before development begins
+- **Deliverables**: ADR audit, architecture proposal, integration plan
+- **Approval Criteria**: Architecture is sound, compatible, and approved
+- **Process**: Must be completed before any development work begins
+
+### Integration with Existing Gates
+- **Gate 1**: Release Plan Approval - Architecture review results inform planning
+- **Gate 2**: Development Completion - Architecture decisions guide implementation
+- **Gate 3**: User Acceptance - Architecture supports user requirements
+- **Gate 4**: Release Approval - Architecture decisions are validated
+
+### Failure Criteria
+**Development must NOT proceed if**:
+- ADR audit reveals conflicting architectural decisions
+- Architecture proposal doesn't address all constraints
+- Integration approach is not validated
+- Performance or security impacts are not mitigated
+- Stakeholders do not approve the architectural approach
+
+## ADR Templates
+
+### Architecture Decision Record Template
 
 ```markdown
 ---
@@ -282,9 +352,34 @@ type: technical
 - **content**: Content strategy, organization, or presentation decisions
 - **process**: Development workflow, deployment, or operational decisions
 
+## Continuous Improvement
+
+### After Each Release
+- Review architecture decisions for effectiveness
+- Update ADRs based on lessons learned
+- Refine architecture review process based on outcomes
+- Document architectural patterns that worked well
+
+### Process Refinement
+- Update review criteria based on project experience
+- Improve documentation templates and checklists
+- Enhance integration with development process
+- Maintain lessons learned for future reviews
+
+## References
+
+### Project Documentation
+- **[Architecture Decision Records](@docs/adr)** - Project architectural decisions and rationale
+- **[Technical Specifications](@docs/technical_specifications.md)** - System architecture and component design
+- **[Development Process](@release-process.mdc)** - Development lifecycle and gates
+
+### External Resources
+- [Architecture Decision Records](https://adr.github.io/)
+- [Documenting Architecture Decisions](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)
+
 ---
 
-- **content**: Content strategy, organization, or presentation decisions
-- **process**: Development workflow, deployment, or operational decisions
-
+**Note**: This consolidated architecture standards file provides consistent command patterns while maintaining all architectural quality standards and decision frameworks. Use the primary commands to guide all architectural activities.
+description: Architecture standards and ADR process for Pomodux project
+alwaysApply: false
 ---

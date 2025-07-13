@@ -1,0 +1,266 @@
+# Release Process Rules
+
+## Core Release Process Principles
+
+### Process-Driven Release Philosophy
+- **Always work within a structured process**: All work (releases, features, bug fixes) must follow the defined process
+- **Approval gates are mandatory**: No work can proceed without passing through the required approval gates
+- **TDD is non-negotiable**: All code changes must follow Test-Driven Development process
+- **Documentation-driven progress**: All progress must be tracked and documented
+- **Quality gates are required**: Every change must meet quality standards before proceeding
+
+## Primary Commands
+
+### `Design a new feature`
+**Purpose**: Plan and architect new features with proper validation
+
+**Process**:
+1. **ADR Audit Phase**
+   - [ ] Review all existing ADRs in `docs/adr/` for relevance and constraints
+   - [ ] Identify architectural patterns that must be followed
+   - [ ] Check for conflicting decisions that might impact the new feature
+   - [ ] Document architectural constraints that the new feature must respect
+
+2. **Architecture Proposal Phase**
+   - [ ] Create architecture proposal for the new feature
+   - [ ] Identify any required third party libraries using architecture standards
+   - [ ] Define integration points with existing components
+   - [ ] Identify potential architectural impacts on current system
+   - [ ] Propose architectural patterns to be used
+   - [ ] Document any deviations from established patterns with rationale
+
+3. **Feature Planning Phase**
+   - [ ] Define work scope and requirements
+   - [ ] Plan technical approach and implementation strategy
+   - [ ] Define TDD approach and test strategy
+   - [ ] Establish measurable success criteria
+   - [ ] Create realistic timeline accounting for TDD and testing
+
+**Required Deliverables**:
+- ADR audit report
+- Proposed ADR's 
+- Stakeholder approval documentation
+
+### `Organize a release`
+**Purpose**: Plan and organize feature or features into a release 
+
+**Process**:
+1. **Release Planning Phase**
+   - [ ] Confirm which features from the backlog `docs/backlog/` should be part of a release.
+
+** If a feature is not documented in the backlog then do NOT proceed. **
+
+2. **Documentation Organization**
+   - [ ] Create/update release planning document in `docs/backlog/release-x.x.x.md`
+   - [ ] Ensure documentation follows project management rules
+
+3. **Gate 1 Preparation**
+   - [ ] Prepare technical specifications
+   - [ ] Plan TDD approach for all features
+   - [ ] Identify risks and mitigation strategies
+   - [ ] Obtain approval for release plan
+
+**Required Deliverables**:
+- Release planning document in backlog
+- Technical specifications and TDD plans
+- Risk assessment and mitigation strategies
+
+### `Implement a release`
+**Purpose**: Execute development with proper gates and quality controls
+
+**Process**:
+1. **Gate 1: Work Plan Approval** ✅ (Completed in "Organize a release")
+   - [ ] Work scope is defined and approved
+   - [ ] Technical approach is planned and documented
+   - [ ] TDD approach is planned for all work
+   - [ ] Success criteria are measurable and approved
+
+2. **Gate 2: Development Completion**
+   - [ ] All planned work is implemented and functional
+   - [ ] TDD process followed for all code changes
+   - [ ] Test coverage meets requirements (80%+ overall, 95%+ critical paths)
+   - [ ] Code quality standards met (linting, formatting, documentation)
+   - [ ] Integration tests passing for all components
+
+3. **Gate 3: Testing/Validation**
+   - [ ] Comprehensive testing completed (unit, integration, user acceptance)
+   - [ ] All issues found are resolved
+   - [ ] Acceptance criteria are met
+   - [ ] State persistence validated across process restarts
+   - [ ] Cross-platform compatibility verified
+
+4. **Gate 4: Final Approval (Releases Only)**
+   - [ ] Final testing completed in release environment
+   - [ ] Release notes prepared with all sections
+   - [ ] Installation procedures documented for all platforms
+   - [ ] Release artifacts ready for all platforms
+   - [ ] Documentation synchronized and consistent
+
+**Required Deliverables**:
+- Working implementation with comprehensive tests
+- Test results and coverage reports
+- User acceptance testing results
+- Complete release documentation
+- Release artifacts and installation instructions
+
+### `Execute a retrospective`
+**Purpose**: Analyze release outcomes and drive continuous improvement
+
+**Process**:
+1. **Lessons Learned Analysis**
+   - [ ] Review entire release lifecycle from planning to completion
+   - [ ] Identify technical, process, communication, and user experience lessons
+   - [ ] Identify patterns that could be improved
+   - [ ] Capture stakeholder and user feedback and insights
+
+2. **Documentation Audit**
+   - [ ] Review all files in `docs/` directory for consistency and completeness
+   - [ ] Verify release documents follow naming conventions
+   - [ ] Check ADRs for current relevance and status
+   - [ ] Validate process documentation is current
+   - [ ] Ensure project documentation reflects actual outcomes
+
+3. **Cursor Rules Audit**
+   - [ ] Review all cursor rules for relevance and effectiveness
+   - [ ] Check for conflicts or redundancies
+   - [ ] Verify rules support current development practices
+   - [ ] Assess rule clarity and usability
+   - [ ] Identify areas for improvement
+
+4. **Improvement Proposals**
+   - [ ] Propose process improvements based on lessons learned
+   - [ ] Suggest documentation updates and new documentation needs
+   - [ ] Recommend cursor rules updates for clarity and effectiveness
+   - [ ] Identify technical improvements and architectural enhancements
+   - [ ] Prioritize changes based on impact and effort
+
+**Required Deliverables**:
+- Lessons learned summary and user feedback document
+- Documentation audit report with findings
+- Cursor rules audit report with recommendations
+- Specific update proposals with rationale and implementation steps
+
+## TDD Integration Requirements
+
+### Test-Driven Development Process
+**For every code change**:
+
+1. **Write failing test first (Red)**:
+   - Write a test that defines the desired behavior
+   - Test should fail initially (Red phase)
+   - Test should be specific and focused
+
+2. **Write minimal code to pass (Green)**:
+   - Write the minimal code needed to make the test pass
+   - Don't add extra functionality yet
+   - Focus on making the test green
+
+3. **Refactor while keeping tests passing**:
+   - Clean up the code while keeping tests passing
+   - Improve design, readability, and performance
+   - Ensure all tests still pass
+
+### Test Coverage Requirements
+- **Overall Coverage**: Minimum 80% for all code
+- **Critical Paths**: Minimum 95% for core functionality
+- **Public APIs**: 100% coverage for all public interfaces
+- **Integration Tests**: Test component interactions and workflows
+
+## Quality Assurance Standards
+
+### Code Quality Requirements
+- **Linting**: All code must pass project linting rules
+- **Formatting**: All code must follow project formatting standards
+- **Documentation**: All public functions must be documented
+- **Error Handling**: Proper error handling and validation
+
+### Testing Requirements
+- **Unit Tests**: Comprehensive unit test coverage
+- **Integration Tests**: Test component interactions
+- **Performance Tests**: Benchmark critical paths
+- **User Acceptance Tests**: Validate user workflows
+- **Regression Tests**: Ensure no regression in existing functionality
+- **Cross-Platform Tests**: Validate functionality across supported platforms
+
+### Documentation Requirements
+- **Technical Documentation**: Keep architecture docs current
+- **User Documentation**: Update user guides and examples
+- **API Documentation**: Document all public APIs
+- **Release Notes**: Prepare comprehensive release notes
+- **GitHub Issues**: Update issue status and link to documentation
+- **Documentation Synchronization**: Update all docs simultaneously
+
+## Risk Management
+
+### Risk Assessment
+**For each work item, assess**:
+- **Technical Risks**: Implementation challenges and solutions
+- **Quality Risks**: Quality assurance risks and controls
+- **User Acceptance Risks**: User experience risks and validation
+- **Process Risks**: Workflow and approval gate risks
+- **Dependency Risks**: External dependencies and integration risks
+
+### Risk Mitigation
+- **Early identification**: Identify risks early in planning
+- **Contingency planning**: Develop backup plans for high-risk items
+- **Regular monitoring**: Monitor risks throughout development
+- **Stakeholder communication**: Keep stakeholders informed of risks
+- **Process adaptation**: Adjust process when risks materialize
+
+## Continuous Process Improvement
+
+### Process Evolution Framework
+**The development process should continuously evolve based on experience**:
+
+#### After Each Release
+1. **Conduct Retrospective**: Use `Execute a retrospective` command
+2. **Document Lessons**: Capture specific lessons learned
+3. **Update Process**: Modify this document with new insights
+4. **Implement Changes**: Apply process improvements to next release
+
+#### Process Improvement Areas
+- **Gate Requirements**: Refine gate criteria based on experience
+- **Documentation Standards**: Improve documentation requirements
+- **Testing Strategies**: Enhance testing approaches
+- **Quality Metrics**: Adjust quality standards and measurements
+- **Workflow Efficiency**: Streamline development workflows
+
+## Integration with Other Rules
+
+### Documentation Integration
+- All documentation organization rules are defined in @project-management.mdc
+- Follow documentation folder structure and naming conventions
+- Maintain clear separation between backlog and releases
+
+### Architecture Integration
+- All architecture standards are defined in @architecture-standards.mdc
+- Follow ADR philosophy and decision documentation guidelines
+- Validate component selection and integration approaches
+
+### Code Standards Integration
+- All Go development standards are defined in @go-code-standards.mdc
+- Follow established coding patterns and conventions
+- Maintain consistent code quality and testing standards
+
+## References
+
+### Project Documentation
+- **[Release Management Guide](@docs/release-management.md)** - Comprehensive release management framework
+- **[Current Release Tracker](@docs/current-release.md)** - Current release progress and status
+- **[Implementation Roadmap](@docs/implementation-roadmap.md)** - Technical implementation plan
+- **[Backlog](@docs/backlog.md)** - Feature backlog organized by release
+- **[Release Notes](@RELEASE_NOTES.md)** - Complete release history
+- **[Architecture Decision Records](@docs/adr)** - Project architectural decisions
+
+### External Resources
+- [Test-Driven Development by Example](https://www.amazon.com/Test-Driven-Development-Kent-Beck/dp/0321146530)
+- [Continuous Delivery](https://www.amazon.com/Continuous-Delivery-Deployment-Automation-Addison-Wesley/dp/0321601912)
+- [Agile Release Planning](https://www.scrum.org/resources/blog/agile-release-planning)
+
+---
+
+**Note**: This consolidated development process provides consistent command patterns while maintaining all quality standards and process controls. Use the primary commands to guide all development activities.
+
+description: Release process and development workflow for Pomodux project
+alwaysApply: true
+---
