@@ -28,6 +28,18 @@ type Config struct {
 		Sound   bool   `yaml:"sound"`
 		Message string `yaml:"message"`
 	} `yaml:"notifications"`
+
+	Plugins struct {
+		Directory string `yaml:"directory"`
+	} `yaml:"plugins"`
+
+	Logging struct {
+		Level      string `yaml:"level"`
+		Format     string `yaml:"format"`
+		Output     string `yaml:"output"`
+		LogFile    string `yaml:"log_file"`
+		ShowCaller bool   `yaml:"show_caller"`
+	} `yaml:"logging"`
 }
 
 // DefaultConfig returns a new Config with default values
@@ -54,7 +66,30 @@ func DefaultConfig() *Config {
 	config.Notifications.Sound = false
 	config.Notifications.Message = "Timer completed!"
 
+	// Plugins directory default
+	config.Plugins.Directory = defaultPluginsDir()
+
+	// Logging defaults
+	config.Logging.Level = "info"
+	config.Logging.Format = "text"
+	config.Logging.Output = "file" // Changed from "console" to "file"
+	config.Logging.LogFile = ""
+	config.Logging.ShowCaller = false
+
 	return config
+}
+
+// defaultPluginsDir returns the default plugins directory (XDG_CONFIG_HOME/pomodux/plugins)
+func defaultPluginsDir() string {
+	configHome := os.Getenv("XDG_CONFIG_HOME")
+	if configHome == "" {
+		homeDir, err := os.UserHomeDir()
+		if err != nil {
+			return "./plugins" // fallback
+		}
+		configHome = filepath.Join(homeDir, ".config")
+	}
+	return filepath.Join(configHome, "pomodux", "plugins")
 }
 
 // Load loads configuration from the default XDG location
@@ -82,6 +117,11 @@ func Load() (*Config, error) {
 	config := DefaultConfig()
 	if err := yaml.Unmarshal(data, config); err != nil {
 		return nil, fmt.Errorf("failed to parse config file: %w", err)
+	}
+
+	// Ensure plugins directory is set
+	if config.Plugins.Directory == "" {
+		config.Plugins.Directory = defaultPluginsDir()
 	}
 
 	// Validate configuration
@@ -117,6 +157,52 @@ func Save(config *Config) error {
 	return nil
 }
 
+// SaveToPath saves configuration to a specific path
+func SaveToPath(config *Config, path string) error {
+	// Ensure directory exists
+	configDir := filepath.Dir(path)
+	if err := os.MkdirAll(configDir, 0755); err != nil {
+		return fmt.Errorf("failed to create config directory: %w", err)
+	}
+
+	data, err := yaml.Marshal(config)
+	if err != nil {
+		return fmt.Errorf("failed to marshal config: %w", err)
+	}
+
+	if err := os.WriteFile(path, data, 0644); err != nil {
+		return fmt.Errorf("failed to write config file: %w", err)
+	}
+
+	return nil
+}
+
+// LoadFromPath loads configuration from a specific path
+func LoadFromPath(path string) (*Config, error) {
+	// Check if file exists
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		return nil, fmt.Errorf("config file does not exist: %s", path)
+	}
+
+	// Load existing config
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read config file: %w", err)
+	}
+
+	config := DefaultConfig()
+	if err := yaml.Unmarshal(data, config); err != nil {
+		return nil, fmt.Errorf("failed to parse config file: %w", err)
+	}
+
+	// Validate configuration
+	if err := Validate(config); err != nil {
+		return nil, fmt.Errorf("invalid configuration: %w", err)
+	}
+
+	return config, nil
+}
+
 // getConfigPath returns the XDG-compliant configuration file path
 func getConfigPath() (string, error) {
 	configHome := os.Getenv("XDG_CONFIG_HOME")
@@ -147,6 +233,10 @@ func Validate(config *Config) error {
 
 	if config.TUI.Theme == "" {
 		return fmt.Errorf("theme cannot be empty")
+	}
+
+	if config.Plugins.Directory == "" {
+		return fmt.Errorf("plugins directory cannot be empty")
 	}
 
 	return nil

@@ -5,7 +5,6 @@ import (
 	"context"
 	"fmt"
 	"os"
-	"os/exec"
 	"os/signal"
 	"strings"
 	"sync"
@@ -13,6 +12,9 @@ import (
 	"time"
 
 	"golang.org/x/term"
+
+	"github.com/rsmacapinlac/pomodux/internal/logger"
+	"github.com/rsmacapinlac/pomodux/internal/plugin"
 )
 
 // Timer represents a timer instance
@@ -25,13 +27,22 @@ type Timer struct {
 	elapsed        time.Duration
 	stateManager   *StateManager
 	historyManager *HistoryManager
+	pluginManager  *plugin.PluginManager
 }
 
-// NewTimer creates a new Timer instance.
+// NewTimer creates a new timer instance
 func NewTimer() *Timer {
 	return &Timer{
 		status: StatusIdle,
+		mu:     sync.Mutex{},
 	}
+}
+
+// NewTimerWithPluginManager creates a new timer instance with plugin manager
+func NewTimerWithPluginManager(pluginManager *plugin.PluginManager) *Timer {
+	timer := NewTimer()
+	timer.pluginManager = pluginManager
+	return timer
 }
 
 // NewTimerWithManagers creates a new Timer instance with state and history managers.
@@ -80,6 +91,20 @@ func (t *Timer) StartWithType(duration time.Duration, sessionType SessionType) e
 		t.stateManager.SaveState(t)
 	}
 
+	// Emit timer started event for plugins
+	if t.pluginManager != nil {
+		event := plugin.Event{
+			Type:      plugin.EventTimerStarted,
+			Timestamp: time.Now(),
+			Data: map[string]interface{}{
+				"session_type": string(t.sessionType),
+				"duration":     int(t.duration.Seconds()),
+				"start_time":   t.startTime.Unix(),
+			},
+		}
+		t.pluginManager.EmitEvent(event)
+	}
+
 	return nil
 }
 
@@ -111,6 +136,25 @@ func (t *Timer) Stop() error {
 	if t.stateManager != nil {
 		t.stateManager.SaveState(t)
 	}
+
+	// Emit timer stopped event for plugins
+	if t.pluginManager != nil {
+		event := plugin.Event{
+			Type:      plugin.EventTimerStopped,
+			Timestamp: time.Now(),
+			Data: map[string]interface{}{
+				"session_type": string(t.sessionType),
+				"duration":     int(t.duration.Seconds()),
+				"start_time":   t.startTime.Unix(),
+				"end_time":     time.Now().Unix(),
+				"completed":    t.status == StatusCompleted,
+			},
+		}
+		t.pluginManager.EmitEvent(event)
+	}
+
+	logger.Info("Timer stopped", map[string]interface{}{"session_type": t.sessionType, "duration": t.duration})
+
 	return nil
 }
 
@@ -127,6 +171,24 @@ func (t *Timer) Pause() error {
 	if t.stateManager != nil {
 		t.stateManager.SaveState(t)
 	}
+
+	// Emit timer paused event for plugins
+	if t.pluginManager != nil {
+		event := plugin.Event{
+			Type:      plugin.EventTimerPaused,
+			Timestamp: time.Now(),
+			Data: map[string]interface{}{
+				"session_type": string(t.sessionType),
+				"duration":     int(t.duration.Seconds()),
+				"start_time":   t.startTime.Unix(),
+				"elapsed":      int(t.elapsed.Seconds()),
+			},
+		}
+		t.pluginManager.EmitEvent(event)
+	}
+
+	logger.Info("Timer paused", map[string]interface{}{"session_type": t.sessionType, "duration": t.duration})
+
 	return nil
 }
 
@@ -143,6 +205,24 @@ func (t *Timer) Resume() error {
 	if t.stateManager != nil {
 		t.stateManager.SaveState(t)
 	}
+
+	// Emit timer resumed event for plugins
+	if t.pluginManager != nil {
+		event := plugin.Event{
+			Type:      plugin.EventTimerResumed,
+			Timestamp: time.Now(),
+			Data: map[string]interface{}{
+				"session_type": string(t.sessionType),
+				"duration":     int(t.duration.Seconds()),
+				"start_time":   t.startTime.Unix(),
+				"elapsed":      int(t.elapsed.Seconds()),
+			},
+		}
+		t.pluginManager.EmitEvent(event)
+	}
+
+	logger.Info("Timer resumed", map[string]interface{}{"session_type": t.sessionType, "duration": t.duration})
+
 	return nil
 }
 
@@ -278,12 +358,20 @@ func (t *Timer) SetHistoryManager(historyManager *HistoryManager) {
 	t.historyManager = historyManager
 }
 
+// SetPluginManager sets the plugin manager for this timer
+func (t *Timer) SetPluginManager(pluginManager *plugin.PluginManager) {
+	t.mu.Lock()
+	defer t.mu.Unlock()
+	t.pluginManager = pluginManager
+}
+
 // StartPersistent starts a timer and blocks until completion, with live progress and keypress controls.
 func (t *Timer) StartPersistent(duration time.Duration, sessionType SessionType) error {
 	if err := t.StartWithType(duration, sessionType); err != nil {
 		return err
 	}
 
+	logger.Info("Timer started", map[string]interface{}{"duration": duration, "session_type": sessionType})
 	fmt.Printf("Timer started for %v\n", duration)
 	fmt.Printf("Session type: %s\n", sessionType)
 	fmt.Println("Press 'p' to pause, 'r' to resume, 'q'/'s' to stop, Ctrl+C to exit.")
@@ -411,6 +499,7 @@ func (t *Timer) StartPersistent(duration time.Duration, sessionType SessionType)
 					percentage,
 					formatDuration(remaining),
 					sessionType)
+				logger.Debug("Timer progress", map[string]interface{}{"progress": progress, "remaining": remaining, "elapsed": elapsed})
 				if remaining <= 0 {
 					break
 				}
@@ -453,34 +542,40 @@ func (t *Timer) handleCompletion() {
 		t.historyManager.AddSession(session)
 	}
 
-	// Send notification
-	sendNotification(t.sessionType, "completed")
+	// Emit timer completion event for plugins to handle notifications
+	if t.pluginManager != nil {
+		logger.Debug("Emitting timer_completed event")
+		event := plugin.Event{
+			Type:      plugin.EventTimerCompleted,
+			Timestamp: time.Now(),
+			Data: map[string]interface{}{
+				"session_type": string(t.sessionType),
+				"duration":     int(t.duration.Seconds()),
+				"start_time":   t.startTime.Unix(),
+				"end_time":     time.Now().Unix(),
+				"completed":    true,
+			},
+		}
+		t.pluginManager.EmitEvent(event)
+		logger.Debug("timer_completed event emitted")
 
+		// Give the event processing goroutine time to process the event
+		time.Sleep(100 * time.Millisecond)
+	} else {
+		logger.Debug("No plugin manager available for timer_completed event")
+	}
+
+	logger.Info("Timer completed", map[string]interface{}{"session_type": t.sessionType, "duration": t.duration})
 	fmt.Print("Timer completed! Session recorded.")
 }
 
 // sendNotification sends a system notification based on session type.
+// DEPRECATED: Use plugin system for notifications instead
 func sendNotification(sessionType SessionType, status string) {
-	var title, message string
-
-	switch sessionType {
-	case SessionTypeWork:
-		title = "Work Session Complete"
-		message = "Your work session has finished. Time for a break!"
-	case SessionTypeBreak:
-		title = "Break Complete"
-		message = "Break time is over. Ready to work?"
-	case SessionTypeLongBreak:
-		title = "Long Break Complete"
-		message = "Long break finished. Time to get back to work!"
-	default:
-		title = "Timer Complete"
-		message = "Your timer session has finished."
-	}
-
-	// Try to send system notification
-	cmd := exec.Command("notify-send", title, message)
-	cmd.Run() // Ignore errors - notification is optional
+	// This function is deprecated and will be removed
+	// Notifications are now handled by the plugin system
+	logger.Warn("DEPRECATED: sendNotification called - use plugin system", map[string]interface{}{"session_type": sessionType, "status": status})
+	fmt.Printf("DEPRECATED: sendNotification called for %s %s - use plugin system\n", sessionType, status)
 }
 
 // formatDuration formats a duration in a human-readable format

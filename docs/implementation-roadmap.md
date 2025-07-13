@@ -11,7 +11,7 @@ The Pomodux implementation is divided into **4 releases**, each building upon th
 - **Release 0.1.0**: Project Foundation & Core Timer Engine ✅ **COMPLETE**
 - **Release 0.2.0**: CLI Interface & Basic Functionality ✅ **COMPLETE**
 - **Release 0.2.1**: Persistent Timer with Keypress Controls ✅ **COMPLETE**
-- **Release 0.3.0**: Terminal UI (TUI) Development 📋 **PLANNED**
+- **Release 0.3.0**: CLI Improvements & Plugin System Foundation 🔄 **IN DEVELOPMENT**
 - **Release 0.4.0**: Plugin System & Advanced Features 📋 **PLANNED**
 
 ### 1.2 Success Criteria
@@ -263,40 +263,22 @@ type KeypressHandler struct {
 - **Dependencies**: Release 0.2.0 completion
 - **Risk Level**: Medium
 
-## 5.0 Release 0.3.0: Terminal UI (TUI) Development
+## 5.0 Release 0.3.0: CLI Improvements & Plugin System Foundation ✅
 
 ### 5.1 Objectives
-- Implement rich terminal user interface using Bubbletea
-- Add progress bars and visual feedback
-- Implement keyboard shortcuts and navigation
-- Add theme system and customization
+- Implement enhanced CLI status, history, and config commands (proof-of-concept complete)
+- Validate plugin system foundation (proof-of-concept complete)
 
 ### 5.2 Deliverables
+- [x] Enhanced CLI status reporting (plain/JSON)
+- [x] Improved session history display (filtering, stats, export)
+- [x] Better configuration management (validation, templates, backup/restore)
+- [x] Plugin system proof-of-concept (Lua integration, event hooks, example plugins)
 
-#### 5.2.1 TUI Framework
-- [ ] Set up Bubbletea TUI framework
-- [ ] Implement main application model
-- [ ] Create component-based UI architecture
-- [ ] Add terminal resize handling
-
-#### 5.2.2 UI Components
-- [ ] Timer display component with progress bar
-- [ ] Status information panel
-- [ ] Session history display
-- [ ] Configuration panel
-- [ ] Help and navigation overlay
-
-#### 5.2.3 User Interaction
-- [ ] Keyboard shortcut system
-- [ ] Input handling and validation
-- [ ] Navigation between UI sections
-- [ ] Modal dialogs for configuration
-
-#### 5.2.4 Visual Design
-- [ ] Theme system with multiple themes
-- [ ] Progress bar animations
-- [ ] Status indicators and icons
-- [ ] Responsive layout system
+### 5.3 Next Steps
+- Implement advanced CLI features (real-time updates, formatting)
+- Integrate plugin system with CLI and core engine
+- Prepare for Gate 1 approval and user testing
 
 ### 5.3 Technical Implementation
 

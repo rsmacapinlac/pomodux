@@ -1,8 +1,3 @@
----
-description: Implementing or building a release, Changing existing functionality, Fixing defects or bugs
-globs: 
-alwaysApply: false
----
 # Development Process Rules for Pomodux
 
 ## Core Development Process Principles
@@ -432,6 +427,18 @@ alwaysApply: false
 - **Process Update**: Establish clear document hierarchy and supersession rules
 - **Implementation**: Archive or delete outdated documents, maintain clear document status
 - **Reference**: See [Release Management - Section 3.0](mdc:docs/release-management.md#30-release-documentation-standards) for complete standards
+
+### External Resources
+- [Test-Driven Development by Example](mdc:https:/www.amazon.com/Test-Driven-Development-Kent-Beck/dp/0321146530)
+- [Continuous Delivery](mdc:https:/www.amazon.com/Continuous-Delivery-Deployment-Automation-Addison-Wesley/dp/0321601912)
+- [Agile Release Planning](mdc:https:/www.scrum.org/resources/blog/agile-release-planning)
+
+## Documentation Workflow Integration
+- All documentation organization rules for backlog and releases are defined in `.cursor/rules/docs-folder.mdc`.
+- When a release is completed, all related backlog items must be moved to the releases folder and not duplicated in backlog.
+- Always follow the documentation organization rules for moving, naming, and cross-referencing release and backlog files.
+
+For full details, see `.cursor/rules/docs-folder.mdc`.
 
 ### External Resources
 - [Test-Driven Development by Example](mdc:https:/www.amazon.com/Test-Driven-Development-Kent-Beck/dp/0321146530)

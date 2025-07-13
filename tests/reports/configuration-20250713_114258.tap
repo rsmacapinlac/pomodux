@@ -1,0 +1,33 @@
+1..14
+ok 1 config show command should succeed
+not ok 2 config show should display work duration
+# (in test file tests/uat/automated/bats/configuration.bats, line 59)
+#   `[[ "$output" =~ "DefaultWorkDuration" ]]' failed
+not ok 3 config show should display break duration
+# (in test file tests/uat/automated/bats/configuration.bats, line 65)
+#   `[[ "$output" =~ "DefaultBreakDuration" ]]' failed
+not ok 4 config show should display long break duration
+# (in test file tests/uat/automated/bats/configuration.bats, line 71)
+#   `[[ "$output" =~ "DefaultLongBreakDuration" ]]' failed
+not ok 5 config set command should succeed with valid work duration
+# (in test file tests/uat/automated/bats/configuration.bats, line 76)
+#   `[ "$status" -eq 0 ]' failed
+not ok 6 config set command should succeed with valid break duration
+# (in test file tests/uat/automated/bats/configuration.bats, line 81)
+#   `[ "$status" -eq 0 ]' failed
+not ok 7 config set command should succeed with valid long break duration
+# (in test file tests/uat/automated/bats/configuration.bats, line 86)
+#   `[ "$status" -eq 0 ]' failed
+ok 8 config set should fail with invalid work duration
+ok 9 config set should fail with invalid break duration
+ok 10 config set should fail with invalid long break duration
+ok 11 config set should fail with unknown setting
+not ok 12 config set should accept various duration formats
+# (in test file tests/uat/automated/bats/configuration.bats, line 112)
+#   `[ "$status" -eq 0 ]' failed
+not ok 13 config show should display JSON format
+# (in test file tests/uat/automated/bats/configuration.bats, line 126)
+#   `[[ "$output" =~ "{" ]]' failed
+not ok 14 config set should handle edge case durations
+# (in test file tests/uat/automated/bats/configuration.bats, line 133)
+#   `[ "$status" -eq 0 ]' failed

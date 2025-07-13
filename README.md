@@ -146,7 +146,7 @@ Pomodux follows a structured 4-gate approval process:
 ### Issue Management
 - Use GitHub issue templates for bug reports and feature requests
 - Follow TDD (Test-Driven Development) approach
-- Reference the backlog in `docs/backlog.md`
+- Reference the backlog in `docs/backlog/` for planning and requirements
 - Link issues to appropriate release milestones
 
 ### Code Standards

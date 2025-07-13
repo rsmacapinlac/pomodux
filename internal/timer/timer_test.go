@@ -1,10 +1,30 @@
 package timer
 
 import (
+	"os"
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/rsmacapinlac/pomodux/internal/logger"
 )
+
+// TestMain initializes the logger for all tests in this package
+func TestMain(m *testing.M) {
+	// Initialize logger for tests
+	logConfig := &logger.Config{
+		Level:      logger.LogLevelDebug,
+		Format:     "text",
+		Output:     "console",
+		ShowCaller: false,
+	}
+	if err := logger.Init(logConfig); err != nil {
+		panic("Failed to initialize logger for tests: " + err.Error())
+	}
+
+	// Run tests
+	os.Exit(m.Run())
+}
 
 func TestTimerLifecycle(t *testing.T) {
 	// Clear any existing state for testing

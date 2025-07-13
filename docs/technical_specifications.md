@@ -106,7 +106,7 @@ The Pomodux terminal timer application follows a modular architecture with clear
 
 #### 2.3.1 Command Structure
 - **Root Commands**: Main application commands (start, break, long-break)
-- **Subcommands**: Specialized operations (config, history, stats)
+- **Subcommands**: Specialized operations (config, history, stats, status)
 - **Flags and Options**: Command-line parameters and configuration
 - **Help System**: Comprehensive help and usage documentation
 
@@ -115,6 +115,24 @@ The Pomodux terminal timer application follows a modular architecture with clear
 - **Script Support**: Command-line automation and scripting
 - **Output Formats**: Text, JSON, and structured output options
 - **Error Handling**: Clear error messages and exit codes
+
+#### 2.3.3 Enhanced CLI Features (0.3.0)
+- **Status Command**: `pomodux status` shows detailed timer/session info (status, type, time remaining, progress, start/end times)
+  - `--json` flag outputs machine-readable status for scripting
+- **History Command**: `pomodux history` displays session history with:
+  - Filtering by date, session type
+  - Statistics summary (total time, completed sessions, completion rate)
+  - Export options: `--json`, `--csv`, `--export <file>`
+- **Config Command**: `pomodux config` supports:
+  - Validation (`--validate`)
+  - Nested key setting (`set timer.default_work_duration 25m`)
+  - Templates for common workflows (`template productivity`)
+  - Backup/restore (`backup`, `restore`)
+  - Output as JSON (`show --json`)
+
+**Rationale**: These enhancements improve usability, automation, and user confidence in configuration and history management. They also lay the foundation for plugin and scripting integration.
+
+**Testing**: All features are covered by CLI tests and manual verification.
 
 ### 2.4 Plugin System
 
@@ -129,6 +147,16 @@ The Pomodux terminal timer application follows a modular architecture with clear
 - **Hook Registration**: Plugin hook registration and management
 - **Event Propagation**: Reliable event delivery to plugins
 - **Hook Lifecycle**: Hook loading, execution, and cleanup
+
+#### 2.4.3 Built-in Plugins
+- **Mako Notification Plugin**: Replaces hardcoded `notify-send` with mako notifications
+  - Supports all timer events (start, pause, resume, complete, stop)
+  - Configurable notification options (urgency, category, icon)
+  - Fallback to `notify-send` if mako is not available
+  - Session-type specific messages and styling
+- **Example Plugins**: Notification and statistics plugins for demonstration
+
+**Rationale**: Moving notifications to plugins makes the system more extensible and allows users to customize notification behavior without modifying core code.
 
 ## 3.0 Data Flow Architecture
 

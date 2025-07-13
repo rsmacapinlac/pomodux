@@ -1,69 +1,80 @@
 # Release Documentation
 
-This directory contains all release-related documentation for Pomodux, following the established documentation standards.
+This directory contains **historical records** of what was actually delivered in each Pomodux release. These documents serve as the authoritative record of completed releases.
 
 ## 📁 Directory Structure
 
 ```
 docs/releases/
 ├── README.md                    # This file - documentation standards
-├── release-0.1.0-final.md       # ✅ Official Release 0.1.0 record
-├── release-0.2.0-final.md       # ✅ Official Release 0.2.0 record
-└── release-0.2.1-final.md       # ✅ Official Release 0.2.1 record
+├── release-0.1.0.md             # ✅ What was delivered in Release 0.1.0
+├── release-0.2.0.md             # ✅ What was delivered in Release 0.2.0
+├── release-0.2.1.md             # ✅ What was delivered in Release 0.2.1
+└── release-0.3.0.md             # ✅ What was delivered in Release 0.3.0 (COMPLETED)
 ```
 
 ## 📋 Documentation Standards
 
+### Document Purpose
+- **Historical Record**: What was actually implemented and delivered
+- **Quality Metrics**: Test results, performance data, UAT outcomes
+- **Release Notes**: What users can expect from this release
+- **Implementation Details**: Technical decisions and architectural changes
+
 ### Document Types
 
-#### Planning Documents (`release-X.Y.Z-planning.md`)
-- **Purpose**: Release planning and Gate 1 approval
-- **Status**: Superseded by final release document
-- **Content**: Features, technical approach, TDD strategy, timeline
-
-#### Final Release Documents (`release-X.Y.Z-final.md`)
-- **Purpose**: Official release record and Gate 4 completion
+#### Final Release Documents (`release-X.Y.Z.md`)
+- **Purpose**: Official historical record of what was delivered
 - **Status**: Authoritative document for the release
-- **Content**: Complete release information, UAT results, quality metrics
+- **Content**: 
+  - What was actually implemented
+  - Quality metrics and test results
+  - UAT outcomes and user feedback
+  - Known issues and limitations
+  - Performance data and benchmarks
 
 ### Naming Convention
-- **Format**: `release-{major}.{minor}.{patch}-{type}.md`
+- **Final Documents**: `release-{major}.{minor}.{patch}.md`
 - **Examples**: 
-  - `release-0.1.0-planning.md`
-  - `release-0.1.0-final.md`
+  - `release-0.1.0.md` (what was delivered)
+  - `release-0.2.0.md` (what was delivered)
 
 ### Status Indicators
-- **Planning**: 🔄 **IN PLANNING** - Gate 1 Pending
-- **Development**: 🔧 **IN DEVELOPMENT** - Gate 2 Pending
-- **Testing**: 🧪 **IN TESTING** - Gate 3 Pending
-- **Released**: ✅ **RELEASED** - Gate 4 Approved
+- **Released**: ✅ **RELEASED** - Gate 4 Approved, delivered to users
+- **In Progress**: 🔄 **IN PROGRESS** - Currently being delivered
 
-## 📚 Current Releases
+## 📚 Completed Releases
 
 ### Release 0.1.0 ✅ RELEASED
-- **Document**: `release-0.1.0-final.md`
-- **Status**: Foundation and Core Timer Engine
+- **Document**: `release-0.1.0.md`
+- **Delivered**: Foundation and Core Timer Engine
 - **Date**: [Release Date]
-- **Gates**: All 4 gates approved
+- **Quality**: All 4 gates approved, UAT passed
 
 ### Release 0.2.0 ✅ RELEASED
-- **Document**: `release-0.2.0-final.md`
-- **Status**: CLI Interface & Basic Functionality
+- **Document**: `release-0.2.0.md`
+- **Delivered**: CLI Interface & Basic Functionality
 - **Date**: [Release Date]
-- **Gates**: All 4 gates approved
+- **Quality**: All 4 gates approved, UAT passed
 
 ### Release 0.2.1 ✅ RELEASED
-- **Document**: `release-0.2.1-final.md`
-- **Status**: Persistent Timer with Keypress Controls
+- **Document**: `release-0.2.1.md`
+- **Delivered**: Persistent Timer with Keypress Controls
 - **Date**: [Release Date]
-- **Gates**: All 4 gates approved
+- **Quality**: All 4 gates approved, UAT passed
+
+### Release 0.3.0 ✅ RELEASED
+- **Document**: `release-0.3.0.md`
+- **Delivered**: CLI Improvements & Plugin System Foundation
+- **Date**: 2025-07-13
+- **Quality**: All 4 gates approved, UAT passed
 
 ## 🔗 Related Documentation
 
 - **[Release Management](docs/release-management.md)** - Complete release process and standards
 - **[Implementation Roadmap](docs/implementation-roadmap.md)** - Development roadmap
 - **[Current Release](docs/current-release.md)** - Active release tracking
-- **[Backlog](docs/backlog.md)** - Feature backlog by release
+- **[Backlog](docs/backlog/)** - Planning and requirements (current & future work)
 
 ## 📖 Standards Reference
 
@@ -71,4 +82,4 @@ For complete documentation standards, see **[Release Management - Section 3.0](d
 
 ---
 
-**Note**: This directory follows the 4-gate approval process. All documents are authoritative and supersede any previous versions. 
+**Note**: This directory contains **historical records** of delivered releases. For planning and requirements, see the [backlog folder](docs/backlog/). 

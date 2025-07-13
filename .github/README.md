@@ -134,7 +134,7 @@ Use this template for tracking User Acceptance Testing.
 
 ## Backlog Management
 
-The main backlog is maintained in `docs/backlog.md` and includes:
+The main backlog is maintained in `docs/backlog/` and includes:
 
 - **Epics** organized by release
 - **User Stories** with acceptance criteria
@@ -143,7 +143,7 @@ The main backlog is maintained in `docs/backlog.md` and includes:
 - **Non-functional requirements**
 
 ### Creating Issues from Backlog
-1. Reference the backlog item in `docs/backlog.md`
+1. Reference the backlog item in `docs/backlog/`
 2. Use the appropriate template
 3. Copy relevant information from the backlog
 4. Add issue-specific details and context
