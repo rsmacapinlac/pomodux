@@ -1,0 +1,239 @@
+# Refine a Feature Process
+
+## Overview
+
+This process defines how to refine backlog features to meet a gold standard. All backlog features should follow this comprehensive structure to ensure thorough planning, ADR compliance, and implementation readiness.
+
+## Gold Standard Template Structure
+
+### 1. Feature Header & Status
+```markdown
+# [Feature Name] 📋 PLANNED
+
+> **Note**: This backlog item follows the 4-gate approval process. Issues can be created from this backlog using the GitHub issue templates in `.github/ISSUE_TEMPLATE/`.
+
+## Feature Status
+- **Status**: 📋 PLANNED
+- **Priority**: [Low/Medium/High]
+- **Component**: [Component Name]
+- **Dependencies**: [Release dependencies]
+```
+
+### 2. Feature Description
+- **Clear, concise description** of what the feature does
+- **Include key constraints** (performance, compatibility, etc.)
+- **Reference existing systems** the feature builds upon
+
+### 3. User Stories
+```markdown
+## User Story
+
+[Primary user story following "As a [user], I want [feature] so that [benefit]" format]
+
+## Enhanced User Stories
+
+- **As a [user type], I want [specific capability]** so that [specific benefit]
+- **As a [user type], I want [specific capability]** so that [specific benefit]
+- **As a [user type], I want [specific capability]** so that [specific benefit]
+```
+
+**Requirements:**
+- **Primary user story** must be clear and focused
+- **Enhanced user stories** should cover different user types and edge cases
+- **Include plugin developer stories** if feature affects plugin system
+- **Consider cross-platform implications** for CLI/TUI features
+
+### 4. Acceptance Criteria
+```markdown
+## Acceptance Criteria
+
+### Core Functionality
+- [ ] [Specific, testable requirement]
+- [ ] [Specific, testable requirement]
+
+### Non-functional requirements
+- [ ] [Performance, security, compatibility requirements]
+- [ ] [Cross-platform, backward compatibility requirements]
+
+### [Specific System] Integration (ADR Compliance)
+- [ ] [Integration requirements with existing systems]
+- [ ] [API stability requirements]
+```
+
+**Requirements:**
+- **Group by category** (Core Functionality, Non-functional, Integration)
+- **Make items testable** - each should be verifiable
+- **Include ADR compliance** references where applicable
+- **Cover performance, security, compatibility** aspects
+
+### 5. Proposed Technical Design (not final)
+```markdown
+### [Design Aspect]
+- **Key point**: Brief explanation
+- **Key point**: Brief explanation
+- **Key point**: Brief explanation
+```
+
+**Requirements:**
+- **Include architecture considerations** relevant to the feature
+- **Reference existing patterns** from the codebase
+- **Consider integration points** with existing systems
+- **Address performance implications**
+
+### 6. Risk Assessment
+```markdown
+## Risk Assessment
+
+### [Risk Level]
+- **[Risk Name]**: [Description of risk]
+  - **Mitigation**: [Specific mitigation strategy]
+```
+
+**Requirements:**
+- **Categorize risks** by level (High/Medium/Low)
+- **Provide specific mitigations** for each risk
+- **Consider technical, user experience, and process risks**
+- **Reference ADR compliance** where relevant
+
+### 7. Implementation Notes (Proposed not final)
+```markdown
+## Implementation Notes
+
+[Context about how this feature builds on existing systems]
+
+### Key Implementation Decisions
+
+1. **[Decision Area]**: [Specific decision and rationale]
+2. **[Decision Area]**: [Specific decision and rationale]
+3. **[Decision Area]**: [Specific decision and rationale]
+
+### Success Criteria
+
+- **[Criterion]**: [Specific, measurable outcome]
+- **[Criterion]**: [Specific, measurable outcome]
+- **[Criterion]**: [Specific, measurable outcome]
+```
+
+**Requirements:**
+- **Explain how feature builds** on existing systems
+- **Document key decisions** and their rationale
+- **Define clear success criteria** that are measurable
+- **Reference ADR compliance** requirements
+
+## Refinement Process Steps
+
+### Step 1: Research & Analysis
+1. **Research industry standards** for similar features
+2. **Analyze existing codebase** for integration points
+3. **Review relevant ADRs** for compliance requirements
+4. **Identify similar features** in other applications
+5. **Document gaps** in current user stories and acceptance criteria
+
+### Step 2: User Story Development
+1. **Write primary user story** that captures core value
+2. **Identify user types** affected by the feature
+3. **Create enhanced user stories** for different scenarios
+4. **Include edge cases** and error conditions
+5. **Consider plugin developer needs** if applicable
+
+### Step 3: Acceptance Criteria Definition
+1. **Define core functionality** requirements
+2. **Specify non-functional requirements** (performance, security, etc.)
+3. **Include integration requirements** with existing systems
+4. **Add ADR compliance criteria** where applicable
+5. **Ensure all criteria are testable**
+
+### Step 4: Technical Design
+1. **Document architecture considerations**
+2. **Reference existing patterns** and systems
+3. **Consider integration approaches**
+4. **Address performance implications**
+5. **Include configuration requirements**
+
+### Step 5: Risk Assessment
+1. **Identify technical risks** (performance, complexity, etc.)
+2. **Consider user experience risks** (usability, learning curve, etc.)
+3. **Assess process risks** (timeline, dependencies, etc.)
+4. **Provide specific mitigations** for each risk
+5. **Reference ADR compliance** where relevant
+
+### Step 6: Implementation Planning
+1. **Document key implementation decisions**
+2. **Define success criteria**
+3. **Reference existing systems** and patterns
+4. **Consider backward compatibility**
+5. **Plan for testing and validation**
+
+## Quality Checklist
+
+### Content Completeness
+- [ ] **Feature description** is clear and comprehensive
+- [ ] **User stories** cover all relevant user types and scenarios
+- [ ] **Acceptance criteria** are specific and testable
+- [ ] **Technical design** addresses key architectural concerns
+- [ ] **Risk assessment** covers major risks with mitigations
+- [ ] **Implementation notes** provide clear guidance
+
+### ADR Compliance
+- [ ] **ADR 001 compliance** (Go language, cross-platform)
+- [ ] **ADR 002 compliance** (Timer performance, user experience)
+- [ ] **ADR 004 compliance** (Plugin system integration)
+- [ ] **ADR 005 compliance** (Logging system integration)
+- [ ] **Other relevant ADRs** referenced and complied with
+
+### Technical Quality
+- [ ] **Integration points** clearly identified
+- [ ] **Performance implications** considered
+- [ ] **Backward compatibility** addressed
+- [ ] **Configuration requirements** specified
+- [ ] **Testing approach** outlined
+
+### User Experience
+- [ ] **User stories** focus on user value
+- [ ] **Acceptance criteria** include UX requirements
+- [ ] **Error handling** considered
+- [ ] **Configuration complexity** managed
+- [ ] **Migration path** defined for existing users
+
+## Examples and References
+
+### Gold Standard Example
+- **Log Rotation System** (`docs/backlog/log-rotation-system.md`) - Complete example of this process
+
+### ADR References
+- **ADR 001**: Programming Language Selection (Go)
+- **ADR 002**: Persistent Timer Design
+- **ADR 004**: Plugin System Architecture
+- **ADR 005**: Structured Logger Architecture
+
+### Related Processes
+- **4-Gate Approval Process** - Overall feature approval workflow
+- **TDD Approach** - Test-driven development requirements
+- **Release Management** - Integration with release planning
+
+## Usage Guidelines
+
+### When to Use This Process
+- **New feature planning** - All new backlog features
+- **Feature refinement** - Updating existing backlog items
+- **Major feature updates** - Significant changes to planned features
+- **ADR compliance review** - Ensuring features align with architecture decisions
+
+### Process Integration
+- **Follow 4-gate approval** process for feature implementation
+- **Create GitHub issues** from refined backlog items
+- **Update release planning** based on refined features
+- **Maintain documentation** as features evolve
+
+### Quality Assurance
+- **Peer review** of refined features
+- **ADR compliance check** before approval
+- **Technical feasibility** validation
+- **User experience** validation
+- **Implementation readiness** assessment
+
+This process ensures that all backlog features meet the high standards established by the Log Rotation System feature, providing comprehensive planning, clear requirements, and implementation guidance while maintaining ADR compliance and user experience quality.
+description:
+globs:
+alwaysApply: false
+---
