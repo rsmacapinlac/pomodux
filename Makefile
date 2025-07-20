@@ -40,7 +40,7 @@ test-coverage:
 # Run linter
 lint:
 	@echo "Running linter..."
-	golangci-lint run
+	export PATH=$$PATH:$$(go env GOPATH)/bin && golangci-lint run
 
 # Clean build artifacts
 clean:
