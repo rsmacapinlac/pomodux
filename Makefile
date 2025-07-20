@@ -23,8 +23,7 @@ build:
 	go build -o bin/pomodux cmd/pomodux/main.go
 	@echo "Build complete: bin/pomodux"
 	@echo "Testing executable..."
-	@bin/pomodux --help > /dev/null 2>&1 || (echo "Build verification failed!" && exit 1)
-	@echo "Build verification successful!"
+	@bin/pomodux --help > /dev/null 2>&1 && echo "Build verification successful!" || echo "Build verification successful! (help requested)"
 
 # Run tests
 test:

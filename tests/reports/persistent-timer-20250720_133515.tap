@@ -1,0 +1,15 @@
+1..10
+ok 1 start command should work with custom duration
+ok 2 start command should work without duration
+ok 3 break command should work
+ok 4 long-break command should work
+ok 5 start command should show timer started message
+not ok 6 start command should show session type
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 112)
+#   `grep -q "Session type" output.txt' failed
+not ok 7 start command should show keypress instructions
+# (in test file tests/uat/automated/bats/persistent-timer.bats, line 126)
+#   `grep -q "Press" output.txt' failed
+ok 8 break command should show break session
+ok 9 long-break command should show long break session
+ok 10 timer should handle very short durations

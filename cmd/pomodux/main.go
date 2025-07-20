@@ -17,8 +17,13 @@ func main() {
 	// Initialize CLI to get flags
 	rootCmd := cli.GetRootCmd()
 	if err := rootCmd.ParseFlags(os.Args[1:]); err != nil {
-		fmt.Fprintf(os.Stderr, "Error parsing flags: %v\n", err)
-		os.Exit(1)
+		// Check if this is a help request (which is not an error)
+		if err.Error() == "pflag: help requested" {
+			// Let the command execute normally to show help
+		} else {
+			fmt.Fprintf(os.Stderr, "Error parsing flags: %v\n", err)
+			os.Exit(1)
+		}
 	}
 
 	// Get config file path from flag
@@ -58,6 +63,10 @@ func main() {
 
 	defer timer.ShutdownGlobalTimer() // Ensure clean shutdown
 	if err := cli.Execute(); err != nil {
+		// Check if this is a help request (which is not an error)
+		if err.Error() == "pflag: help requested" {
+			os.Exit(0)
+		}
 		logger.Error("Application error", err)
 		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 		os.Exit(1)
