@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/rsmacapinlac/pomodux/internal/cli"
 	"github.com/rsmacapinlac/pomodux/internal/config"
@@ -14,20 +15,17 @@ import (
 var Version = "dev"
 
 func main() {
-	// Initialize CLI to get flags
-	rootCmd := cli.GetRootCmd()
-	if err := rootCmd.ParseFlags(os.Args[1:]); err != nil {
-		// Check if this is a help request (which is not an error)
-		if err.Error() == "pflag: help requested" {
-			// Let the command execute normally to show help
-		} else {
-			fmt.Fprintf(os.Stderr, "Error parsing flags: %v\n", err)
-			os.Exit(1)
+	// Get config file path from flag (will be parsed during Execute)
+	cfgFile := ""
+	for i, arg := range os.Args[1:] {
+		if arg == "--config" && i+1 < len(os.Args[1:]) {
+			cfgFile = os.Args[1:][i+1]
+			break
+		} else if strings.HasPrefix(arg, "--config=") {
+			cfgFile = strings.TrimPrefix(arg, "--config=")
+			break
 		}
 	}
-
-	// Get config file path from flag
-	cfgFile, _ := rootCmd.Flags().GetString("config")
 
 	// Load configuration
 	var cfg *config.Config

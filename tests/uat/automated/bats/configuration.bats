@@ -54,50 +54,50 @@ teardown() {
 }
 
 @test "config show should display work duration" {
-    run "$APP_BINARY" config show
+    run "$APP_BINARY" config show --json
     [ "$status" -eq 0 ]
     [[ "$output" =~ "DefaultWorkDuration" ]]
 }
 
 @test "config show should display break duration" {
-    run "$APP_BINARY" config show
+    run "$APP_BINARY" config show --json
     [ "$status" -eq 0 ]
     [[ "$output" =~ "DefaultBreakDuration" ]]
 }
 
 @test "config show should display long break duration" {
-    run "$APP_BINARY" config show
+    run "$APP_BINARY" config show --json
     [ "$status" -eq 0 ]
     [[ "$output" =~ "DefaultLongBreakDuration" ]]
 }
 
 @test "config set command should succeed with valid work duration" {
-    run "$APP_BINARY" config set default_work_duration 25m
+    run "$APP_BINARY" config set timer.default_work_duration 25m
     [ "$status" -eq 0 ]
 }
 
 @test "config set command should succeed with valid break duration" {
-    run "$APP_BINARY" config set default_break_duration 5m
+    run "$APP_BINARY" config set timer.default_break_duration 5m
     [ "$status" -eq 0 ]
 }
 
 @test "config set command should succeed with valid long break duration" {
-    run "$APP_BINARY" config set default_long_break_duration 15m
+    run "$APP_BINARY" config set timer.default_long_break_duration 15m
     [ "$status" -eq 0 ]
 }
 
 @test "config set should fail with invalid work duration" {
-    run "$APP_BINARY" config set default_work_duration invalid
+    run "$APP_BINARY" config set timer.default_work_duration invalid
     [ "$status" -eq 1 ]
 }
 
 @test "config set should fail with invalid break duration" {
-    run "$APP_BINARY" config set default_break_duration invalid
+    run "$APP_BINARY" config set timer.default_break_duration invalid
     [ "$status" -eq 1 ]
 }
 
 @test "config set should fail with invalid long break duration" {
-    run "$APP_BINARY" config set default_long_break_duration invalid
+    run "$APP_BINARY" config set timer.default_long_break_duration invalid
     [ "$status" -eq 1 ]
 }
 
@@ -108,20 +108,20 @@ teardown() {
 
 @test "config set should accept various duration formats" {
     # Test minutes format
-    run "$APP_BINARY" config set default_work_duration 25m
+    run "$APP_BINARY" config set timer.default_work_duration 25m
     [ "$status" -eq 0 ]
     
     # Test seconds format
-    run "$APP_BINARY" config set default_break_duration 300s
+    run "$APP_BINARY" config set timer.default_break_duration 300s
     [ "$status" -eq 0 ]
     
     # Test numeric minutes (with explicit unit)
-    run "$APP_BINARY" config set default_long_break_duration 15m
+    run "$APP_BINARY" config set timer.default_long_break_duration 15m
     [ "$status" -eq 0 ]
 }
 
 @test "config show should display JSON format" {
-    run "$APP_BINARY" config show
+    run "$APP_BINARY" config show --json
     [ "$status" -eq 0 ]
     [[ "$output" =~ "{" ]]
     [[ "$output" =~ "}" ]]
@@ -129,10 +129,10 @@ teardown() {
 
 @test "config set should handle edge case durations" {
     # Test very short duration
-    run "$APP_BINARY" config set default_break_duration 1s
+    run "$APP_BINARY" config set timer.default_break_duration 1s
     [ "$status" -eq 0 ]
     
     # Test very long duration
-    run "$APP_BINARY" config set default_work_duration 120m
+    run "$APP_BINARY" config set timer.default_work_duration 120m
     [ "$status" -eq 0 ]
 } 
