@@ -117,6 +117,20 @@ build/
 *.tar.gz
 *.zip
 
+# Arch Linux package build artifacts
+*.pkg.tar.zst
+*.pkg.tar.xz
+*.pkg.tar.gz
+src/
+pkg/
+*.src.tar.gz
+*.src.tar.xz
+*.src.tar.zst
+
+# Arch Linux package files (typically kept in separate AUR repository)
+PKGBUILD
+.SRCINFO
+
 # Profiling files
 *.prof
 
