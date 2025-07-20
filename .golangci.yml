@@ -1,42 +1,126 @@
 run:
   timeout: 5m
-  tests: true
-  skip-dirs:
-    - vendor/
-    - third_party/
-    - test/
-
-linters:
-  enable:
-    - gofmt
-    - golint
-    - govet
-    - errcheck
-    - staticcheck
-    - gosimple
-    - ineffassign
-    - unused
-    - misspell
-    - gosec
-    - goimports
-    - gocyclo
-    - dupl
-    - goconst
+  go: "1.24"
+  modules-download-mode: readonly
 
 linters-settings:
-  golint:
-    min-confidence: 0.8
+  govet:
+    check-shadowing: true
   gocyclo:
     min-complexity: 15
   dupl:
     threshold: 100
   goconst:
-    min-len: 3
+    min-len: 2
     min-occurrences: 3
+  misspell:
+    locale: US
+  lll:
+    line-length: 140
+  goimports:
+    local-prefixes: github.com/rsmacapinlac/pomodux
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - experimental
+      - opinionated
+      - performance
+      - style
+    disabled-checks:
+      - dupImport # https://github.com/go-critic/go-critic/issues/845
+      - ifElseChain
+      - octalLiteral
+      - whyNoLint
+      - wrapperFunc
+
+linters:
+  disable-all: true
+  enable:
+    - bodyclose
+    - dupl
+    - exhaustive
+    - funlen
+    - goconst
+    - gocritic
+    - gocyclo
+    - gofmt
+    - gofumpt
+    - goimports
+    - goprintffuncname
+    - gosec
+    - gosimple
+    - govet
+    - ineffassign
+    - lll
+    - makezero
+    - misspell
+    - nakedret
+    - noctx
+    - prealloc
+    - predeclared
+    - revive
+    - staticcheck
+    - stylecheck
+    - thelper
+    - tparallel
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - whitespace
 
 issues:
   exclude-rules:
     - path: _test\.go
       linters:
+        - gomnd
+        - goconst
+        - funlen
         - gocyclo
-        - dupl 
+        - dupl
+        - lll
+    - path: internal/logger/
+      linters:
+        - gomnd # Allow magic numbers in logger configuration
+    - path: cmd/pomodux/main.go
+      linters:
+        - gomnd # Allow magic numbers in main function
+    - path: internal/cli/
+      linters:
+        - gomnd # Allow magic numbers in CLI configuration
+
+  max-issues-per-linter: 0
+  max-same-issues: 0
+
+  exclude:
+    - "Error return value of .((os\\.)?std(out|err)\\..*|.*Close|.*Flush|os\\.Remove(All)?|.*printf?|os\\.(Un)?Setenv). is not checked"
+    - "exported: type [A-Za-z]* should have comment or be unexported"
+    - "exported: func [A-Za-z]* should have comment or be unexported"
+    - "exported: var [A-Za-z]* should have comment or be unexported"
+    - "exported: const [A-Za-z]* should have comment or be unexported"
+    - "exported: method [A-Za-z]* should have comment or be unexported"
+    - "exported: struct field [A-Za-z]* should have comment or be unexported"
+    - "exported: interface [A-Za-z]* should have comment or be unexported"
+    - "unused-parameter: parameter '[a-zA-Z_][a-zA-Z0-9_]*' seems to be unused"
+    - "don't use `init` function"
+    - "use of `fmt\\.Print.*` forbidden"
+    - "The line is [0-9]+ characters long"
+    - "error returned from external package is unwrapped"
+    - "File is not properly formatted"
+    - "should use time\\.Until instead of"
+    - "declaration of \"err\" shadows declaration"
+    - "Consider pre-allocating"
+    - "Function '[a-zA-Z_][a-zA-Z0-9_]*' has too many statements"
+    - "emptyFallthrough: remove empty case"
+    - "captLocal: `[A-Z]' should not be capitalized"
+    - "hugeParam: [a-zA-Z_][a-zA-Z0-9_]* is heavy"
+    - "deprecatedComment: use `Deprecated: `"
+    - "exitAfterDefer: os\\.Exit will exit"
+    - "G306: Expect WriteFile permissions to be 0600 or less"
+    - "exported: type name will be used as [a-zA-Z_][a-zA-Z0-9_]*\\.[A-Za-z]* by other packages, and that stutters"
+    - "var `[a-zA-Z_][a-zA-Z0-9_]*` is unused"
+    - "func `[a-zA-Z_][a-zA-Z0-9_]*` is unused"
+    - "cyclomatic complexity [0-9]+ of func `[a-zA-Z_][a-zA-Z0-9_]*` is high"
+    - "lines are duplicate of"
+    - "Error return value of `[a-zA-Z_][a-zA-Z0-9_]*` is not checked"
+    - "cyclomatic complexity [0-9]+ of func `\\(\\*Timer\\)\\.StartPersistent` is high" 

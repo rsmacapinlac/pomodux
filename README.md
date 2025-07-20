@@ -90,7 +90,7 @@ pomodux/
 ## 🧪 Development
 
 ### Prerequisites
-- Go 1.21+
+- Go 1.24.4+
 - golangci-lint
 - Make
 
@@ -99,6 +99,32 @@ pomodux/
 # Clone and setup
 git clone https://github.com/yourusername/pomodux.git
 cd pomodux
+
+# Install development tools and setup environment
+make setup
+
+# Run all CI checks locally
+make ci-check
+```
+
+### CI/CD Pipeline
+
+Pomodux uses a comprehensive CI/CD pipeline with automated testing, linting, and releases:
+
+- **Continuous Integration**: Runs on every push and pull request
+- **Automated Releases**: Triggered by git tags (e.g., `v1.0.0`)
+- **Multi-Platform Builds**: Linux, macOS, and Windows (amd64/arm64)
+- **Quality Gates**: Automated testing, linting, and security scanning
+
+**Quick Start**:
+```bash
+# Create a new release
+./scripts/release.sh 1.2.3
+```
+
+For detailed information, see:
+- [CI/CD Quick Start Guide](docs/ci-cd-quickstart.md)
+- [Full CI/CD Documentation](docs/ci-cd-pipeline.md)
 
 # Install dependencies
 go mod download

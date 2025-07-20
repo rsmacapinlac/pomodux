@@ -10,6 +10,9 @@ import (
 	"github.com/rsmacapinlac/pomodux/internal/timer"
 )
 
+// Version will be set during build time via ldflags
+var Version = "dev"
+
 func main() {
 	// Initialize CLI to get flags
 	rootCmd := cli.GetRootCmd()
