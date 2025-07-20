@@ -5,7 +5,7 @@ run:
 
 linters-settings:
   govet:
-    check-shadowing: true
+    # check-shadowing is deprecated, using shadow linter instead
   gocyclo:
     min-complexity: 15
   dupl:
