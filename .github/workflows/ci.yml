@@ -141,6 +141,36 @@ jobs:
         git clone https://github.com/bats-core/bats-core.git /tmp/bats
         sudo /tmp/bats/install.sh /usr/local
 
+    - name: Setup test configuration
+      run: |
+        mkdir -p ~/.config/pomodux
+        cat > ~/.config/pomodux/config.yaml << EOF
+        timer:
+          default_work_duration: 25m
+          default_break_duration: 5m
+          default_long_break_duration: 15m
+          auto_start_breaks: false
+        tui:
+          theme: default
+          key_bindings:
+            pause: p
+            resume: r
+            start: s
+            stop: q
+        notifications:
+          enabled: true
+          sound: false
+          message: Timer completed!
+        logging:
+          level: info
+          format: text
+          output: file
+          log_file: ""
+          show_caller: false
+        plugins:
+          directory: ~/.config/pomodux/plugins
+        EOF
+
     - name: Run UAT tests
       run: |
         chmod +x tests/uat/automated/run-tests.sh
