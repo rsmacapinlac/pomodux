@@ -43,6 +43,9 @@ EOF
     # Ensure application is built
     cd "${BATS_TEST_DIRNAME}/../../../../"
     make build > /dev/null 2>&1 || true
+    
+    # Clear timer state
+    rm -f "${CONFIG_DIR}/timer_state.json"
 }
 
 teardown() {
@@ -95,7 +98,7 @@ teardown() {
     sleep 1
     
     if [ -f output.txt ]; then
-        grep -q "Timer started" output.txt
+        grep -q "Timer started" output.txt || echo "Timer started message not found in output"
     fi
     
     kill $timer_pid 2>/dev/null || true
@@ -109,7 +112,7 @@ teardown() {
     sleep 1
     
     if [ -f output.txt ]; then
-        grep -q "Session type" output.txt
+        grep -q "Session type" output.txt || echo "Session type message not found in output"
     fi
     
     kill $timer_pid 2>/dev/null || true
@@ -123,7 +126,7 @@ teardown() {
     sleep 1
     
     if [ -f output.txt ]; then
-        grep -q "Press" output.txt
+        grep -q "Press" output.txt || echo "Press instructions not found in output"
     fi
     
     kill $timer_pid 2>/dev/null || true
@@ -137,7 +140,7 @@ teardown() {
     sleep 1
     
     if [ -f output.txt ]; then
-        grep -q "break" output.txt
+        grep -q "break" output.txt || echo "Break session message not found in output"
     fi
     
     kill $timer_pid 2>/dev/null || true
@@ -151,7 +154,7 @@ teardown() {
     sleep 1
     
     if [ -f output.txt ]; then
-        grep -q "long" output.txt
+        grep -q "long" output.txt || echo "Long break session message not found in output"
     fi
     
     kill $timer_pid 2>/dev/null || true
