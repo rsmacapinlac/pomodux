@@ -242,7 +242,7 @@ func exportHistory(sessions []timer.SessionRecord, filepath string, jsonFormat, 
 		return fmt.Errorf("invalid export path: %w", err)
 	}
 
-	file, err := os.Create(filepath)
+	file, err := os.Create(filepath) // #nosec G304 -- filepath is validated by validateExportPath
 	if err != nil {
 		return fmt.Errorf("failed to create export file: %w", err)
 	}

@@ -117,7 +117,7 @@ var configEditCmd = &cobra.Command{
 		if !isSafeExecutable(editor) {
 			return fmt.Errorf("unsafe editor executable: %s", editor)
 		}
-		c := exec.Command(editor, path)
+		c := exec.Command(editor, path) // #nosec G204 -- Editor is validated by isSafeExecutable
 		c.Stdin = os.Stdin
 		c.Stdout = os.Stdout
 		c.Stderr = os.Stderr

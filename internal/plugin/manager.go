@@ -79,7 +79,7 @@ func NewPluginManager(pluginsDir string) *PluginManager {
 // LoadPlugins loads all plugins from the plugins directory
 func (pm *PluginManager) LoadPlugins() error {
 	// Create plugins directory if it doesn't exist
-	if err := os.MkdirAll(pm.pluginsDir, 0755); err != nil {
+	if err := os.MkdirAll(pm.pluginsDir, 0750); err != nil {
 		return fmt.Errorf("failed to create plugins directory: %w", err)
 	}
 
@@ -112,7 +112,7 @@ func (pm *PluginManager) LoadPluginFromFile(filePath string) error {
 	}
 
 	// Read the plugin file
-	content, err := os.ReadFile(filePath)
+	content, err := os.ReadFile(filePath) // #nosec G304 -- filePath is validated by validateFilePath
 	if err != nil {
 		return fmt.Errorf("failed to read plugin file %s: %w", filePath, err)
 	}

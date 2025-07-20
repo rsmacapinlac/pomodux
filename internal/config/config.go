@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"gopkg.in/yaml.v3"
@@ -109,7 +110,7 @@ func Load() (*Config, error) {
 	}
 
 	// Load existing config
-	data, err := os.ReadFile(configPath)
+	data, err := os.ReadFile(configPath) // #nosec G304 -- configPath is from trusted XDG_CONFIG_HOME or user home
 	if err != nil {
 		return nil, fmt.Errorf("failed to read config file: %w", err)
 	}
@@ -179,7 +180,11 @@ func SaveToPath(config *Config, path string) error {
 
 // LoadFromPath loads configuration from a specific path
 func LoadFromPath(path string) (*Config, error) {
-	data, err := os.ReadFile(path)
+	// Validate path is not empty and doesn't contain path traversal
+	if path == "" || strings.Contains(path, "..") {
+		return nil, fmt.Errorf("invalid config path: %s", path)
+	}
+	data, err := os.ReadFile(path) // #nosec G304 -- path is validated above
 	if err != nil {
 		return nil, fmt.Errorf("failed to read config file: %w", err)
 	}
