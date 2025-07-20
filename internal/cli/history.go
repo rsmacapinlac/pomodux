@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/rsmacapinlac/pomodux/internal/logger"
@@ -236,6 +237,11 @@ func outputHistoryText(sessions []timer.SessionRecord) error {
 }
 
 func exportHistory(sessions []timer.SessionRecord, filepath string, jsonFormat, csvFormat bool) error {
+	// Validate file path for security
+	if err := validateExportPath(filepath); err != nil {
+		return fmt.Errorf("invalid export path: %w", err)
+	}
+
 	file, err := os.Create(filepath)
 	if err != nil {
 		return fmt.Errorf("failed to create export file: %w", err)
@@ -290,4 +296,37 @@ func getStateDir() (string, error) {
 		stateHome = filepath.Join(homeDir, ".local", "state")
 	}
 	return filepath.Join(stateHome, "pomodux"), nil
+}
+
+// validateExportPath validates an export file path for security
+func validateExportPath(exportPath string) error {
+	// Check for path traversal attempts
+	if strings.Contains(exportPath, "..") {
+		return fmt.Errorf("path traversal not allowed")
+	}
+
+	// Check for dangerous characters
+	dangerousChars := []string{"|", "&", ";", "`", "$", "(", ")", "<", ">", "*", "?"}
+	for _, char := range dangerousChars {
+		if strings.Contains(exportPath, char) {
+			return fmt.Errorf("dangerous character '%s' not allowed in file path", char)
+		}
+	}
+
+	// For export files, we can be more permissive but still validate
+	// Allow relative paths and absolute paths in user's home directory
+	if filepath.IsAbs(exportPath) {
+		homeDir, err := os.UserHomeDir()
+		if err != nil {
+			return fmt.Errorf("failed to get home directory for path validation")
+		}
+
+		// Check if path is within user's home directory
+		relPath, err := filepath.Rel(homeDir, exportPath)
+		if err != nil || strings.HasPrefix(relPath, "..") {
+			return fmt.Errorf("export path must be within user's home directory")
+		}
+	}
+
+	return nil
 }

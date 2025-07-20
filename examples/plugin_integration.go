@@ -67,12 +67,18 @@ func main() {
 	logger.Info("Pausing timer after 3 seconds")
 	time.Sleep(3 * time.Second)
 	fmt.Println("Pausing timer...")
-	t.Pause()
+	if err := t.Pause(); err != nil {
+		logger.Error("Error pausing timer", err)
+		fmt.Printf("Error pausing timer: %v\n", err)
+	}
 
 	logger.Info("Resuming timer after 2 seconds")
 	time.Sleep(2 * time.Second)
 	fmt.Println("Resuming timer...")
-	t.Resume()
+	if err := t.Resume(); err != nil {
+		logger.Error("Error resuming timer", err)
+		fmt.Printf("Error resuming timer: %v\n", err)
+	}
 
 	// Wait for completion
 	logger.Info("Waiting for timer completion (8 seconds)")
@@ -86,7 +92,10 @@ func main() {
 	} else {
 		logger.Info("Stopping timer before completion")
 		fmt.Println("Stopping timer...")
-		t.Stop()
+		if err := t.Stop(); err != nil {
+			logger.Error("Error stopping timer", err)
+			fmt.Printf("Error stopping timer: %v\n", err)
+		}
 	}
 
 	// Demo: Start a break session
@@ -109,7 +118,10 @@ func main() {
 	} else {
 		logger.Info("Stopping break before completion")
 		fmt.Println("Stopping break...")
-		t.Stop()
+		if err := t.Stop(); err != nil {
+			logger.Error("Error stopping break", err)
+			fmt.Printf("Error stopping break: %v\n", err)
+		}
 	}
 
 	logger.Info("Plugin Demo Complete")

@@ -5,6 +5,7 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
+	"strings"
 	"sync"
 	"time"
 
@@ -105,6 +106,11 @@ func (pm *PluginManager) LoadPlugins() error {
 
 // LoadPluginFromFile loads a plugin from a Lua file
 func (pm *PluginManager) LoadPluginFromFile(filePath string) error {
+	// Validate file path for security
+	if err := validateFilePath(filePath); err != nil {
+		return fmt.Errorf("invalid file path: %w", err)
+	}
+
 	// Read the plugin file
 	content, err := os.ReadFile(filePath)
 	if err != nil {
@@ -445,4 +451,41 @@ func (pm *PluginManager) Shutdown() {
 		plugin.LState.Close()
 		delete(pm.plugins, name)
 	}
+}
+
+// validateFilePath validates a file path for security
+func validateFilePath(filePath string) error {
+	// Check for path traversal attempts
+	if strings.Contains(filePath, "..") {
+		return fmt.Errorf("path traversal not allowed")
+	}
+
+	// Check for dangerous characters
+	dangerousChars := []string{"|", "&", ";", "`", "$", "(", ")", "<", ">", "*", "?"}
+	for _, char := range dangerousChars {
+		if strings.Contains(filePath, char) {
+			return fmt.Errorf("dangerous character '%s' not allowed in file path", char)
+		}
+	}
+
+	// For absolute paths, check if they're in a safe location
+	if filepath.IsAbs(filePath) {
+		// Allow paths in /tmp for testing
+		if strings.HasPrefix(filePath, "/tmp/") {
+			return nil
+		}
+
+		// Allow paths in the user's home directory
+		homeDir, err := os.UserHomeDir()
+		if err == nil {
+			if strings.HasPrefix(filePath, homeDir) {
+				return nil
+			}
+		}
+
+		// For now, be restrictive with other absolute paths
+		return fmt.Errorf("absolute paths not allowed for security")
+	}
+
+	return nil
 }

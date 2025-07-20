@@ -113,6 +113,10 @@ var configEditCmd = &cobra.Command{
 		if editor == "" {
 			editor = "vi"
 		}
+		// Validate editor is a safe executable
+		if !isSafeExecutable(editor) {
+			return fmt.Errorf("unsafe editor executable: %s", editor)
+		}
 		c := exec.Command(editor, path)
 		c.Stdin = os.Stdin
 		c.Stdout = os.Stdout
@@ -503,6 +507,32 @@ func getLongBreaksTemplate() *config.Config {
 // parseDuration parses a duration string in various formats
 func parseDuration(s string) (time.Duration, error) {
 	return time.ParseDuration(s)
+}
+
+// isSafeExecutable checks if the given executable is safe to run
+func isSafeExecutable(editor string) bool {
+	// List of safe editors
+	safeEditors := []string{
+		"vi", "vim", "nano", "emacs", "code", "subl", "atom",
+		"gedit", "kate", "mousepad", "leafpad", "geany",
+	}
+
+	// Check if editor is in the safe list
+	for _, safe := range safeEditors {
+		if editor == safe {
+			return true
+		}
+	}
+
+	// For other editors, check if they exist in PATH and are not in dangerous locations
+	if strings.Contains(editor, "/") {
+		// Absolute or relative path - be more restrictive
+		return false
+	}
+
+	// Check if executable exists in PATH
+	_, err := exec.LookPath(editor)
+	return err == nil
 }
 
 func init() {

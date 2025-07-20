@@ -88,7 +88,9 @@ func (t *Timer) StartWithType(duration time.Duration, sessionType SessionType) e
 
 	// Save state
 	if t.stateManager != nil {
-		t.stateManager.SaveState(t)
+		if err := t.stateManager.SaveState(t); err != nil {
+			logger.Warn("Failed to save timer state", map[string]interface{}{"error": err.Error()})
+		}
 	}
 
 	// Emit timer started event for plugins
@@ -126,7 +128,9 @@ func (t *Timer) Stop() error {
 			Completed: t.status == StatusCompleted,
 		}
 		// Don't check error here as history recording shouldn't prevent stopping
-		t.historyManager.AddSession(session)
+		if err := t.historyManager.AddSession(session); err != nil {
+			logger.Warn("Failed to add session to history", map[string]interface{}{"error": err.Error()})
+		}
 	}
 
 	t.status = StatusIdle
@@ -134,7 +138,9 @@ func (t *Timer) Stop() error {
 
 	// Save state
 	if t.stateManager != nil {
-		t.stateManager.SaveState(t)
+		if err := t.stateManager.SaveState(t); err != nil {
+			logger.Warn("Failed to save timer state", map[string]interface{}{"error": err.Error()})
+		}
 	}
 
 	// Emit timer stopped event for plugins
@@ -169,7 +175,9 @@ func (t *Timer) Pause() error {
 	t.status = StatusPaused
 	// Save state
 	if t.stateManager != nil {
-		t.stateManager.SaveState(t)
+		if err := t.stateManager.SaveState(t); err != nil {
+			logger.Warn("Failed to save timer state", map[string]interface{}{"error": err.Error()})
+		}
 	}
 
 	// Emit timer paused event for plugins
@@ -203,7 +211,9 @@ func (t *Timer) Resume() error {
 	t.status = StatusRunning
 	// Save state
 	if t.stateManager != nil {
-		t.stateManager.SaveState(t)
+		if err := t.stateManager.SaveState(t); err != nil {
+			logger.Warn("Failed to save timer state", map[string]interface{}{"error": err.Error()})
+		}
 	}
 
 	// Emit timer resumed event for plugins
@@ -238,7 +248,9 @@ func (t *Timer) GetStatus() TimerStatus {
 			t.elapsed = t.duration
 			// Save state when timer completes
 			if t.stateManager != nil {
-				t.stateManager.SaveState(t)
+				if err := t.stateManager.SaveState(t); err != nil {
+					logger.Warn("Failed to save timer state", map[string]interface{}{"error": err.Error()})
+				}
 			}
 			// Record session in history immediately when timer completes
 			if t.historyManager != nil && t.sessionType != "" {
@@ -250,7 +262,9 @@ func (t *Timer) GetStatus() TimerStatus {
 					Completed: true,
 				}
 				// Record session immediately
-				t.historyManager.AddSession(session)
+				if err := t.historyManager.AddSession(session); err != nil {
+					logger.Warn("Failed to add session to history", map[string]interface{}{"error": err.Error()})
+				}
 			}
 		}
 	}
@@ -273,7 +287,9 @@ func (t *Timer) GetProgress() float64 {
 			t.elapsed = t.duration
 			// Save state when timer completes
 			if t.stateManager != nil {
-				t.stateManager.SaveState(t)
+				if err := t.stateManager.SaveState(t); err != nil {
+					logger.Warn("Failed to save timer state", map[string]interface{}{"error": err.Error()})
+				}
 			}
 		}
 	} else {
@@ -324,7 +340,9 @@ func (t *Timer) Reset() error {
 			Completed: true,
 		}
 		// Don't check error here as history recording shouldn't prevent resetting
-		t.historyManager.AddSession(session)
+		if err := t.historyManager.AddSession(session); err != nil {
+			logger.Warn("Failed to add session to history", map[string]interface{}{"error": err.Error()})
+		}
 	}
 
 	t.status = StatusIdle
@@ -332,7 +350,9 @@ func (t *Timer) Reset() error {
 	t.duration = 0
 	// Save state
 	if t.stateManager != nil {
-		t.stateManager.SaveState(t)
+		if err := t.stateManager.SaveState(t); err != nil {
+			logger.Warn("Failed to save timer state", map[string]interface{}{"error": err.Error()})
+		}
 	}
 	return nil
 }
@@ -527,7 +547,9 @@ func (t *Timer) handleCompletion() {
 
 	// Save state
 	if t.stateManager != nil {
-		t.stateManager.SaveState(t)
+		if err := t.stateManager.SaveState(t); err != nil {
+			logger.Warn("Failed to save timer state", map[string]interface{}{"error": err.Error()})
+		}
 	}
 
 	// Record session in history immediately
@@ -539,7 +561,9 @@ func (t *Timer) handleCompletion() {
 			EndTime:   time.Now(),
 			Completed: true,
 		}
-		t.historyManager.AddSession(session)
+		if err := t.historyManager.AddSession(session); err != nil {
+			logger.Warn("Failed to add session to history", map[string]interface{}{"error": err.Error()})
+		}
 	}
 
 	// Emit timer completion event for plugins to handle notifications

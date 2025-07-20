@@ -16,7 +16,10 @@ var Version = "dev"
 func main() {
 	// Initialize CLI to get flags
 	rootCmd := cli.GetRootCmd()
-	rootCmd.ParseFlags(os.Args[1:])
+	if err := rootCmd.ParseFlags(os.Args[1:]); err != nil {
+		fmt.Fprintf(os.Stderr, "Error parsing flags: %v\n", err)
+		os.Exit(1)
+	}
 
 	// Get config file path from flag
 	cfgFile, _ := rootCmd.Flags().GetString("config")
