@@ -1,7 +1,6 @@
 ---
 status: proposed
 version: 0.1
-created: 2025-07-13
 type: technical
 ---
 

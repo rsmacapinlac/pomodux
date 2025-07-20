@@ -46,30 +46,34 @@ func DefaultConfig() *Config {
 
 // Init initializes the global logger with the given configuration
 func Init(config *Config) error {
-	Logger = logrus.New()
-
-	// Set log level
+	// Set log level first to validate it
 	level, err := logrus.ParseLevel(string(config.Level))
 	if err != nil {
+		Logger = nil
 		return fmt.Errorf("invalid log level %s: %w", config.Level, err)
 	}
+
+	Logger = logrus.New()
 	Logger.SetLevel(level)
 
 	// Set formatter
+	var formatter logrus.Formatter
 	switch config.Format {
 	case "json":
-		Logger.SetFormatter(&logrus.JSONFormatter{
+		formatter = &logrus.JSONFormatter{
 			TimestampFormat: time.RFC3339,
-		})
+		}
 	case "text":
 		fallthrough
 	default:
-		Logger.SetFormatter(&logrus.TextFormatter{
+		formatter = &logrus.TextFormatter{
 			FullTimestamp:   true,
 			TimestampFormat: time.RFC3339,
 			DisableColors:   false,
-		})
+		}
 	}
+
+	Logger.SetFormatter(formatter)
 
 	// Set output
 	switch config.Output {
@@ -116,6 +120,14 @@ func Init(config *Config) error {
 	}
 
 	return nil
+}
+
+// ConfigFromMainConfig converts the main application config to logger config
+func ConfigFromMainConfig(mainConfig interface{}) (*Config, error) {
+	// This is a simplified conversion - in a real implementation,
+	// you would use reflection or a more sophisticated approach
+	// For now, we'll return a default config
+	return DefaultConfig(), nil
 }
 
 // getDefaultLogFile returns the default log file path
@@ -178,34 +190,26 @@ func Warn(msg string, fields ...map[string]interface{}) {
 // Error logs an error message
 func Error(msg string, err error, fields ...map[string]interface{}) {
 	if Logger != nil {
-		if err != nil {
-			if len(fields) > 0 {
-				Logger.WithError(err).WithFields(fields[0]).Error(msg)
-			} else {
-				Logger.WithError(err).Error(msg)
-			}
-		} else {
-			if len(fields) > 0 {
-				Logger.WithFields(fields[0]).Error(msg)
-			} else {
-				Logger.Error(msg)
-			}
+		logEntry := Logger.WithError(err)
+		if len(fields) > 0 {
+			logEntry = logEntry.WithFields(fields[0])
 		}
+		logEntry.Error(msg)
 	}
 }
 
-// WithField creates a logger with a field
+// WithField creates a new log entry with a single field
 func WithField(key string, value interface{}) *logrus.Entry {
 	if Logger != nil {
 		return Logger.WithField(key, value)
 	}
-	return logrus.NewEntry(logrus.New())
+	return nil
 }
 
-// WithFields creates a logger with multiple fields
+// WithFields creates a new log entry with multiple fields
 func WithFields(fields map[string]interface{}) *logrus.Entry {
 	if Logger != nil {
 		return Logger.WithFields(fields)
 	}
-	return logrus.NewEntry(logrus.New())
+	return nil
 }

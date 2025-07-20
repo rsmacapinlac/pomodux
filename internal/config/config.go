@@ -179,12 +179,6 @@ func SaveToPath(config *Config, path string) error {
 
 // LoadFromPath loads configuration from a specific path
 func LoadFromPath(path string) (*Config, error) {
-	// Check if file exists
-	if _, err := os.Stat(path); os.IsNotExist(err) {
-		return nil, fmt.Errorf("config file does not exist: %s", path)
-	}
-
-	// Load existing config
 	data, err := os.ReadFile(path)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read config file: %w", err)
@@ -195,6 +189,11 @@ func LoadFromPath(path string) (*Config, error) {
 		return nil, fmt.Errorf("failed to parse config file: %w", err)
 	}
 
+	// Ensure plugins directory is set
+	if config.Plugins.Directory == "" {
+		config.Plugins.Directory = defaultPluginsDir()
+	}
+
 	// Validate configuration
 	if err := Validate(config); err != nil {
 		return nil, fmt.Errorf("invalid configuration: %w", err)
@@ -203,7 +202,7 @@ func LoadFromPath(path string) (*Config, error) {
 	return config, nil
 }
 
-// getConfigPath returns the XDG-compliant configuration file path
+// getConfigPath returns the path to the configuration file
 func getConfigPath() (string, error) {
 	configHome := os.Getenv("XDG_CONFIG_HOME")
 	if configHome == "" {
@@ -213,30 +212,54 @@ func getConfigPath() (string, error) {
 		}
 		configHome = filepath.Join(homeDir, ".config")
 	}
-
 	return filepath.Join(configHome, "pomodux", "config.yaml"), nil
 }
 
-// Validate validates the configuration values
+// Validate validates the configuration
 func Validate(config *Config) error {
+	// Validate timer configuration
 	if config.Timer.DefaultWorkDuration <= 0 {
 		return fmt.Errorf("default work duration must be positive")
 	}
-
 	if config.Timer.DefaultBreakDuration <= 0 {
 		return fmt.Errorf("default break duration must be positive")
 	}
-
 	if config.Timer.DefaultLongBreakDuration <= 0 {
 		return fmt.Errorf("default long break duration must be positive")
 	}
 
-	if config.TUI.Theme == "" {
-		return fmt.Errorf("theme cannot be empty")
+	// Validate logging configuration
+	if config.Logging.Level != "" {
+		validLevels := map[string]bool{
+			"debug": true,
+			"info":  true,
+			"warn":  true,
+			"error": true,
+		}
+		if !validLevels[config.Logging.Level] {
+			return fmt.Errorf("invalid log level: %s", config.Logging.Level)
+		}
 	}
 
-	if config.Plugins.Directory == "" {
-		return fmt.Errorf("plugins directory cannot be empty")
+	if config.Logging.Format != "" {
+		validFormats := map[string]bool{
+			"text": true,
+			"json": true,
+		}
+		if !validFormats[config.Logging.Format] {
+			return fmt.Errorf("invalid log format: %s", config.Logging.Format)
+		}
+	}
+
+	if config.Logging.Output != "" {
+		validOutputs := map[string]bool{
+			"console": true,
+			"file":    true,
+			"both":    true,
+		}
+		if !validOutputs[config.Logging.Output] {
+			return fmt.Errorf("invalid log output: %s", config.Logging.Output)
+		}
 	}
 
 	return nil

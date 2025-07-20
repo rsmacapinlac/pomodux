@@ -21,6 +21,10 @@ The logging architecture was designed and approved through [ADR 005: Structured 
 ### 2. Log Levels
 Use the following standard log levels consistently:
 
+- **Trace**: Ultra-detailed debugging information for deep troubleshooting
+  - Use for: Function entry/exit, variable values, detailed flow, performance profiling
+  - Example: `log.WithField("duration", duration).Trace("Timer duration set")`
+
 - **Debug**: Detailed information for debugging and development
   - Use for: Function entry/exit, variable values, detailed flow
   - Example: `log.WithField("duration", duration).Debug("Timer duration set")`
@@ -36,6 +40,10 @@ Use the following standard log levels consistently:
 - **Error**: Errors that require attention and may cause issues
   - Use for: File I/O errors, network failures, invalid states
   - Example: `log.WithError(err).Error("Failed to save timer state")`
+
+- **Fatal**: Critical errors that require immediate attention and terminate the application
+  - Use for: Unrecoverable errors, critical system failures, security violations
+  - Example: `log.WithError(err).Fatal("Critical system failure")`
 
 ## Implementation Standards
 
@@ -93,7 +101,7 @@ Logging is configured through the application configuration:
 
 ```yaml
 logging:
-  level: info                    # debug, info, warn, error
+  level: info                    # trace, debug, info, warn, error, fatal
   output: file                   # file, console, both
   file: "~/.config/pomodux/pomodux.log"  # Log file path
 ```

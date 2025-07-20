@@ -124,8 +124,8 @@ The plugin system has been successfully implemented and integrated into Pomodux:
 - **✅ Plugin system ready for community use**
 - **See also:**
   - [Technical Specifications](../technical_specifications.md)
-  - [Current Release Documentation](../current-release.md)
-  - [Implementation Roadmap](../implementation-roadmap.md)
+  - [Release Management](../release-management.md)
+  - [Technical Specifications](../technical_specifications.md)
 
 ## 8. References
 - [gopher-lua](https://github.com/yuin/gopher-lua)

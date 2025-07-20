@@ -12,10 +12,11 @@ The documentation is organized into the following key areas:
 4. **[Development Setup](development-setup.md)** - Development environment and tools
 5. **[Go Standards](go-standards.md)** - Go coding standards and conventions
 6. **[Logging Standards](logging-standards.md)** - Logging configuration and standards
-7. **[Releases](releases/)** - Historical release documentation
-8. **[Backlog](backlog/)** - Planning and requirements (current & future work)
-9. **[ADR](adr/)** - Architecture Decision Records
-10. **[Retrospectives](retrospectives/)** - Release retrospectives and lessons learned
+7. **[Documentation Standards](documentation-standards.md)** - Documentation guidelines and templates
+8. **[Releases](releases/)** - Historical release documentation
+9. **[Backlog](backlog/)** - Planning and requirements (current & future work)
+10. **[ADR](adr/)** - Architecture Decision Records
+11. **[Retrospectives](retrospectives/)** - Release retrospectives and lessons learned
 
 ## 🎯 Quick Navigation by Audience
 
@@ -25,14 +26,14 @@ The documentation is organized into the following key areas:
 3. **[Requirements](requirements.md)** - Project requirements and goals
 
 ### **For Current Development**
-1. **[Current Release](current-release.md)** - Active release tracking and progress
+1. **[Release Management](release-management.md)** - Release process and approval gates
 2. **[Backlog](backlog/)** - Planning and requirements for current/future work
-3. **[Implementation Roadmap](implementation-roadmap.md)** - Development roadmap and timeline
+3. **[Technical Specifications](technical_specifications.md)** - Technical architecture and design
 
 ### **For Historical Reference**
 1. **[Releases](releases/)** - What was actually delivered in each release
 2. **[Retrospectives](retrospectives/)** - Lessons learned and improvements
-3. **[ADR](adr/)** - Architecture decision records
+3. **[ADR](adr/)** - Architecture decision records and process
 
 ## 📋 Documentation by Purpose
 
@@ -44,6 +45,7 @@ The documentation is organized into the following key areas:
 | [development-setup.md](development-setup.md) | Development environment and tools | Developers |
 | [go-standards.md](go-standards.md) | Go coding standards and conventions | Developers |
 | [logging-standards.md](logging-standards.md) | Logging configuration and standards | Developers, DevOps |
+| [documentation-standards.md](documentation-standards.md) | Documentation guidelines and templates | All contributors |
 | [releases/](releases/) | Historical release documentation | All stakeholders |
 | [backlog/](backlog/) | Planning and requirements | Stakeholders, Developers |
 | [adr/](adr/) | Architecture Decision Records | Developers, Architects |
@@ -106,4 +108,6 @@ The documentation is organized into the following key areas:
 
 ---
 
-**Note**: This documentation structure supports the Pomodux development process while following industry best practices. The `backlog/` folder contains planning and requirements, while `releases/` contains historical records of what was delivered. 
+**Note**: This documentation structure supports the Pomodux development process while following industry best practices. The `backlog/` folder contains planning and requirements, while `releases/` contains historical records of what was delivered.
+
+**Last Updated:** 2025-01-27 

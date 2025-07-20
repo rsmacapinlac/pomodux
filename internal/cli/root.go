@@ -29,6 +29,11 @@ func Execute() error {
 	return rootCmd.Execute()
 }
 
+// GetRootCmd returns the root command for external access
+func GetRootCmd() *cobra.Command {
+	return rootCmd
+}
+
 func init() {
 	cobra.OnInitialize(initConfig)
 
@@ -45,6 +50,6 @@ func init() {
 
 // initConfig reads in config file and ENV variables if set.
 func initConfig() {
-	// TODO: Implement configuration loading
-	// This will be implemented when we add the configuration system
+	// This function is called by cobra when the application starts
+	// The actual config loading is handled in main.go
 }

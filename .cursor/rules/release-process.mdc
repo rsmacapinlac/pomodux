@@ -414,8 +414,10 @@
 
 ### Documentation Integration
 - All documentation organization rules are defined in @project-management.mdc
+- Follow documentation standards defined in [Documentation Standards](@docs/documentation-standards.md)
 - Follow documentation folder structure and naming conventions
 - Maintain clear separation between backlog and releases
+- Update index READMEs when files are added, deleted, or modified
 
 ### Architecture Integration
 - All architecture standards are defined in @architecture-standards.mdc
@@ -430,6 +432,7 @@
 ## References
 
 ### Project Documentation
+- **[Documentation Standards](@docs/documentation-standards.md)** - Comprehensive documentation guidelines and templates
 - **[Release Management Guide](@docs/release-management.md)** - Comprehensive release management framework
 - **[Backlog](@docs/backlog.md)** - Feature backlog organized by release
 - **[Release Notes](@RELEASE_NOTES.md)** - Complete release history

@@ -72,12 +72,18 @@
 
 ## Documentation Organization Rules
 
+### Documentation Standards Reference
+- **Primary Reference**: [Documentation Standards](@docs/documentation-standards.md) - Comprehensive documentation guidelines and templates
+- **Index Documentation**: All subdirectory README files serve as navigation indexes and must be updated when files change
+- **Maintenance Requirements**: Index READMEs must be updated immediately when files are added, deleted, or modified
+
 ### Backlog Folder Rules (`docs/backlog/`)
 
 #### Structure
 - **One file per release**: Each release gets its own file (e.g., `release-0.3.1.md`)
 - **Current releases only**: Backlog should contain only the current working release
 - **No completed releases**: Completed releases must be moved to releases folder
+- **Index maintenance**: Update `docs/backlog/README.md` when adding/removing features
 
 #### Content
 - User stories and requirements
@@ -95,25 +101,27 @@
 #### Structure
 - **Final documents**: `release-X.Y.Z.md` (what was delivered)
 - **Historical records only**: No active planning or backlog duplication
+- **Index maintenance**: Update `docs/releases/README.md` when adding/removing releases
 
 #### Content
 - **Final documents**: What was actually implemented, quality metrics, UAT results
 - **No active planning**: Releases folder is for historical records only
 
 #### Naming Convention
-- `release-{major}.{minor}.{patch}-final.md` (e.g., `release-0.3.0-final.md`)
+- `release-{major}.{minor}.{patch}.md` (e.g., `release-0.3.0.md`)
 
 ### Release Lifecycle Rules
 
 #### When a Release is Complete
-1. **Move backlog file**: `docs/backlog/release-X.Y.Z.md` → `docs/releases/release-X.Y.Z-backlog.md`
-2. **Create final document**: `docs/releases/release-X.Y.Z-final.md` (if not exists)
-3. **Update documentation**: Update README files and cross-references
+1. **Create final document**: `docs/releases/release-X.Y.Z.md` (if not exists)
+2. **Update documentation**: Update README files and cross-references
+3. **Update indexes**: Update `docs/releases/README.md` and `docs/backlog/README.md`
 4. **Remove from backlog**: Ensure backlog only contains current/future work
 
 #### When Starting a New Release
 1. **Create new backlog file**: `docs/backlog/release-X.Y.Z.md`
 2. **Update documentation**: Update README files and cross-references
+3. **Update indexes**: Update `docs/backlog/README.md` with new release information
 
 ## Quality Assurance Rules
 
@@ -124,7 +132,9 @@
 - [ ] Ensure backlog contains only current/future work
 - [ ] Confirm releases contain only completed work
 - [ ] Update all README files and cross-references
+- [ ] Update index READMEs when files are added, deleted, or modified
 - [ ] Check that status indicators are accurate
+- [ ] Verify all links in index READMEs are valid and current
 
 #### Documentation Review Checklist
 - [ ] Clear separation between planning and historical records
@@ -132,6 +142,9 @@
 - [ ] Accurate cross-references
 - [ ] Up-to-date status indicators
 - [ ] No orphaned or duplicate files
+- [ ] Index READMEs contain all files in their directories
+- [ ] All links in index READMEs are valid and current
+- [ ] Documentation follows standards in `docs/documentation-standards.md`
 
 ## Integration with Release Process
 
@@ -180,6 +193,7 @@
 ## References
 
 ### Project Documentation
+- **[Documentation Standards](@docs/documentation-standards.md)** - Comprehensive documentation guidelines and templates
 - **[Release Management Guide](@docs/release-management.md)** - Comprehensive release management framework
 - **[Backlog](@docs/backlog.md)** - Feature backlog organized by release
 - **[Release Notes](@RELEASE_NOTES.md)** - Complete release history

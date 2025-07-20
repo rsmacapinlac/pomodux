@@ -52,6 +52,10 @@ This directory contains the consolidated cursor rules for the Pomodux project. T
 **Consolidated From**:
 - `docs-folder.mdc` - Documentation organization rules
 
+**Documentation Standards Reference**:
+- **[Documentation Standards](@docs/documentation-standards.md)** - Comprehensive guidelines and templates
+- **Index Maintenance**: All subdirectory README files must be updated when files change
+
 ## Key Improvements
 
 ### Consistent Command Patterns
@@ -108,6 +112,8 @@ All rules now use consistent command patterns that are easy to remember and use:
 - Tracking project status
 - Maintaining documentation structure
 - Coordinating project workflow
+- Updating index READMEs when files change
+- Following documentation standards and templates
 
 ### Command Usage Examples
 
@@ -192,6 +198,7 @@ All rules now use consistent command patterns that are easy to remember and use:
 ## References
 
 ### Project Documentation
+- **[Documentation Standards](@docs/documentation-standards.md)** - Comprehensive documentation guidelines and templates
 - **[Release Process](mdc:.cursor/rules/release-process.mdc)** - Release workflow and development process
 - **[Architecture Standards](mdc:.cursor/rules/architecture-standards.mdc)** - Architecture guidelines and decisions
 - **[Code Standards](mdc:.cursor/rules/code-standards.mdc)** - Go development standards

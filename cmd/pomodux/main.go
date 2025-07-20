@@ -11,10 +11,26 @@ import (
 )
 
 func main() {
+	// Initialize CLI to get flags
+	rootCmd := cli.GetRootCmd()
+	rootCmd.ParseFlags(os.Args[1:])
+
+	// Get config file path from flag
+	cfgFile, _ := rootCmd.Flags().GetString("config")
+
 	// Load configuration
-	cfg, err := config.Load()
+	var cfg *config.Config
+	var err error
+
+	if cfgFile != "" {
+		// Load from specified config file
+		cfg, err = config.LoadFromPath(cfgFile)
+	} else {
+		// Load from default location
+		cfg, err = config.Load()
+	}
+
 	if err != nil {
-		logger.Error("Error loading config", err)
 		fmt.Fprintf(os.Stderr, "Error loading config: %v\n", err)
 		os.Exit(1)
 	}
@@ -27,6 +43,7 @@ func main() {
 		LogFile:    cfg.Logging.LogFile,
 		ShowCaller: cfg.Logging.ShowCaller,
 	}
+
 	if err := logger.Init(logConfig); err != nil {
 		logger.Error("Error initializing logger", err)
 		fmt.Fprintf(os.Stderr, "Error initializing logger: %v\n", err)

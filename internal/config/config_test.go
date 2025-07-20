@@ -79,11 +79,11 @@ func TestConfigValidation(t *testing.T) {
 		t.Error("expected validation to fail with negative break duration")
 	}
 
-	// Test invalid theme
+	// Test invalid log level
 	config = DefaultConfig()
-	config.TUI.Theme = ""
+	config.Logging.Level = "invalid"
 	if err := Validate(config); err == nil {
-		t.Error("expected validation to fail with empty theme")
+		t.Error("expected validation to fail with invalid log level")
 	}
 }
 
