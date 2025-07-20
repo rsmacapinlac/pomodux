@@ -129,7 +129,7 @@ func (hm *HistoryManager) saveHistory(history []SessionRecord) error {
 		return fmt.Errorf("failed to marshal history: %w", err)
 	}
 
-	if err := os.WriteFile(hm.historyFile, data, 0644); err != nil {
+	if err := os.WriteFile(hm.historyFile, data, 0600); err != nil {
 		return fmt.Errorf("failed to write history file: %w", err)
 	}
 

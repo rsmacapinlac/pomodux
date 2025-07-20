@@ -459,7 +459,9 @@ func (t *Timer) StartPersistent(duration time.Duration, sessionType SessionType)
 	go func() {
 		<-interruptChan
 		cancel()
-		stdinW.Close() // Unblock keypress goroutine if blocked
+		if err := stdinW.Close(); err != nil {
+			logger.Warn("Failed to close stdin writer", map[string]interface{}{"error": err.Error()})
+		}
 	}()
 
 	startTime := time.Now()
@@ -473,12 +475,16 @@ func (t *Timer) StartPersistent(duration time.Duration, sessionType SessionType)
 		case <-ctx.Done():
 			fmt.Print("\r" + strings.Repeat(" ", 120) + "\r")
 			fmt.Println("Timer stopped by user (signal).")
-			t.Stop()
+			if err := t.Stop(); err != nil {
+				logger.Warn("Failed to stop timer", map[string]interface{}{"error": err.Error()})
+			}
 			return nil
 		case <-stopChan:
 			fmt.Print("\r" + strings.Repeat(" ", 120) + "\r")
 			fmt.Println("Timer stopped.")
-			t.Stop()
+			if err := t.Stop(); err != nil {
+				logger.Warn("Failed to stop timer", map[string]interface{}{"error": err.Error()})
+			}
 			return nil
 		case <-externalStopChan:
 			fmt.Print("\r" + strings.Repeat(" ", 120) + "\r")
@@ -488,12 +494,16 @@ func (t *Timer) StartPersistent(duration time.Duration, sessionType SessionType)
 			if !paused {
 				pauseStart = time.Now()
 				paused = true
-				t.Pause()
+				if err := t.Pause(); err != nil {
+					logger.Warn("Failed to pause timer", map[string]interface{}{"error": err.Error()})
+				}
 				fmt.Print("\r⏸️  PAUSED - Press 'r' to resume" + strings.Repeat(" ", 50))
 			}
 		case <-resumeChan:
 			if paused {
-				t.Resume()
+				if err := t.Resume(); err != nil {
+					logger.Warn("Failed to resume timer", map[string]interface{}{"error": err.Error()})
+				}
 				totalPaused += time.Since(pauseStart)
 				paused = false
 				fmt.Print("\r▶️  RESUMED" + strings.Repeat(" ", 50))

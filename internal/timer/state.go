@@ -59,7 +59,7 @@ func (sm *StateManager) SaveState(timer *Timer) error {
 		return fmt.Errorf("failed to marshal state: %w", err)
 	}
 
-	if err := os.WriteFile(sm.stateFile, data, 0644); err != nil {
+	if err := os.WriteFile(sm.stateFile, data, 0600); err != nil {
 		return fmt.Errorf("failed to write state file: %w", err)
 	}
 

@@ -141,7 +141,7 @@ func Save(config *Config) error {
 
 	// Ensure config directory exists
 	configDir := filepath.Dir(configPath)
-	if err := os.MkdirAll(configDir, 0755); err != nil {
+	if err := os.MkdirAll(configDir, 0750); err != nil {
 		return fmt.Errorf("failed to create config directory: %w", err)
 	}
 
@@ -150,7 +150,7 @@ func Save(config *Config) error {
 		return fmt.Errorf("failed to marshal config: %w", err)
 	}
 
-	if err := os.WriteFile(configPath, data, 0644); err != nil {
+	if err := os.WriteFile(configPath, data, 0600); err != nil {
 		return fmt.Errorf("failed to write config file: %w", err)
 	}
 
@@ -161,7 +161,7 @@ func Save(config *Config) error {
 func SaveToPath(config *Config, path string) error {
 	// Ensure directory exists
 	configDir := filepath.Dir(path)
-	if err := os.MkdirAll(configDir, 0755); err != nil {
+	if err := os.MkdirAll(configDir, 0750); err != nil {
 		return fmt.Errorf("failed to create config directory: %w", err)
 	}
 
@@ -170,7 +170,7 @@ func SaveToPath(config *Config, path string) error {
 		return fmt.Errorf("failed to marshal config: %w", err)
 	}
 
-	if err := os.WriteFile(path, data, 0644); err != nil {
+	if err := os.WriteFile(path, data, 0600); err != nil {
 		return fmt.Errorf("failed to write config file: %w", err)
 	}
 

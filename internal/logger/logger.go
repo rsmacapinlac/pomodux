@@ -84,7 +84,7 @@ func Init(config *Config) error {
 		config.LogFile = expandHome(config.LogFile)
 		// Ensure parent directory exists
 		dir := filepath.Dir(config.LogFile)
-		if err := os.MkdirAll(dir, 0755); err != nil {
+		if err := os.MkdirAll(dir, 0750); err != nil {
 			return fmt.Errorf("failed to create log directory %s: %w", dir, err)
 		}
 		file, err := os.OpenFile(config.LogFile, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0600)
@@ -99,7 +99,7 @@ func Init(config *Config) error {
 		config.LogFile = expandHome(config.LogFile)
 		// Ensure parent directory exists
 		dir := filepath.Dir(config.LogFile)
-		if err := os.MkdirAll(dir, 0755); err != nil {
+		if err := os.MkdirAll(dir, 0750); err != nil {
 			return fmt.Errorf("failed to create log directory %s: %w", dir, err)
 		}
 		_, err := os.OpenFile(config.LogFile, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0600)
