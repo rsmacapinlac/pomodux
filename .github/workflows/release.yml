@@ -151,7 +151,8 @@ jobs:
         git clone https://github.com/bats-core/bats-core.git /tmp/bats
         sudo /tmp/bats/install.sh /usr/local
         
-        # Copy Linux build for testing
+        # Create bin directory and copy Linux build for testing
+        mkdir -p bin
         cp release/pomodux-linux-amd64 bin/pomodux
         chmod +x bin/pomodux
         
