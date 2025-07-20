@@ -163,6 +163,13 @@ teardown() {
 
 @test "timer should handle very short durations" {
     # Test with a very short duration
+    # First check if timer is running and wait for it to complete
+    run "$APP_BINARY" status
+    if [ "$status" -eq 0 ] && [[ "$output" =~ "running" ]]; then
+        # Wait for timer to complete
+        sleep 5
+    fi
+    
     run "$APP_BINARY" start 1s
     [ "$status" -eq 0 ]
 } 

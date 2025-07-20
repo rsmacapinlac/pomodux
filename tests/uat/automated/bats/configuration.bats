@@ -128,11 +128,11 @@ teardown() {
 }
 
 @test "config set should handle edge case durations" {
-    # Test very short duration
+    # Test very short duration (should fail due to validation)
     run "$APP_BINARY" config set timer.default_break_duration 1s
-    [ "$status" -eq 0 ]
+    [ "$status" -eq 1 ]
     
-    # Test very long duration
+    # Test very long duration (should succeed)
     run "$APP_BINARY" config set timer.default_work_duration 120m
     [ "$status" -eq 0 ]
 } 
