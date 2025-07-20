@@ -334,18 +334,20 @@ func (pm *PluginManager) callPluginHooks(event Event) {
 
 		logger.Debug("PLUGIN: Plugin has hooks", map[string]interface{}{"plugin": plugin.Name, "hook_count": len(hooks), "event": event.Type})
 		for _, hook := range hooks {
-			go func(p *Plugin, h lua.LValue) {
-				logger.Debug("PLUGIN: Calling hook", map[string]interface{}{"plugin": p.Name, "event": event.Type})
-				if err := pm.callHook(p, h, event); err != nil {
-					logger.Error("PLUGIN: Error calling hook", err, map[string]interface{}{"plugin": p.Name})
-				}
-			}(plugin, hook)
+			logger.Debug("PLUGIN: Calling hook", map[string]interface{}{"plugin": plugin.Name, "event": event.Type})
+			if err := pm.callHook(plugin, hook, event); err != nil {
+				logger.Error("PLUGIN: Error calling hook", err, map[string]interface{}{"plugin": plugin.Name})
+			}
 		}
 	}
 }
 
 // callHook calls a single plugin hook
 func (pm *PluginManager) callHook(plugin *Plugin, hook lua.LValue, event Event) error {
+	// Lock the plugin's mutex to ensure thread-safe access to Lua state
+	plugin.mu.Lock()
+	defer plugin.mu.Unlock()
+
 	L := plugin.LState
 
 	// Create event table for Lua
