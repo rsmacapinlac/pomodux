@@ -44,8 +44,12 @@ EOF
     cd "${BATS_TEST_DIRNAME}/../../../../"
     make build > /dev/null 2>&1 || true
     
-    # Clear timer state
+    # Clear timer state and ensure clean environment
     rm -f "${CONFIG_DIR}/timer_state.json"
+    rm -f "${CONFIG_DIR}/session_history.json"
+    # Kill any existing timer processes
+    pkill -f "pomodux" 2>/dev/null || true
+    sleep 1
 }
 
 teardown() {
@@ -70,24 +74,43 @@ teardown() {
 @test "start command should work with custom duration" {
     # Test that the start command accepts custom durations
     run "$APP_BINARY" start 10s
+    if [ "$status" -ne 0 ]; then
+        echo "Start command failed with status $status"
+        echo "Output: $output"
+        echo "Current directory: $(pwd)"
+        echo "Config directory: $CONFIG_DIR"
+        ls -la "$CONFIG_DIR" || echo "Cannot list config directory"
+    fi
     [ "$status" -eq 0 ]
 }
 
 @test "start command should work without duration" {
     # Test that start command works without duration (should use default)
     run "$APP_BINARY" start
+    if [ "$status" -ne 0 ]; then
+        echo "Start command (no duration) failed with status $status"
+        echo "Output: $output"
+    fi
     [ "$status" -eq 0 ]
 }
 
 @test "break command should work" {
     # Test that break command works
     run "$APP_BINARY" break
+    if [ "$status" -ne 0 ]; then
+        echo "Break command failed with status $status"
+        echo "Output: $output"
+    fi
     [ "$status" -eq 0 ]
 }
 
 @test "long-break command should work" {
     # Test that long-break command works
     run "$APP_BINARY" long-break
+    if [ "$status" -ne 0 ]; then
+        echo "Long-break command failed with status $status"
+        echo "Output: $output"
+    fi
     [ "$status" -eq 0 ]
 }
 

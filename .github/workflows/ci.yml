@@ -171,6 +171,22 @@ jobs:
           directory: ~/.config/pomodux/plugins
         EOF
 
+    - name: Debug environment
+      run: |
+        echo "=== Environment Debug ==="
+        pwd
+        ls -la
+        echo "=== Config Directory ==="
+        ls -la ~/.config/pomodux/
+        echo "=== Config Content ==="
+        cat ~/.config/pomodux/config.yaml
+        echo "=== Test Binary ==="
+        ls -la bin/pomodux
+        echo "=== Test Binary Help ==="
+        ./bin/pomodux --help
+        echo "=== Test Timer Command ==="
+        timeout 5s ./bin/pomodux start 2s || echo "Timer command failed with exit code $?"
+
     - name: Run UAT tests
       run: |
         chmod +x tests/uat/automated/run-tests.sh
